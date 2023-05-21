@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+@layer components {
+    .banner_list_item {
+       @apply flex items-center justify-between mb-3  cursor-pointer px-8
+    }
+    .testing_hover {
+        @apply group-hover/ab:text-sky-500
+    }
+}
