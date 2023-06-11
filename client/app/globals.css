@@ -21,9 +21,15 @@ img {
     max-width: 1124px;
     width: 90%;
 }
-@media (min-width:640px) {
+@media (min-width:840px) {
     .my_container {
         max-width: 1124px;
+        width: 95%;
+    }
+}
+
+@media (min-width:1180px) {
+    .my_container {
         width: 100%;
     }
 }

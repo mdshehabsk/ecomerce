@@ -1,5 +1,6 @@
 import Banner from "@/components/Banner/Banner";
 import LogoHomeSlider from "@/components/logoHomeSlider/LogoHomeSlider";
+import Offer from "@/components/offer/Offer";
 
 export const metadata = {
   title: "Pickaboo",
@@ -10,10 +11,8 @@ export default function Home() {
   return (
     <>
       <Banner />
-      <div>
-
-        <LogoHomeSlider/>
-      </div>
+      <LogoHomeSlider />
+      <Offer/>
     </>
   );
 }

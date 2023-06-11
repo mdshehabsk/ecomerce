@@ -8,7 +8,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 // import required modules
 import { Pagination } from "swiper";
-import SliderItem from "./SliderItem";
+import LogoSliderItem from "./LogoSliderItem";
 
 
 //all image import
@@ -41,22 +41,22 @@ const LogoHomeSlider = () => {
             className="mySwiper"
           >
             <SwiperSlide>
-              <SliderItem image={delivary} name="3 Hours Delivary"  />
+              <LogoSliderItem image={delivary} name="3 Hours Delivary"  />
             </SwiperSlide>
             <SwiperSlide>
-            <SliderItem image={emi} name="UP TO 36 MONTH EMI"  />
+            <LogoSliderItem image={emi} name="UP TO 36 MONTH EMI"  />
             </SwiperSlide>
             <SwiperSlide>
-              <SliderItem image={Return} name="easy return" />
+              <LogoSliderItem image={Return} name="easy return" />
             </SwiperSlide>
             <SwiperSlide>
-              <SliderItem  image={warranty} name="100% genuine product "  />
+              <LogoSliderItem  image={warranty} name="100% genuine product "  />
             </SwiperSlide>
             <SwiperSlide>
-              <SliderItem image={payment} name="secure payment"  />
+              <LogoSliderItem image={payment} name="secure payment"  />
             </SwiperSlide>
             <SwiperSlide>
-              <SliderItem image={temp} name="warrenty covarage" />
+              <LogoSliderItem image={temp} name="warrenty covarage" />
             </SwiperSlide>
           </Swiper>
         </div>
