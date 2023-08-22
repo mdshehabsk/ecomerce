@@ -39,7 +39,7 @@ const Product_section_one = () => {
         onBeforeInit={(swiper) => {
           swiperRef.current = swiper;
         }}
-        // pagination={{clickable:true}}
+        pagination={{clickable:true,el:'.custom-pagination'}}
         modules={[Navigation, Pagination]}
         className="mySwiper "
         slidesPerView={2}
@@ -48,7 +48,10 @@ const Product_section_one = () => {
                 slidesPerView: 2,
                 spaceBetween: 5,
               },
-
+              768: {
+                slidesPerView: 3,
+                spaceBetween: 10,
+            },
               1024: {
                 slidesPerView: 4,
                 spaceBetween: 10,
@@ -75,7 +78,7 @@ const Product_section_one = () => {
                 <SingleProduct/>
             </SwiperSlide>
          
-          
+            <div className="custom-pagination items-center justify-center mt-4 flex gap-2 xl:hidden  "></div>
           </Swiper>
           <div className="hidden xl:block" >
           <div  onClick={() => swiperRef.current?.slidePrev()} className="absolute w-[50px] h-[50px] border border-slate-500 flex items-center justify-center rounded-full cursor-pointer left-6 top-[55%] hover:bg-sky-600 text-white transition duration-500 ">

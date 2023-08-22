@@ -33,3 +33,8 @@ img {
         width: 100%;
     }
 }
+
+/* custom pagination button desing */
+.swiper-pagination-bullet {
+    cursor: pointer;
+}
