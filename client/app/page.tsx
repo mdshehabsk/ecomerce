@@ -1,4 +1,5 @@
 import Banner from "@/components/Banner/Banner";
+import Product_section_one from "@/components/Product_section_one/Product_section_one";
 import LogoHomeSlider from "@/components/logoHomeSlider/LogoHomeSlider";
 import Offer from "@/components/offer/Offer";
 
@@ -13,6 +14,7 @@ export default function Home() {
       <Banner />
       <LogoHomeSlider />
       <Offer/>
+      <Product_section_one/>
     </>
   );
 }
