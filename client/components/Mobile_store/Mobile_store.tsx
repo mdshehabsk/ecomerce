@@ -16,8 +16,9 @@ import { useRef } from "react";
 
 // import react icon
 
-import {GrNext} from 'react-icons/gr' 
-import {GrPrevious} from 'react-icons/gr' 
+import {BiSkipNextCircle} from 'react-icons/bi' 
+import {BiSkipPreviousCircle} from 'react-icons/bi' 
+ 
 
 const Mobile_store = () => {
     const swiperRef = useRef<any>();
@@ -35,7 +36,6 @@ const Mobile_store = () => {
           </div>
           <div className="w-full h-[1px] bg-slate-300 my-4" ></div>
          <Swiper
-          cssMode={true}
           onBeforeInit={(swiper) => {
             swiperRef.current = swiper;
           }}
@@ -81,11 +81,11 @@ const Mobile_store = () => {
               <div className="custom-pagination items-center justify-center mt-4 flex gap-2 xl:hidden  "></div>
             </Swiper>
             <div className="hidden xl:block" >
-            <div  onClick={() => swiperRef.current?.slidePrev()} className="absolute w-[50px] h-[50px] border border-slate-500 flex items-center justify-center rounded-full cursor-pointer left-6 top-[55%] hover:bg-sky-600 text-white transition duration-500 ">
-              <GrPrevious className="text-2xl text-white " />
+            <div  onClick={() => swiperRef.current?.slidePrev()} className=" group/prev absolute w-[50px] h-[50px] border border-slate-500 flex items-center justify-center rounded-full cursor-pointer left-6 top-[55%] hover:bg-sky-600 transition duration-500 ">
+              <BiSkipPreviousCircle className="text-2xl group-hover/prev:text-white  " />
             </div>
-            <div   onClick={() => swiperRef.current?.slideNext()} className="absolute w-[50px] h-[50px] border border-slate-500 flex items-center justify-center rounded-full cursor-pointer right-6 top-[55%] hover:bg-sky-600 text-white transition duration-500 ">
-              <GrNext className="text-2xl text-white " />
+            <div onClick={() => swiperRef.current?.slideNext()} className="group/next absolute w-[50px] h-[50px] border border-slate-500 flex items-center justify-center rounded-full cursor-pointer right-6 top-[55%] hover:bg-sky-600  transition duration-500 ">
+              <BiSkipNextCircle className="text-2xl group-hover/next:text-white" />
             </div>
             </div>
          </div>
