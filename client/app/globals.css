@@ -8,7 +8,9 @@ img {
     max-width: 100%;
     max-height: 100%;
 }
-
+body, html {
+    overflow-x: hidden;
+}
 @layer components {
     .banner_list_item {
        @apply flex items-center justify-between mb-3  cursor-pointer px-8

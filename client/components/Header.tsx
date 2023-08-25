@@ -20,7 +20,7 @@ function Navbar() {
   return (
     <>
       <header className="w-full min-h-max bg-sky-600 flex items-center py-2 lg:py-0 sticky top-0 z-50 ">
-        <div className="container mx-auto px-4 md:px-0">
+        <div className="my_container mx-auto  md:px-0">
           <div className="flex flex-wrap h-full  items-center justify-between">
             <div className="order-1 flex gap-2 items-center " >
             <div className="  hidden lg:block  cursor-pointer group/banner lg:py-7 transition-all duration-500  group-banner "  >

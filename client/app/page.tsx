@@ -21,7 +21,7 @@ import Footer from "@/components/Footer/Footer";
 export default function Home() {
   return (
     <>
-      {/* <Banner />
+      <Banner />
       <LogoHomeSlider />
       <Offer/>
       <Best_selling_product/>
@@ -30,7 +30,7 @@ export default function Home() {
       <Main_product_section title="Gadgets" imageArr={[SliderThree,SliderFive]}/>
       <Main_product_section title="Laptop & Tab" imageArr={[SliderFour,SliderSix]}/>
       <Main_product_section title="Lifestyle" imageArr={[SliderFive,SliderTwo]}/>
-      <Brand_directory/> */}
+      <Brand_directory/>
       <Footer/>
     </>
   );
