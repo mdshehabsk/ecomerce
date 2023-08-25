@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { FiMenu } from "react-icons/fi";
 import { AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai";
-import Sidebar from "./mobile_sidebar/Sidebar";
+import Sidebar from "./Mobile_sidebar/Sidebar";
 import BannerLeft from "./Banner/BannerLeft";
 
 function Navbar() {

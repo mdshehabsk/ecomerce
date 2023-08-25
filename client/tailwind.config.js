@@ -11,11 +11,15 @@ module.exports = {
       fontFamily: {
         'sans': ['Roboto', ...defaultTheme.fontFamily.sans],
       },
+      colors: {
+        footerColor: '#002F4A',
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      
       screens:{
         'xs': '475px',
         ...defaultTheme.screens,

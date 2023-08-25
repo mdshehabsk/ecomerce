@@ -9,8 +9,6 @@ import 'swiper/css/navigation';
 import 'swiper/css/free-mode';
 // import required modules
 import { Pagination,Navigation} from "swiper";
-import Image from "next/image";
-import Best from '@/images/best.jpg'
 import SingleProduct from "../Products/SingleProduct";
 import { useRef } from "react";
 
