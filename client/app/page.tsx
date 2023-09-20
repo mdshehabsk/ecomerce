@@ -31,7 +31,6 @@ export default function Home() {
       <Main_product_section title="Laptop & Tab" imageArr={[SliderFour,SliderSix]}/>
       <Main_product_section title="Lifestyle" imageArr={[SliderFive,SliderTwo]}/>
       <Brand_directory/>
-      <Footer/>
     </>
   );
 }

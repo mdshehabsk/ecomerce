@@ -4,6 +4,7 @@ import { FiMenu } from "react-icons/fi";
 import { AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai";
 import Sidebar from "./Mobile_sidebar/Sidebar";
 import BannerLeft from "./Banner/BannerLeft";
+import Link from "next/link";
 
 function Navbar() {
   const [bannerShow,setBannerShow] = useState<boolean>(false)
@@ -20,7 +21,7 @@ function Navbar() {
   return (
     <>
       <header className="w-full min-h-max bg-sky-600 flex items-center py-2 lg:py-0 sticky top-0 z-50 ">
-        <div className="my_container mx-auto  md:px-0">
+        <div className="container mx-auto px-2 md:px-0">
           <div className="flex flex-wrap h-full  items-center justify-between">
             <div className="order-1 flex gap-2 items-center " >
             <div className="  hidden lg:block  cursor-pointer group/banner lg:py-7 transition-all duration-500  group-banner "  >
@@ -33,7 +34,7 @@ function Navbar() {
               <FiMenu className="text-slate-100 text-2xl"/>
             </div>
             <div className="text-slate-100 ">
-              <p className=" text-lg md:text-2xl font-extrabold ">Pickaboo</p>
+              <Link href='/' className=" text-lg md:text-2xl font-extrabold ">Pickaboo</Link>
             </div>
             </div>
             <div className="relative bg-white order-3 lg:order-2 mt-2 basis-full lg:basis-4/6  p-1 flex">
@@ -53,7 +54,7 @@ function Navbar() {
               </div>
               <span className="h-[20px] w-[2px] bg-white "></span>
               <div className="md:border md:px-6 py-1 rounded cursor-pointer " >
-                <a className="text-white  text-md font-medium "> Login </a>
+                <Link href='/product' className="text-white  text-md font-medium "> Login </Link>
               </div>
             </div>
           </div>

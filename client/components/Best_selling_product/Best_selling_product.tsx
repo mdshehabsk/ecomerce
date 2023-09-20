@@ -27,7 +27,7 @@ const Product_section_one = () => {
           <div className="product_section_one_header flex justify-between flex-wrap">
             <div className="flex items-center">
               <Image src={Best} alt="no image" width={50} height={50} />
-              <h1 className="ml-2 font-bold capitalize lg:text-2xl ">
+              <h1 className="ml-2  font-bold capitalize lg:text-2xl ">
                 Best selling product
               </h1>
             </div>
@@ -62,7 +62,7 @@ const Product_section_one = () => {
               },
             }}
           >
-            <SwiperSlide>
+            <SwiperSlide  >
               <SingleProduct />
             </SwiperSlide>
             <SwiperSlide>

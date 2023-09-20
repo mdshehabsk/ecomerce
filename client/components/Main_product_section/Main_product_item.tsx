@@ -1,3 +1,4 @@
+'use client'
 import Image from 'next/image'
 import Oven from '@/images/slider/oven-102.jpg'
 import {AiOutlineStar} from 'react-icons/ai' 

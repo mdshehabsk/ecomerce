@@ -170,7 +170,7 @@ const Footer = () => {
         </div>
        
         
-          <div className="w-screen h-px bg-slate-500 my-5 mx-0 ">    
+          <div className="w-full h-px bg-slate-500 my-5 mx-0 ">    
         </div>
         <div className="my_container mx-auto">
           <div className="flex items-center justify-between flex-wrap">

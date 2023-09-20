@@ -10,7 +10,7 @@ function BannerLeft() {
           <div className="hidden group-hover:flex min-w-max  z-10 absolute left-full top-0 bg-gray-100 py-5 ">
             <ul>
               <SubmenuListItem>Samsung</SubmenuListItem>
-              <SubmenuListItem>Infinis</SubmenuListItem>
+              <SubmenuListItem>Infinix</SubmenuListItem>
               <SubmenuListItem>Oppo</SubmenuListItem>
               <SubmenuListItem>Oneplus</SubmenuListItem>
               <SubmenuListItem>Techo</SubmenuListItem>

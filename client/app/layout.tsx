@@ -1,5 +1,8 @@
+
+import ReduxProvider from "@/toolkit/Redux-Provider";
 import Header from "../components/Header";
 import "./globals.css";
+import Footer from "@/components/Footer/Footer";
 
 export default function RootLayout({
   children,
@@ -8,10 +11,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={` relative `}>
-        <Header />
-        {children}
-      </body>
+      <ReduxProvider  >
+        <body className={` relative `}>
+          <Header />
+          {children}
+          <Footer/>
+        </body>
+      </ReduxProvider>
     </html>
   );
 }
