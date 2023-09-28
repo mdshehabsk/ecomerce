@@ -1,10 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 const defaultTheme = require('tailwindcss/defaultTheme')
-module.exports = {
+export default {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./index.html",
+    "./**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -13,6 +12,8 @@ module.exports = {
       },
       colors: {
         footerColor: '#002F4A',
+        mainBlueColor: '#1299E8',
+        orangeColor : 'rgb(255, 87, 34)'
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -26,7 +27,7 @@ module.exports = {
       }
     },
   },
-  variants: {
+   variants: {
     extend: {
       dropdown_sub_menu : ['hover']
     }
