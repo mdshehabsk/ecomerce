@@ -1,22 +1,20 @@
-
-import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 SwiperCore.use([Autoplay]);
 // Import Swiper styles
 import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
 import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 // import required modules
-import { Pagination, Navigation, Autoplay } from "swiper/modules";
+import SingleProduct from "@components/Products/SingleProduct";
 import Best from "@images/best.jpg";
-import SingleProduct from '@components/Products/SingleProduct'
 import { useRef } from "react";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
 // import react icon
 
-import {BiSkipNextCircle} from 'react-icons/bi' 
-import {BiSkipPreviousCircle} from 'react-icons/bi' 
+import { BiSkipNextCircle, BiSkipPreviousCircle } from "react-icons/bi";
 const Product_section_one = () => {
   const swiperRef = useRef<any>();
   return (
@@ -41,7 +39,7 @@ const Product_section_one = () => {
             onBeforeInit={(swiper) => {
               swiperRef.current = swiper;
             }}
-            freeMode={false}
+            freeMode={true}
             pagination={{ clickable: true, el: ".custom-pagination" }}
             modules={[Navigation, Pagination]}
             className="mySwiper "

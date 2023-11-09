@@ -26,7 +26,7 @@ function Banner() {
         <div className="flex ">
           <BannerLeft />
           <Swiper
-            pagination={{ clickable: true }}
+            pagination={{ clickable: true}}
             modules={[Pagination]}
             className="mySwiper basis-full lg:basis-3/4 "
             autoplay
@@ -59,6 +59,7 @@ function Banner() {
                 className="min-h-[200px] xs:min-h-[250px] h-full "
               ></img>
             </SwiperSlide>
+
           </Swiper>
         </div>
       </section>
