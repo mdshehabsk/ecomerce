@@ -5,7 +5,7 @@ const allCategories = [
     name: "Smartphone",
     submenu: [
       "Samsung",
-      "Infinis",
+      "Infinix",
       "Oppo",
       "Oneplus",
       "Techo",

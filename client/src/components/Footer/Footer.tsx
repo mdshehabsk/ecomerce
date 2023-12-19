@@ -15,7 +15,7 @@ import FooterLink from "./FooterLink";
 const Footer = () => {
   return (
     <>
-      <footer className="bg-footerColor py-8 ">
+      <footer className="bg-footerColor py-8  ">
         <div className="my_container mx-auto">
           <div className=" lg:gap-[22px]  flex flex-wrap  ">
             <div className=" text-slate-50 basis-full md:basis-1/3 lg:basis-3/12 ">
