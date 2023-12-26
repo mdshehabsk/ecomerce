@@ -61,7 +61,7 @@ function Navbar() {
               <span className="h-[20px] w-[2px] bg-white "></span>
               <div className="md:border md:px-6 py-1 rounded cursor-pointer ">
                 <Link
-                  to="/auth/login"
+                  to="/login"
                   className="text-white  text-md font-medium "
                 >
                   Login

@@ -4,14 +4,16 @@ import { FaFacebookF } from "react-icons/fa";
 
 const Auth = () => {
   const location = useLocation();
+  const pathname = location.pathname;
+  console.log(pathname)
   return (
     <>
       <div className="mx-auto my-6 max-w-[400px] ">
         <div className="flex mx-auto justify-center">
           <Link
-            to="/auth/login"
+            to="/login"
             className={`flex justify-center basis-1/2   font-semibold  ${
-              location.pathname === "/auth/login"
+              pathname === "/login"
                 ? "text-orangeColor  border-b-[3px] border-orangeColor "
                 : null
             } `}
@@ -20,9 +22,9 @@ const Auth = () => {
           </Link>
 
           <Link
-            to="/auth/register"
+            to="/register"
             className={`flex justify-center basis-1/2   font-semibold  ${
-              location.pathname === "/auth/register"
+              pathname === "/register"
                 ? "text-orangeColor  border-b-[3px] border-orangeColor "
                 : null
             } `}
