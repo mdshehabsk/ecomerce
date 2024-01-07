@@ -17,7 +17,7 @@ function App() {
       {!isAdminPage && <Header />}
       <Routes>
         <Route index element={<HomePage />} />
-        <Route path="/product" element={<ProductPage />} />
+        <Route path="/product/:name" element={<ProductPage />} />
         <Route path="/product-details" element={<ProductDetailsPage />} />
 
         <Route element={<Auth />}>

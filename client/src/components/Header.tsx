@@ -4,19 +4,19 @@ import { FiMenu } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import BannerLeft from "./Banner/BannerLeft";
 import Sidebar from "./Mobile_sidebar/Sidebar";
+import { useAppDispatch, useAppSelector } from "@toolkit/hook";
+import { sidebarOpen } from "@toolkit/slice/SidebarSlice";
 
 function Navbar() {
-  const [bannerShow, setBannerShow] = useState<boolean>(false);
-  function bannerMenuShow() {
-    setBannerShow(true);
-  }
+const {sidebarShow} = useAppSelector(state => state.Sidebar)
+const dispatch = useAppDispatch()
   useEffect(() => {
-    if (bannerShow) {
+    if (sidebarShow) {
       document.body.style.overflowY = "hidden";
     } else {
       document.body.style.overflowY = "auto";
     }
-  }, [bannerShow]);
+  }, [sidebarShow]);
   return (
     <>
       <header className="w-full min-h-max bg-mainBlueColor flex items-center py-2 lg:py-0 sticky top-0 z-50 ">
@@ -33,7 +33,7 @@ function Navbar() {
               </div>
               <div
                 className="cursor-pointer group/banner lg:py-7  group-banner  lg:hidden  "
-                onClick={bannerMenuShow}
+                onClick={() =>dispatch(sidebarOpen())}
               >
                 <FiMenu className="text-slate-100 text-2xl" />
               </div>
@@ -71,7 +71,7 @@ function Navbar() {
           </div>
         </div>
       </header>
-      <Sidebar bannerShow={bannerShow} setBannerShow={setBannerShow} />
+      <Sidebar />
     </>
   );
 }

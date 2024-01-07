@@ -23,8 +23,7 @@ const SidebarListItem = ({
             <img src={img} alt="no img" />
           </div>
           <a className=" cursor-pointer group-hover/li:text-sky-500 grow font-medium">
-            {" "}
-            {name}{" "}
+            {name}
           </a>
         </div>
         {!iconNone && (

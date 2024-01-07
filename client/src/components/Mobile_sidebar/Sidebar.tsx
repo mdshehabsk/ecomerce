@@ -11,16 +11,11 @@ import lifestyle from '@images/nav_icon_img/lifestyle.jpg'
 import call from '@images/nav_icon_img/call.jpg'
 //impor icon
 import { RxCross2 } from "react-icons/rx";
+import { useAppDispatch, useAppSelector } from "@toolkit/hook";
+import { sidebarClose } from "@toolkit/slice/SidebarSlice";
 
 
-
-interface PropsType {
-  bannerShow: boolean;
-  setBannerShow: (arg0: boolean) => void;
-}
-// reducer Functiion
-
-function Sidebar({ bannerShow, setBannerShow }: PropsType) {
+const  Sidebar = () => {
   const initialState = {
     smartphone: false,
     electronics: false,
@@ -48,21 +43,23 @@ function Sidebar({ bannerShow, setBannerShow }: PropsType) {
     }
   };
   const [value, dispatch] = useReducer(reducerFn, initialState);
+  const {sidebarShow} = useAppSelector(state => state.Sidebar)
+  const dispatchRTK = useAppDispatch()
   return (
     <div
       className={`h-full w-screen transform transition duration-500 bg-black/30  ${
-        bannerShow ? "translate-x-0" : "-translate-x-[2000px]"
+        sidebarShow ? "translate-x-0" : "-translate-x-[2000px]"
       }  fixed z-[100] left-0 top-0 lg:hidden   `}
     >
       <div
         className="w-full h-full "
-        onClick={() => setBannerShow(false)}
+        onClick={() => dispatchRTK(sidebarClose())}
       ></div>
       <div className=" max-w-[330px] md:max-w-[400px] w-full bg-white h-full absolute z-[100] left-0 top-0 bottom-0 box p-5 overflow-y-scroll">
         <h2 className="font-bold">Shop for</h2>
         <RxCross2
           className="ml-auto -mt-6 text-3xl cursor-pointer"
-          onClick={() => setBannerShow(false)}
+          onClick={() => dispatchRTK(sidebarClose())}
         />
         <ul className=" py-4 max-w-full ">
           <SidebarListItem
