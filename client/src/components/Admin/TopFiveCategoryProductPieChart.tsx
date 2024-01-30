@@ -1,0 +1,47 @@
+import { ApexOptions } from "apexcharts"
+import ReactApexChart from "react-apexcharts"
+
+
+const series = [44, 55, 13, 33,100]
+const option:ApexOptions =  {
+    chart: {
+      width:'100%'
+    },
+    title:{
+        text:'Top Five category Product',
+        style:{
+            fontSize:"18px"
+        }
+    },
+    dataLabels: {
+      enabled: true
+    },
+    labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", ],
+    // responsive: [{
+    //   breakpoint: 480,
+    //   options: {
+    //     chart: {
+    //       width: 200
+    //     },
+    //     legend: {
+    //       show: false
+    //     }
+    //   }
+    // }],
+    legend: {
+      position: 'bottom',
+      offsetY: 0,
+    }
+  }
+
+
+
+const TopFiveCategoryProductPieChart = () => {
+  return (
+    <div className="bg-white shadow-md  lg:col-span-5 grow " >
+        <ReactApexChart options={option} series={series} type="donut" />
+    </div>
+  )
+}
+
+export default TopFiveCategoryProductPieChart

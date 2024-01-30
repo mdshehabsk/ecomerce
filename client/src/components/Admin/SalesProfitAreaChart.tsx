@@ -1,70 +1,74 @@
 import Chart from "react-apexcharts";
-import { ApexOptions } from "apexcharts";
+
 import React from "react";
+import { ApexOptions } from "apexcharts";
 
-interface ChartData {
-  options: ApexOptions;
-  series: any;
-}
-
-const SalesProfitAreaChart: React.FC<{ color: string }> = ({ color }) => {
-  const chartData: ChartData = {
-    options: {
-      chart: {
-        id: "basic-area",
-        toolbar: {
-          show: false,
-        },
-        zoom:{enabled:false},
-       
-      },
-      title:{
-text:'sales',
-margin:10,
-style:{
-    fontSize:'16px'
-}
-      },
-      colors: [color],
-      xaxis: {
-        categories: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ],
-        labels: { show: false, },
-
-      },
-      yaxis: {
-        labels: { show: false },
-        
-      },
-      
+const SalesProfitAreaChart: React.FC<{ color: string; name?: string }> = ({
+  color,
+  name,
+}) => {
+  const series = [
+    {
+      name,
+      data: [47, 45, 54, 38, 56, 24, 65, 31, 37, 39, 62, 51],
     },
-    
-
-    series: [
-      {
-        name: "series-1",
-        data: [30, 40, 35, 50, 49, 60, 70, 91, 80, 20, 12],
+  ];
+  const options: ApexOptions = {
+    chart: {
+      type:'area',
+      height: 100,
+      sparkline: {
+        enabled: true,
       },
-    ],
+    },
+    stroke: {
+      curve: 'straight'
+    },
+    fill: {
+      opacity: 0.4,
+    },
+
+    xaxis: {
+      categories: [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ],
+    },
+    yaxis: {
+      min: 0,
+    },
+    colors: [color],
+    title: {
+      text: "$424,652",
+      offsetX: 0,
+      style: {
+        fontSize: "24px",
+      },
+    },
+    subtitle: {
+      text: name,
+      offsetX: 0,
+      style: {
+        fontSize: "14px",
+      },
+    },
   };
 
   return (
-    <div className="bg-white shadow-sm flex-1">
+    <div className="bg-white shadow-lg px-2   ">
       <Chart
-        options={chartData.options}
-        series={chartData.series}
+        options={options}
+        series={series}
         type="area"
       />
     </div>
