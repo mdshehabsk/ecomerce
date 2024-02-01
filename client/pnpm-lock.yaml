@@ -29,6 +29,9 @@ dependencies:
   react-router-dom:
     specifier: ^6.16.0
     version: 6.21.1(react-dom@18.2.0)(react@18.2.0)
+  react-slugify:
+    specifier: ^3.0.3
+    version: 3.0.3
   recharts:
     specifier: ^2.10.4
     version: 2.10.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
@@ -2240,6 +2243,10 @@ packages:
     dependencies:
       '@remix-run/router': 1.14.1
       react: 18.2.0
+    dev: false
+
+  /react-slugify@3.0.3:
+    resolution: {integrity: sha512-CWQvLIyG8vOH8DWBY+fKvJHtd2IWLHVk0mfQlFS28kVckQBv06NGJajAOurS3+HSgsmYP/6R9qDAdJYSotXMWA==}
     dev: false
 
   /react-smooth@2.0.5(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0):

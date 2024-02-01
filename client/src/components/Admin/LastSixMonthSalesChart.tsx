@@ -19,29 +19,29 @@ const options = {
     ]
   },
   title: {
-    text: "Last Six month sales overview",
+    text: "Last six month sales overview",
     offsetX: 2,
     offsetY:5,
     style: {
-      fontSize: "24px",
+      fontSize: "18px",
     },
   },
-  responsive: [
-    {
-      breakpoint: 768, // Adjust this breakpoint based on your design needs
-      options: {
-      title:{
-        style:{
-          fontSize:'20px'
-        }
-      },
-        chart: {
-          width: "100%", // Set width to 100% for smaller screens
-        },
-      },
-    },
+  // responsive: [
+  //   {
+  //     breakpoint: 768, // Adjust this breakpoint based on your design needs
+  //     options: {
+  //     title:{
+  //       style:{
+  //         fontSize:'20px'
+  //       }
+  //     },
+  //       chart: {
+  //         width: "100%", // Set width to 100% for smaller screens
+  //       },
+  //     },
+  //   },
     
-  ],
+  // ],
 };
 const series = [
   {
@@ -51,7 +51,7 @@ const series = [
 ];
 
 const LastSixMonthSalesChart = () => (
- <div className="px-2 bg-white md:col-span-7 " >
+ <div className="px-2 bg-white md:col-span-7  shadow-md " >
    <Chart options={options} series={series} type="bar"  />
  </div>
 );

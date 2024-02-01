@@ -7,8 +7,12 @@ import Footer from "@components/Footer/Footer";
 import Login from "@pages/auth/login/Login";
 import Auth from "@pages/auth/Auth";
 import Register from "@pages/auth/register/Register";
+
+// admin route
 import Admin from "@pages/admin/Admin";
 import Index from "@pages/admin/index";
+import AddProduct from "@pages/admin/AddProduct";
+import ManageProduct from "@pages/admin/ManageProduct";
 function App() {
   // Check if the current route is the admin page
   const isAdminPage = window.location.pathname.startsWith("/admin");
@@ -28,6 +32,8 @@ function App() {
         {/* all admin page are here */}
         <Route path="admin" element={<Admin />}>
           <Route index element={<Index />} />
+          <Route path="add-product" element={<AddProduct />} />
+          <Route path="manage-product" element={<ManageProduct />} />
         </Route>
       </Routes>
       {!isAdminPage && <Footer />}
@@ -36,4 +42,3 @@ function App() {
 }
 
 export default App;
-

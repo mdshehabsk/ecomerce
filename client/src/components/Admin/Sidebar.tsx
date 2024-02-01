@@ -16,6 +16,7 @@ const sidebarItems = [
     id: 1,
     name: "Overview",
     icon: BiBarChart,
+    link: "/admin"
   },
   {
     id: 2,
@@ -25,74 +26,73 @@ const sidebarItems = [
       {
         id: 21,
         name: "Add Product",
+        link: 'add-product'
       },
       {
         id: 22,
-        name: "Edit Product",
+        name: "Manage Product",
+        link: 'manage-product'
       },
-      {
-        id: 23,
-        name: "Delete Product",
-      },
+      
     ],
   },
   {
     id: 3,
     name: "Order",
     icon: FiCommand,
-    submenu: [
-      {
-        id: 31,
-        name: "Place Order",
-      },
-      {
-        id: 32,
-        name: "Track Order",
-      },
-      {
-        id: 33,
-        name: "Cancel Order",
-      },
-    ],
+    // submenu: [
+    //   {
+    //     id: 31,
+    //     name: "Place Order",
+    //   },
+    //   {
+    //     id: 32,
+    //     name: "Track Order",
+    //   },
+    //   {
+    //     id: 33,
+    //     name: "Cancel Order",
+    //   },
+    // ],
   },
   {
     id: 4,
     name: "Maintenance",
     icon: SlWrench,
-    submenu: [
-      {
-        id: 41,
-        name: "Scheduled Maintenance",
-      },
-      {
-        id: 42,
-        name: "Emergency Maintenance",
-      },
-    ],
+    // submenu: [
+    //   {
+    //     id: 41,
+    //     name: "Scheduled Maintenance",
+    //   },
+    //   {
+    //     id: 42,
+    //     name: "Emergency Maintenance",
+    //   },
+    // ],
   },
   {
     id: 5,
     name: "Settings",
     icon: CiSettings,
-    submenu: [
-      {
-        id: 51,
-        name: "General Settings",
-      },
-      {
-        id: 52,
-        name: "Security Settings",
-      },
-      {
-        id: 53,
-        name: "Account Settings",
-      },
-    ],
+    // submenu: [
+    //   {
+    //     id: 51,
+    //     name: "General Settings",
+    //   },
+    //   {
+    //     id: 52,
+    //     name: "Security Settings",
+    //   },
+    //   {
+    //     id: 53,
+    //     name: "Account Settings",
+    //   },
+    // ],
   },
 ];
 
 const Sidebar = () => {
-  const [activeItem, setActiveItem] = useState<null | number>(null);
+  const [activeItem, setActiveItem] = useState<null | number>(1);
 
   const handleItemClick = (item: number) => {
     setActiveItem(activeItem === item ? null : item);
@@ -128,6 +128,12 @@ const Sidebar = () => {
 
         <ul className="mt-[50px]">
           {sidebarItems.map((item) => (
+            item.link ? <Link        className={`text-white flex flex-wrap items-center  hover:bg-gray-700 transition-['background']  w-full  `} to={item.link}>    <div className={`flex items-center gap-2  hover:bg-gray-700 transition-['background'] p-3 w-full ${activeItem === item.id && "bg-gray-700"} `}>
+            <item.icon className="text-xl" />
+            <span className=""> {item.name} </span>
+            
+            
+          </div> </Link> :
             <li
               onClick={() => handleItemClick(item.id)}
               key={item.id}
@@ -152,7 +158,7 @@ const Sidebar = () => {
                         key={subItem.id}
                         className="py-2 border-t border-gray-700 hover:bg-gray-700  pl-5 "
                       >
-                        <Link to="/new" className="py-3">
+                        <Link to={subItem.link} className="block ">
                           {subItem.name}
                         </Link>
                       </li>
