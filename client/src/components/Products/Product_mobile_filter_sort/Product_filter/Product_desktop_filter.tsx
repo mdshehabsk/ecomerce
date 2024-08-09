@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useState } from "react";
 import { BsChevronDown, BsFillPlayCircleFill } from "react-icons/bs";
 

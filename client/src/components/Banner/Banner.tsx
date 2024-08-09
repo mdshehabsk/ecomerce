@@ -31,7 +31,7 @@ function Banner() {
           <Swiper
             pagination={{ clickable: true}}
             modules={[Pagination]}
-            className="mySwiper basis-full lg:basis-3/4 "
+            className="mySwiper basis-full lg:basis-8/12 grow "
             autoplay
           >
             <SwiperSlide>

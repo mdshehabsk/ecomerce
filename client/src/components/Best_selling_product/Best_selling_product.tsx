@@ -16,6 +16,7 @@ import Image from "next/image";
 // import react icon
 
 import { BiSkipNextCircle, BiSkipPreviousCircle } from "react-icons/bi";
+import Link from "next/link";
 const Product_section_one = () => {
   const swiperRef = useRef<any>();
   return (
@@ -30,9 +31,9 @@ const Product_section_one = () => {
               </h1>
             </div>
             <div className="flex items-center ">
-              <button className="border-2 border-mainBlueColor px-4 lg:px-8 py-2 text-mainBlueColor rounded-md hover:text-white hover:bg-mainBlueColor transition duration-500">
+              <Link href='/product' className="border-2 border-mainBlueColor px-4 lg:px-6 py-2 text-mainBlueColor rounded-md hover:text-white hover:bg-mainBlueColor transition duration-500">
                 View All
-              </button>
+              </Link>
             </div>
           </div>
           <div className="w-full h-[1px] bg-slate-300 my-4"></div>

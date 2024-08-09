@@ -29,7 +29,7 @@ const ProductPage = () => {
                 <h2 className="font-semibold text-slate-800">Infinix</h2>
                 <p className="text-sm">13 items in infinix</p>
               </div>
-              <Product_desktop_sort />
+              <Product_desktop_sort  />
             </div>
             <div className="w-full h-px bg-gray-300 my-4"></div>
             <main className=" gap-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-10  ">

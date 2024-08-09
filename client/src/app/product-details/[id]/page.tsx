@@ -5,10 +5,10 @@ import { IoBagHandleOutline } from "react-icons/io5"
 import Image from "next/image";
 const ProductDetailsPage = () => {
   return (
-    <div className="bg-gray-50 pt-5 min-h-full ">
-      <div className="container mx-auto bg-white  ">
+    <div className="bg-gray-50 pt-5 h-svh ">
+      <div className="my-container mx-auto bg-white  ">
         <div className="flex flex-wrap justify-between ">
-          <div className=" p-3 basis-full md:basis-5/12 ">
+          <div className=" sticky left-0 bottom-0  p-3 basis-full md:basis-5/12 ">
             <div className=" max-w-[300px] md:max-w-max  mx-auto flex justify-center ">
               <Image src={productOne} alt="no Image" />
             </div>
@@ -29,7 +29,7 @@ const ProductDetailsPage = () => {
               </div>
             </div>
           </div>
-          <div className="border-t md:border-l border-neutral-300 mt-1 basis-full md:basis-7/12 p-3  ">
+          <div className="border-t md:border-l border-neutral-300 mt-1 basis-full md:basis-7/12 p-3 ">
             <h1 className="text-xl  font-semibold ">
               Amazfit Pop 3S AMOLED Bluetooth Calling Smart Watch Global Version
             </h1>
@@ -97,6 +97,7 @@ const ProductDetailsPage = () => {
         " >Emi available : </p> <span> 2 Years official warrenty</span>
               </div>
             </div>
+
           </div>
         </div>
       </div>
