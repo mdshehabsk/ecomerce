@@ -1,11 +1,13 @@
+'use client'
 import { useEffect, useState } from "react";
 import { AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai";
 import { FiMenu } from "react-icons/fi";
-import { Link } from "react-router-dom";
+
 import BannerLeft from "./Banner/BannerLeft";
 import Sidebar from "./Mobile_sidebar/Sidebar";
-import { useAppDispatch, useAppSelector } from "@toolkit/hook";
-import { sidebarOpen } from "@toolkit/slice/SidebarSlice";
+import { useAppDispatch, useAppSelector } from "@/toolkit/hook";
+import { sidebarOpen } from "@/toolkit/slice/SidebarSlice";
+import Link from "next/link";
 
 function Navbar() {
 const {sidebarShow} = useAppSelector(state => state.Sidebar)
@@ -38,7 +40,7 @@ const dispatch = useAppDispatch()
                 <FiMenu className="text-slate-100 text-2xl" />
               </div>
               <div className="text-slate-100 ">
-                <Link to="/" className=" text-lg md:text-2xl font-extrabold ">
+                <Link href="/" className=" text-lg md:text-2xl font-extrabold ">
                   Pickaboo
                 </Link>
               </div>
@@ -61,7 +63,7 @@ const dispatch = useAppDispatch()
               <span className="h-[20px] w-[2px] bg-white "></span>
               <div className="md:border md:px-6 py-1 rounded cursor-pointer ">
                 <Link
-                  to="/login"
+                  href="/login"
                   className="text-white  text-md font-medium "
                 >
                   Login

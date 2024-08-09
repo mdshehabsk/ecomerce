@@ -9,7 +9,7 @@ const store = configureStore({
     Sidebar : sidebarSlice.reducer,
     AdminSidebar: adminSidebarSlice.reducer
   },
-  middleware: (gdm) => [...gdm()],
+  // middleware: (gdm) => [...gdm()],
 });
 
 export default store

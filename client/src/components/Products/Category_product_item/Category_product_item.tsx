@@ -1,13 +1,14 @@
-import Oven from "@images/slider/oven-102.jpg";
+import Oven from "@/images/slider/oven-102.jpg";
 import { AiOutlineStar } from "react-icons/ai";
+import Image from "next/image";
 const Category_product_item = () => {
   return (
     <>
       <div className="border border-gray-200 p-2 py-4  ">
         <div className="flex justify-center overflow-hidden ">
-          <img
+          <Image
             src={Oven}
-            alt="no image"
+            alt="no Image"
             className="hover:scale-105 transition duration-300"
           />
         </div>

@@ -1,3 +1,4 @@
+'use client'
 import Chart from "react-apexcharts";
 
 const options = {

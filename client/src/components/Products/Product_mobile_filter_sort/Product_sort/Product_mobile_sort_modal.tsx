@@ -1,7 +1,7 @@
-
+'use client'
 // import react icon
-import { useAppSelector,useAppDispatch } from "@toolkit/hook";
-import { mobileSortModalToggle } from "@toolkit/slice/ProductSortAndFilter";
+import { useAppSelector,useAppDispatch } from "@/toolkit/hook";
+import { mobileSortModalToggle } from "@/toolkit/slice/ProductSortAndFilter";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const Product_mobile_sort_modal = () => {

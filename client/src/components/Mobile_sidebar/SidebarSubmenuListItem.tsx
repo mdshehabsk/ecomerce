@@ -1,6 +1,7 @@
-import { useAppDispatch } from "@toolkit/hook";
-import { sidebarClose } from "@toolkit/slice/SidebarSlice";
-import { NavLink } from "react-router-dom";
+import { useAppDispatch } from "@/toolkit/hook";
+import { sidebarClose } from "@/toolkit/slice/SidebarSlice";
+import Link from "next/link";
+
 
 function SidebarSubmenuListItem({ children }: { children: string }) {
   const dispatch = useAppDispatch()
@@ -9,7 +10,7 @@ function SidebarSubmenuListItem({ children }: { children: string }) {
   }
   return (
     <li className="py-2 ">
-      <NavLink to={`/product/${children}`} onClick={linkClick}  className='active:text-mainBlueColor'  >{children}</NavLink>
+      <Link href={`/product/${children}`} onClick={linkClick}  className='active:text-mainBlueColor'  >{children}</Link>
     </li>
   );
 }

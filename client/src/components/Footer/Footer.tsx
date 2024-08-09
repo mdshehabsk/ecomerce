@@ -1,17 +1,18 @@
+'use client'
 import { ImLocation } from "react-icons/im";
 import { IoMdCall } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
 
-// logo image import 
-import android from '@images/appStoreLogo/android.png'
-import appGallery from '@images/appStoreLogo/app-gallery.png'
-import appStore from '@images/appStoreLogo/apple-store.png'
+// logo Image import 
+import android from '@/images/appStoreLogo/android.png'
+import appGallery from '@/images/appStoreLogo/app-gallery.png'
+import appStore from '@/images/appStoreLogo/apple-store.png'
 
-// payment image import
-import payment from '@images/payment/payment.png'
+// payment Image import
+import payment from '@/images/appStoreLogo/payement-6.svg'
 
 import FooterLink from "./FooterLink";
-
+import Image from "next/image";
 const Footer = () => {
   return (
     <>
@@ -150,18 +151,18 @@ const Footer = () => {
               <div>
                 <div className="mb-2" >
                   <FooterLink >
-                   <img src={android} alt="no image" />
+                   <Image src={android} alt="no Image" />
                   </FooterLink>
                 </div>
               </div>
               <div className="mb-2" >
                 <FooterLink >
-                   <img src={appGallery} alt="no image" />
+                   <Image src={appGallery} alt="no Image" />
                 </FooterLink>
               </div>
               <div className="mb-2" >
                 <FooterLink >
-                  <img src={appStore} alt="no image" />
+                  <Image src={appStore} alt="no Image" />
                 </FooterLink>
               </div>
             </div>
@@ -177,7 +178,7 @@ const Footer = () => {
           © 2023 pickaboo.com | All Rights Reserved.
           </div>
           <div className="flex items-center gap-2 my-2 md:my-0 ">
-           <p className="text-slate-100 text-sm hidden md:block " >Payment Method</p><img src={payment} alt="no image" />
+           <p className="text-slate-100 text-sm hidden md:block " >Payment Method</p><Image src={payment} alt="no Image"   />
           </div>
           </div>
         </div>

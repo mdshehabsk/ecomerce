@@ -1,13 +1,13 @@
+import Image from 'next/image';
 
-
-import offerOne from '@images/offer/offer-1.jpg'
+import offerOne from '@/images/offer/offer-1.jpg'
 function OfferSliderItem() {
   return (
     <div className="shadow-md rounded-lg group ">
       <div className="max-w-full overflow-hidden">
-        <img
+        <Image
           src={offerOne}
-          alt="no image"
+          alt="no Image"
           className="w-full rounded-t-lg group-hover:scale-105 transition"
         />
       </div>

@@ -1,3 +1,4 @@
+'use client'
 import { BiBarChart } from "react-icons/bi";
 import { RiProductHuntLine } from "react-icons/ri";
 import { FiCommand } from "react-icons/fi";
@@ -5,9 +6,9 @@ import { SlWrench } from "react-icons/sl";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { RiMenu2Fill } from "react-icons/ri";
 import { CiSettings } from "react-icons/ci";
-import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "@toolkit/hook";
-import { sidebarClose } from "@toolkit/slice/AdminSidebarSlice";
+import Link from "next/link";
+import { useAppDispatch, useAppSelector } from "@/toolkit/hook";
+import { sidebarClose } from "@/toolkit/slice/AdminSidebarSlice";
 import { RxCross2 } from "react-icons/rx";
 import { useState } from "react";
 
@@ -16,7 +17,7 @@ const sidebarItems = [
     id: 1,
     name: "Overview",
     icon: BiBarChart,
-    link: "/admin"
+    link: "/dashboard"
   },
   {
     id: 2,
@@ -26,12 +27,12 @@ const sidebarItems = [
       {
         id: 21,
         name: "Add Product",
-        link: 'add-product'
+        link: '/dashboard/add-product'
       },
       {
         id: 22,
         name: "Manage Product",
-        link: 'manage-product'
+        link: '/dashboard/manage-product'
       },
       
     ],
@@ -128,7 +129,7 @@ const Sidebar = () => {
 
         <ul className="mt-[50px]">
           {sidebarItems.map((item) => (
-            item.link ? <Link        className={`text-white flex flex-wrap items-center  hover:bg-gray-700 transition-['background']  w-full  `} to={item.link}>    <div className={`flex items-center gap-2  hover:bg-gray-700 transition-['background'] p-3 w-full ${activeItem === item.id && "bg-gray-700"} `}>
+            item.link ? <Link        className={`text-white flex flex-wrap items-center  hover:bg-gray-700 transition-['background']  w-full  `} href={item.link}>    <div className={`flex items-center gap-2  hover:bg-gray-700 transition-['background'] p-3 w-full ${activeItem === item.id && "bg-gray-700"} `}>
             <item.icon className="text-xl" />
             <span className=""> {item.name} </span>
             
@@ -158,7 +159,7 @@ const Sidebar = () => {
                         key={subItem.id}
                         className="py-2 border-t border-gray-700 hover:bg-gray-700  pl-5 "
                       >
-                        <Link to={subItem.link} className="block ">
+                        <Link href={subItem.link} className="block ">
                           {subItem.name}
                         </Link>
                       </li>

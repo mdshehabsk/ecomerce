@@ -1,3 +1,4 @@
+'use client'
 import SwiperCore from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 SwiperCore.use([Autoplay]);
@@ -7,11 +8,11 @@ import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 // import required modules
-import SingleProduct from "@components/Products/SingleProduct";
-import Best from "@images/best.jpg";
+import SingleProduct from "@/components/Products/SingleProduct";
+import Best from "@/images/best.jpg";
 import { useRef } from "react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
-
+import Image from "next/image";
 // import react icon
 
 import { BiSkipNextCircle, BiSkipPreviousCircle } from "react-icons/bi";
@@ -23,7 +24,7 @@ const Product_section_one = () => {
         <div className="my_container mx-auto">
           <div className="product_section_one_header flex justify-between flex-wrap">
             <div className="flex items-center">
-              <img src={Best} alt="no image" width={50} height={50} />
+              <Image src={Best} alt="no Image" width={50} height={50} />
               <h1 className="ml-2  font-bold capitalize lg:text-2xl ">
                 Best selling product
               </h1>

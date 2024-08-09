@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import  Link  from 'next/link'
 
 const allCategories = [
   {
@@ -126,7 +126,7 @@ const Brand_directory = () => {
                 <Link
                   key={i}
                   className=" hover:text-mainBlueColor transition duration-500 text-[12px] font-medium text-black opacity-80 capitalize "
-                  to={elem}
+                  href={elem}
                 >
                   {elem} {"|"}
                 </Link>

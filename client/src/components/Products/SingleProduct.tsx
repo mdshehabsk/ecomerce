@@ -1,15 +1,16 @@
 
-
-import Product from '@images/product/product-1.jpg'
+import Image from 'next/image';
+import Product from '@/images/product/product-1.jpg'
+import Link from 'next/link';
 import {AiOutlineStar} from 'react-icons/ai' 
-import { Link } from 'react-router-dom';
+
 const SingleProduct = () => {
   return (
-    <Link to='/product-details' className="group/product">
+    <Link href='/product-details' className="group/product">
       <div className="flex  justify-center overflow-hidden ">
-        <img
+        <Image
           src={Product}
-          alt="no image"
+          alt="no Image"
           className="group-hover/product:scale-105 transition  "
         />
       </div>
