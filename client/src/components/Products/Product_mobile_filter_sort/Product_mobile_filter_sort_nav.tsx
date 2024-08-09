@@ -1,4 +1,5 @@
-import { useAppDispatch } from "@toolkit/hook";
+'use client'
+import { useAppDispatch } from "@/toolkit/hook";
 // import react icon
 
 import { AiOutlineFilter } from "react-icons/ai";
@@ -8,7 +9,7 @@ import { BsSortDown } from "react-icons/bs";
 import {
   mobileFilterModalToggle,
   mobileSortModalToggle,
-} from "../../../toolkit/slice/ProductSortAndFilter";
+} from "@/toolkit/slice/ProductSortAndFilter";
 
 const Product_mobile_filter_sort = () => {
   const dispatch = useAppDispatch();

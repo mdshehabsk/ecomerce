@@ -1,4 +1,4 @@
-
+'use client'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -10,13 +10,13 @@ import { Pagination } from "swiper/modules";
 import LogoSliderItem from "./LogoSliderItem";
 
 
-//all image import
-import delivary from '@images/logoHomeSlider/delivary.png'
-import emi from '@images/logoHomeSlider/EMI.png'
-import Return from '@images/logoHomeSlider/return.png'
-import warranty from '@images/logoHomeSlider/warranty.png'
-import temp from "@images/logoHomeSlider/temp.png"
-import payment from '@images/logoHomeSlider/payment.png'
+//all Image import
+import delivary from '@/images/logoHomeSlider/delivary.png'
+import emi from '@/images/logoHomeSlider/EMI.png'
+import Return from '@/images/logoHomeSlider/return.png'
+import warranty from '@/images/logoHomeSlider/warranty.png'
+import temp from "@/images/logoHomeSlider/temp.png"
+import payment from '@/images/logoHomeSlider/payment.png'
 
 const LogoHomeSlider = () => {
   return (
@@ -41,24 +41,27 @@ const LogoHomeSlider = () => {
             className="mySwiper"
           >
             <SwiperSlide>
-              <LogoSliderItem image={delivary} name="3 Hours Delivary"  />
+              <LogoSliderItem img={delivary} name="3 Hours Delivary"  />
             </SwiperSlide>
             <SwiperSlide>
-            <LogoSliderItem image={emi} name="UP TO 36 MONTH EMI"  />
+            <LogoSliderItem img={emi} name="UP TO 36 MONTH EMI"  />
             </SwiperSlide>
             <SwiperSlide>
-              <LogoSliderItem image={Return} name="easy return" />
+              <LogoSliderItem img={Return} name="easy return" />
             </SwiperSlide>
             <SwiperSlide>
-              <LogoSliderItem  image={warranty} name="100% genuine product "  />
+              <LogoSliderItem  img={warranty} name="100% genuine product "  />
             </SwiperSlide>
             <SwiperSlide>
-              <LogoSliderItem image={payment} name="secure payment"  />
+              <LogoSliderItem img={payment} name="secure payment"  />
             </SwiperSlide>
             <SwiperSlide>
-              <LogoSliderItem image={temp} name="warrenty covarage" />
+              <LogoSliderItem img={temp} name="warrenty covarage" />
             </SwiperSlide>
           </Swiper>
+
+
+
         </div>
       </section>
     </>

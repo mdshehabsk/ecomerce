@@ -1,4 +1,4 @@
-
+'use client'
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from 'swiper';
 SwiperCore.use([Autoplay]);
@@ -9,7 +9,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/free-mode';
 // import required modules
 import { Pagination,Navigation,Autoplay} from "swiper/modules";
-import SingleProduct from "@components/Products/SingleProduct";
+import SingleProduct from "@/components/Products/SingleProduct";
 import { useRef } from "react";
 
 // import react icon

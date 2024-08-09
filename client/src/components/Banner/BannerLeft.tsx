@@ -2,8 +2,8 @@ import ListItem from "./ListItem";
 import SubmenuListItem from "./SubmenuListItem";
 function BannerLeft() {
   return (
-    <div className="basis-1/4 bg-gray-100 hidden lg:block ">
-      <ul className=" py-5 pb-20 relative">
+    <div className="lg:basis-4/12 xl:basis-3/12 bg-gray-100 hidden lg:block  ">
+      <ul className=" ml-[60px] py-5 pb-20 relative">
         <ListItem name="SmartPhones">
           <div className="hidden group-hover:flex min-w-max  z-10 absolute left-full top-0 bg-gray-100 py-5 ">
             <ul>
@@ -11,7 +11,7 @@ function BannerLeft() {
               <SubmenuListItem>Infinix</SubmenuListItem>
               <SubmenuListItem>Oppo</SubmenuListItem>
               <SubmenuListItem>Oneplus</SubmenuListItem>
-              <SubmenuListItem>Techo</SubmenuListItem>
+              <SubmenuListItem>Techno</SubmenuListItem>
               <SubmenuListItem>Nokia</SubmenuListItem>
               <SubmenuListItem>Motorola</SubmenuListItem>
               <SubmenuListItem>Nothing</SubmenuListItem>

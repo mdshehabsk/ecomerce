@@ -1,7 +1,7 @@
+'use client'
 
-
-import { useAppDispatch, useAppSelector } from "@toolkit/hook";
-import { mobileFilterModalToggle } from "@toolkit/slice/ProductSortAndFilter";
+import { useAppDispatch, useAppSelector } from "@/toolkit/hook";
+import { mobileFilterModalToggle } from "@/toolkit/slice/ProductSortAndFilter";
 import React, { useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { BsFillPlayCircleFill } from "react-icons/bs";

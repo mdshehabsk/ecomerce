@@ -1,5 +1,7 @@
+'use client'
 import { ApexOptions } from "apexcharts";
-import ReactApexChart from "react-apexcharts";
+import dynamic from "next/dynamic";
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const series = [44, 55, 13, 33, 100];
 const option: ApexOptions = {
@@ -38,7 +40,7 @@ const option: ApexOptions = {
 const TopFiveCategoryProductPieChart = () => {
   return (
     <div className="bg-white shadow-md  lg:col-span-5 grow ">
-      <ReactApexChart options={option} series={series} type="donut" />
+      <Chart options={option} series={series} type="donut" />
     </div>
   );
 };

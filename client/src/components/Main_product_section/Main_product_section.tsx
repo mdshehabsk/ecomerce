@@ -1,3 +1,4 @@
+'use client'
 import { Grid, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
@@ -7,11 +8,11 @@ import "swiper/css/pagination";
 import Main_product_item from "./Main_product_item";
 type Iprops = {
   title: string;
-  imageArr: string[];
+  ImageArr: any[];
 };
-
+import Image from "next/image";
 const Main_product_section = (props: Iprops) => {
-  const { title, imageArr } = props;
+  const { title, ImageArr } = props;
   return (
     <section className="my-20 relative shadow-lg pb-8 ">
       <div className="my_container mx-auto">
@@ -34,11 +35,11 @@ const Main_product_section = (props: Iprops) => {
               autoplay
               speed={2000}
             >
-              {imageArr?.map((elem) => (
+              {ImageArr?.map((elem) => (
                 <SwiperSlide key={Math.random()}>
-                  <img
+                  <Image
                     src={elem}
-                    alt="no image"
+                    alt="no Image"
                     className="min-h-full object-cover"
                   />
                 </SwiperSlide>

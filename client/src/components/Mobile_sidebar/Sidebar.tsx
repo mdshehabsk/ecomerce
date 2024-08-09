@@ -2,19 +2,19 @@ import { useReducer } from "react";
 import SidebarListItem from "./SidebarListItem";
 import SidebarSubmenu from "./SidebarSubmenu";
 import SidebarSubmenuListItem from "./SidebarSubmenuListItem";
-// image import
-import mobile from "@images/nav_icon_img/mobile.jpg"
-import electronics from '@images/nav_icon_img/electronics.jpg'
-import mobile_accessories from '@images/nav_icon_img/mobile_accessories.jpg'
-import computer from '@images/nav_icon_img/computer.jpg'
-import lifestyle from '@images/nav_icon_img/lifestyle.jpg'
-import call from '@images/nav_icon_img/call.jpg'
+// Image import
+import mobile from "@/images/nav_icon_img/mobile.jpg"
+import electronics from '@/images/nav_icon_img/electronics.jpg'
+import mobile_accessories from '@/images/nav_icon_img/mobile_accessories.jpg'
+import computer from '@/images/nav_icon_img/computer.jpg'
+import lifestyle from '@/images/nav_icon_img/lifestyle.jpg'
+import call from '@/images/nav_icon_img/call.png'
 //impor icon
 import { RxCross2 } from "react-icons/rx";
-import { useAppDispatch, useAppSelector } from "@toolkit/hook";
-import { sidebarClose } from "@toolkit/slice/SidebarSlice";
+import { useAppDispatch, useAppSelector } from "@/toolkit/hook";
+import { sidebarClose } from "@/toolkit/slice/SidebarSlice";
 
-
+import Image from "next/image";
 const  Sidebar = () => {
   const initialState = {
     smartphone: false,

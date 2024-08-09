@@ -1,13 +1,13 @@
+import Image from 'next/image'
 
-
-import Oven from '@images/slider/oven-102.jpg'
+import Oven from '@/images/slider/oven-102.jpg'
 import {AiOutlineStar} from 'react-icons/ai' 
 const Main_product_item = () => {
   return (
     <>
    <div className='border border-gray-100 p-2  hover:shadow-lg ' >
    <div className="flex justify-center  " >
-        <img src={Oven} alt="no image"  />
+        <Image src={Oven} alt="no Image"  />
     </div>
     <h3 className="text-sm font-medium" >Techno camon 20 Cksrns 8/18GB</h3>
     <div className="flex items-center " >
