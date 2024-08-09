@@ -1,4 +1,4 @@
-'use client'
+
 import LastSixMonthSalesChart from "@/components/Admin/LastSixMonthSalesChart";
 import SalesProfitAreaChart from "@/components/Admin/SalesProfitAreaChart";
 import TopFiveCategoryProductPieChart from "@/components/Admin/TopFiveCategoryProductPieChart";

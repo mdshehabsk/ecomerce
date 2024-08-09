@@ -1,12 +1,10 @@
 'use client'
 import React from "react";
-import slugify from 'react-slugify';
 const Box: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <div className="p-4 bg-white shadow-sm rounded-sm">{children}</div>
 );
 
 const AddProduct = () => {
-  console.log(slugify('hello world'))
   return (
     <>
 

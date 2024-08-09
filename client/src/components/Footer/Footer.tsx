@@ -13,10 +13,15 @@ import payment from '@/images/appStoreLogo/payement-6.svg'
 
 import FooterLink from "./FooterLink";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 const Footer = () => {
+  const pathname = usePathname()
+  if(pathname.startsWith('/dashboard')){
+    return;
+  }
   return (
     <>
-      <footer className="bg-footerColor py-8  ">
+      <footer className="bg-footerColor py-8 ">
         <div className="my_container mx-auto">
           <div className=" lg:gap-[22px]  flex flex-wrap  ">
             <div className=" text-slate-50 basis-full md:basis-1/3 lg:basis-3/12 ">

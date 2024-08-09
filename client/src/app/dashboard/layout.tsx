@@ -10,9 +10,9 @@ const DashboardLayout = ({
   }: Readonly<{
     children: React.ReactNode;
   }>)  => {
-    const dispath = useAppDispatch()
+    const dispatch = useAppDispatch()
     function sidebarShow () {
-      dispath(sidebarOpen())
+      dispatch(sidebarOpen())
     }
     return (
         <div className="flex w-screen h-screen   " >

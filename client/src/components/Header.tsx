@@ -8,8 +8,14 @@ import Sidebar from "./Mobile_sidebar/Sidebar";
 import { useAppDispatch, useAppSelector } from "@/toolkit/hook";
 import { sidebarOpen } from "@/toolkit/slice/SidebarSlice";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 function Navbar() {
+  const pathname = usePathname();
+  
+  if(pathname.startsWith('/dashboard')){
+    return;
+  }
 const {sidebarShow} = useAppSelector(state => state.Sidebar)
 const dispatch = useAppDispatch()
   useEffect(() => {

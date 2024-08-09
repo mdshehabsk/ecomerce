@@ -1,8 +1,9 @@
-'use client'
-import Chart from "react-apexcharts";
+"use client"
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 import React from "react";
 import { ApexOptions } from "apexcharts";
+import dynamic from "next/dynamic";
 
 const SalesProfitAreaChart: React.FC<{ color: string; name?: string }> = ({
   color,
