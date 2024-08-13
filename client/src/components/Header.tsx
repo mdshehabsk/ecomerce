@@ -62,7 +62,7 @@ function Navbar() {
                 <AiOutlineSearch className="text-2xl" />
               </div>
             </div>
-            <div className="flex justify-end items-center space-x-2 text-white order-2 lg:order-3 md:gap-3 lg:basis-3/12 ">
+            <div className="flex justify-center items-center space-x-2 text-white order-2 lg:order-3 md:gap-3 lg:basis-3/12 ">
               <div className="flex gap-1 cursor-pointer md:order-3">
                 <IoMdCart className=" text-xl  md:text-2xl " />
                 <p className="hidden md:block">Cart</p>
