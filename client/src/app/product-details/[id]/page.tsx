@@ -1,20 +1,24 @@
+'use client'
 import productOne from "@/images/product/product-1.jpg";
 import { AiOutlineStar } from "react-icons/ai";
 import { CiShoppingCart } from "react-icons/ci";
 import { IoBagHandleOutline } from "react-icons/io5"
 import Image from "next/image";
+import useScreenSize from "@/hooks/useScreenSize";
 const ProductDetailsPage = () => {
+  const {size,device} =useScreenSize();
+
   return (
    <>
     <div className="bg-gray-50  ">
-      <div className="my-container mx-auto bg-white  ">
+      <div className="my-container mx-auto bg-white xs  ">
         <div className="flex flex-wrap justify-between ">
           <div className=" p-3 basis-full md:basis-5/12  md:sticky top-[80px] left-0 max-h-[92vh]   ">
            <div className="relative  md:h-full flex flex-col ">
            <div className="mx-auto md:h-full w-full flex justify-center items-center ">
               <Image src={productOne} alt="no Image" />
             </div>
-            <div className="flex justify-center items-baseline md:absolute bottom-0 md:h-[120px] w-full ">
+            <div className="flex justify-center items-baseline md:block bottom-0 md:h-[120px] w-full ">
               <div className="flex gap-1 justify-center w-full ">
                 <div className=" max-w-[80px]  lg:max-w-[110px] cursor-pointer border  border-blue-600  ">
                   <Image src={productOne} alt="no Image" />
@@ -33,11 +37,14 @@ const ProductDetailsPage = () => {
                 </div>
               </div>
             </div>
+            <div>
+              <button>Login</button>
+            </div>
            </div>
           </div>
           <div className="border-t md:border-l border-neutral-300 mt-1 basis-full md:basis-7/12 2 p-3 ">
             <h1 className="text-xl  font-semibold ">
-              Amazfit Pop 3S AMOLED Bluetooth Calling Smart Watch Global Version
+              Amazfit Pop 3S AMOLED Bluetooth Calling Smart Watch Global Version {size }
             </h1>
             <div className="flex my-2 items-center gap-3 border-y py-2  ">
               <div className="flex items-center gap-2 bg-orangeColor text-white px-2 py-2 rounded-sm ">
