@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { AnyZodObject, z } from "zod";
+import sendResponse from "../utils/sendResponse";
+import httpStatus from "http-status";
 
 const validateRequest = (schema: AnyZodObject) => {
   return async (req: Request, res: Response, next: NextFunction) => {
@@ -16,9 +18,12 @@ const validateRequest = (schema: AnyZodObject) => {
           path: err.path[1],
           message: err.message,
         }));
-        return res.status(400).json({
-          status: "error",
-          errors: formattedErrors,
+        return sendResponse(res, {
+          statusCode: httpStatus.BAD_REQUEST,
+          success: false,
+          error: formattedErrors,
+          message: "validation faild",
+          data: null,
         });
       }
       next(error);
