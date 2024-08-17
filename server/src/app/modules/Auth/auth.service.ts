@@ -6,6 +6,7 @@ import { AppError } from "../../errors/AppError";
 import { User } from "../User/user.model";
 import { ILoginUser, IRegisterUser } from "./auth.interface";
 import { CreateToken } from "./auth.utils";
+import { sendMail } from "../../mail/sendMail";
 
 
 const userRegister = async (user: IRegisterUser) => {
@@ -23,8 +24,11 @@ const userRegister = async (user: IRegisterUser) => {
       emailExist: true,
     };
   }
-  const userSaved = await User.create({ email, username, password });
-  if (userSaved) {
+  const userSaved = new User({ email, username, password });
+  const token = CreateToken({_id:userSaved._id},config.jwt_secret, config.jwt_expire)
+  const mailSend = await sendMail({email:userSaved.email,subject:'verification',token,username:userSaved.username});
+  await userSaved.save()
+  if (userSaved && mailSend?.accepted) {
     return {
       userSaved: true,
     };
