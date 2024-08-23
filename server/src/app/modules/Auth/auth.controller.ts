@@ -22,6 +22,15 @@ const authRegister = catchAsync(async (req,res)=> {
 })
 
 
+
+const verifyUser = catchAsync(async (req,res)=> {
+    const {token} = req.query;
+
+    
+    const {userVerify} = await AuthServices.verifyUser(token)
+})
+
 export const AuthController = {
-    authRegister
+    authRegister,
+    verifyUser
 };

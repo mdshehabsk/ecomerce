@@ -5,38 +5,46 @@ import { IUser } from "./user.interface";
 
 const UserSchema = new Schema<IUser>(
   {
-    username:{
-      type:String,
-      required:true
+    username: {
+      type: String,
+      required: true,
     },
-    email:{
-      type:String,
-      require:true
+    email: {
+      type: String,
+      required: true,
     },
-    password:{
-      type:String,
-      required:function () {
+    password: {
+      type: String,
+      required: function () {
         return !this.googleId && !this.facebookId;
       },
     },
     googleId: {
       type: String,
-      unique:true,
-      sparse:true
+      unique: true,
+      sparse: true,
     },
     facebookId: {
       type: String,
-      unique:true,
-      sparse:true
+      unique: true,
+      sparse: true,
     },
     isEmailVerified: {
       type: Boolean,
       default: false,
     },
+    // expireAt: {
+    //   type: Date,
+    //   default: Date.now, 
+    //   expires: 600,
+    // },
+    createdAt:{
+      type:Date,
+      default: new Date(),
+      expires: 600
+    }
+   
   },
-  {
-    timestamps: true,
-  }
 );
 
 UserSchema.pre('save', async function (next) {

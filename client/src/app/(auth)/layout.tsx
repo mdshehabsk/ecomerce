@@ -12,7 +12,7 @@ const Auth = ({
     const pathname = usePathname()
   return (
     <>
-      <div className="mx-auto my-6 max-w-[400px] ">
+      <div className="mx-auto my-6 max-w-[400px]   ">
         <div className="flex mx-auto justify-center">
           <Link
             href="/login"

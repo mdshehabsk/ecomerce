@@ -15,7 +15,7 @@ const Login = () => {
   };
   return (
     <>
-      <div className="mt-5">
+      <div className="my-5">
         <form autoComplete="off" onSubmit={loginSubmit}>
           <div className="w-full flex items-center border px-4 py-2 my-8">
             <input
@@ -48,6 +48,12 @@ const Login = () => {
           <div className="w-full flex items-center justify-center my-3 text-orangeColor">
             <Link href="/forgetPassword">Forget Password?</Link>
           </div>
+          <p className="text-center text-gray-600 mt-4">
+              Don’t have an account?{" "}
+              <Link href="/register" className="text-orangeColor hover:underline">
+                Register
+              </Link>
+            </p>
         </form>
       </div>
     </>

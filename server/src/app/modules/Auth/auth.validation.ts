@@ -1,9 +1,9 @@
 import { z } from "zod";
 import { IUser } from "../User/user.interface";
 
-
 const AuthRegisterSchema = z.object({
-    body: z.object({
+  body: z
+    .object({
       username: z
         .string({ required_error: "Username is required" })
         .min(1, { message: "Username is required" })
@@ -24,13 +24,22 @@ const AuthRegisterSchema = z.object({
           required_error: "Confirm password is required",
         })
         .min(1, { message: "Confirm password is required" })
-        .max(30, { message: "Confirm password cannot be more than 30 characters" }),
-    }).refine((data) => data.password === data.cpassword, {
-      path: ['body', 'cpassword'],  // Adjusted path to the correct location
+        .max(30, {
+          message: "Confirm password cannot be more than 30 characters",
+        }),
+    })
+    .refine((data) => data.password === data.cpassword, {
+      path: ["cpassword"], // Adjusted path to the correct location
       message: "Passwords do not match",
     }),
-  });
+});
 
+const AuthVerifySchema = z.object({
+  query: z.object({
+    token: z.string({ required_error: "token is missing" }),
+  }),
+});
 export const AuthValidation = {
   AuthRegisterSchema,
+  AuthVerifySchema,
 };

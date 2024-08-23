@@ -9,7 +9,9 @@ export interface IUser extends Document {
   password: string
   googleId: string
   facebookId:string
-  isEmailVerified: boolean
+  isEmailVerified: boolean,
+  createdAt: Date,
+  expireAt: Date
 }
 
 
