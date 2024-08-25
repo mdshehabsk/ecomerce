@@ -1,33 +1,45 @@
-'use client'
-import { Suspense } from 'react'
-import { useVerifyUserQuery } from '@/toolkit/api/authApi'
-import { useSearchParams } from 'next/navigation'
+"use client";
 
-import { useState } from 'react'
-import NotFoundPage from '@/components/not-found'
-import {useRouter} from 'next/navigation'
+import { useVerifyUserQuery } from "@/toolkit/api/authApi";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
-const VerifyUser = () => {
+
+
+const MyComponent = () => {
   const router = useRouter()
-    function Search() {
-      const searchParams = useSearchParams()
-     const token = searchParams.get('token')
-     const {data,isLoading,isError,isSuccess} = useVerifyUserQuery(token) 
-     if(isSuccess){
-       router.push('/')
-     }
-      return <NotFoundPage/>
+  const searchParams = useSearchParams()
+ 
+  const token = searchParams.get('token')
+  if(!token){
+     router.push('/not-found')
+  }
+  const { data, isLoading, isError, isSuccess } = useVerifyUserQuery(token);
+    useEffect(()=> {
+    if(isError){
+      router.push('/not-found')
     }
-
-
-    
+    if(isSuccess){
+      router.push('/')
+    }
+  },[data,isSuccess,isError,isLoading])
   return (
     <div>
-      <Suspense>
-        <Search/>
-      </Suspense>
+     
     </div>
-  )
-}
+  );
+};
 
-export default VerifyUser
+
+const VerifyUser = () => {
+  return (
+    <div>
+     <Suspense fallback={<h1>Loading...</h1>} >
+      <MyComponent/>
+     </Suspense>
+    </div>
+  );
+};
+
+export default VerifyUser;

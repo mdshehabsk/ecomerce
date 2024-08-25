@@ -18,7 +18,7 @@ const authApi = baseApi.injectEndpoints({
       query: (user) => ({
         url: "/auth/register",
         method: "POST",
-        data: user,
+        data: user
       }),
     }),
     verifyUser: builder.query({

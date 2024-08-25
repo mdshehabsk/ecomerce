@@ -18,7 +18,12 @@ const sendResponse = <T>(res: Response, data: IResponse<T>) => {
   // Set cookie if provided
   if (data.cookie) {
     const { name, value, options } = data.cookie;
-    res.cookie(name, value, options);
+    res.cookie(name, value, {
+      httpOnly:true,
+      secure:true,
+      sameSite:'none',
+      ...options
+    });
   }
 
   // Clear cookie if provided
@@ -37,3 +42,8 @@ const sendResponse = <T>(res: Response, data: IResponse<T>) => {
 };
 
 export default sendResponse;
+
+
+
+
+

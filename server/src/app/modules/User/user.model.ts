@@ -33,17 +33,6 @@ const UserSchema = new Schema<IUser>(
       type: Boolean,
       default: false,
     },
-    // expireAt: {
-    //   type: Date,
-    //   default: Date.now, 
-    //   expires: 600,
-    // },
-    createdAt:{
-      type:Date,
-      default: new Date(),
-      expires: 600
-    }
-   
   },
 );
 
