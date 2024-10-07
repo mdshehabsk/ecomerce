@@ -34,26 +34,25 @@ const authRegister = catchAsync(async (req, res) => {
   }
 });
 
-const verifyUser = catchAsync(async (req,res) => {
+const verifyUser = catchAsync(async (req, res) => {
   const { token } = req.query;
 
-  const { userVerify,userToken } = await AuthServices.verifyUser(token);
-  if(userVerify){
-
-    sendResponse(res,{
+  const { userVerify, userToken } = await AuthServices.verifyUser(token);
+  if (userVerify) {
+    sendResponse(res, {
       statusCode: httpStatus.OK,
-      success:true,
-      message:'verifcation successfull',
-      cookie:{
-        name:'user_ID',
+      success: true,
+      message: "verifcation successfull",
+      cookie: {
+        name: "user_ID",
         value: userToken,
-        options:{
+        options: {
           httpOnly: true,
-          secure:true,
-          sameSite:'none'
-        }
-      }
-    })
+          secure: true,
+          sameSite: "none",
+        },
+      },
+    });
   }
 });
 

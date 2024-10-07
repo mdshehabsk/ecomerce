@@ -37,7 +37,7 @@ const PasswordInput = ({
 );
 
 const Register = () => {
-  const [mutate, { isLoading, data, isError, error, isSuccess }] =
+  const [mutate, { data, isError, error, isSuccess }] =
     useRegisterUserMutation();
   const [inputVal, setInputVal] = useState({
     username: "",
@@ -65,7 +65,7 @@ const Register = () => {
   };
 
   useEffect(() => {
-    if (isError && 'error' in error) {
+    if (isError && "error" in error) {
       const newFieldErrors: Record<string, string> = {};
       if (Array.isArray(error.error)) {
         error.error.forEach((err) => {
@@ -82,7 +82,7 @@ const Register = () => {
       setToast(
         <div className="w-full py-3 bg-gray-50 flex items-center justify-center">
           <p className="text-orangeColor">{data?.message}</p>
-        </div>
+        </div>,
       );
     }
   }, [isSuccess, data]);
@@ -93,7 +93,9 @@ const Register = () => {
     <div className="my-5">
       {isError && (
         <div className="w-full py-3 bg-gray-50 flex items-center justify-center">
-          <p className="text-orangeColor">{isError && 'message' in error && error?.message}</p>
+          <p className="text-orangeColor">
+            {isError && "message" in error && error?.message}
+          </p>
         </div>
       )}
       {toast}

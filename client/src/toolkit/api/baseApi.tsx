@@ -1,10 +1,13 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type { BaseQueryFn } from "@reduxjs/toolkit/query";
 import axios from "axios";
 import type { AxiosRequestConfig, AxiosError } from "axios";
 
+
+
+
 // Define the global error type
-export interface IApiError  {
+export interface IApiError {
   statusCode: number;
   message: string;
   error?: string | { path: string; message: string }[];
@@ -12,7 +15,7 @@ export interface IApiError  {
 
 const axiosBaseQuery =
   (
-    { baseUrl }: { baseUrl: string } = { baseUrl: "" }
+    { baseUrl }: { baseUrl: string } = { baseUrl: "" },
   ): BaseQueryFn<
     {
       url?: string;
@@ -24,7 +27,7 @@ const axiosBaseQuery =
     unknown,
     IApiError
   > =>
-  async ({ url, method , data, params, headers }): Promise<any> => {
+  async ({ url, method, data, params, headers }): Promise<any> => {
     try {
       const result = await axios({
         url: baseUrl + url,
@@ -42,7 +45,6 @@ const axiosBaseQuery =
       };
     }
   };
-
 
 const baseApi = createApi({
   baseQuery: axiosBaseQuery({
