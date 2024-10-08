@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+  .banner_list_item {
+     @apply flex items-center justify-between mb-3  cursor-pointer px-8
+  }
+  .testing_hover {
+      @apply group-hover/ab:text-sky-500
+  }
+  .product_filter_item {
+      @apply px-2 py-4 border-y  transition-all duration-150
+  }
+  .product_filter_price_box {
+      @apply hover:border hover:border-orange-500 transition-[hover]  text-xs rounded-md w-[100px] px-2 py-2 outline-none border border-slate-400 
+  }
+}
+.my_container {
+  /* max-width: 1124px; */
+  max-width: 95%;
+}
+@media (min-width:840px) {
+  .my_container {
+      /* max-width: 1124px; */
+      width: 95%;
+  }
+}
+
+@media (min-width:1180px) {
+  .my_container {
+      width: 100%;
+  }
+}
+@media (min-width:1600px) {
+  .my_container {
+      max-width: 80%;
+      width: 100%;
+  }
+}
+
+/* custom pagination button desing */
+.swiper-pagination-bullet {
+  cursor: pointer;
+}
