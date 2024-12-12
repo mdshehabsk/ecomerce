@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 import ejs from "ejs";
 import path from "path";
+import config from "../config";
 export const sendMail = async ({
   email,
   token,
@@ -15,8 +16,8 @@ export const sendMail = async ({
   const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-          user: process.env.MAIL_USER,
-          pass: process.env.MAIL_PASS,
+          user: config.mail_user,
+          pass: config.mail_pass,
       },
   });
   // eslint-disable-next-line no-undef
@@ -25,9 +26,8 @@ export const sendMail = async ({
     token,
     username,
   });
-
   const mailSend = await transporter.sendMail({
-    from: `pickaboo <${process.env.MAIL_USER}>`,
+    from: `pickaboo <${config.mail_user}>`,
     to: email,
     subject,
     html: fileVal,

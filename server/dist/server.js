@@ -34,8 +34,8 @@ function main() {
     });
 }
 main();
-process.on("unhandledRejection", () => {
-    console.log("😈😈Unhandled rejection Detected 😈 shutting down the server...💤💤💤💤💤");
+process.on("unhandledRejection", (err) => {
+    console.log("😈😈Unhandled rejection Detected 😈 shutting down the server...💤💤💤💤💤", err);
     if (server) {
         server.close(() => {
             process.exit(1);

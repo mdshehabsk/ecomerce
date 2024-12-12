@@ -1,15 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const sendResponse = (res, data) => {
-    // Set cookie if provided
-    if (data.cookie) {
-        const { name, value, options } = data.cookie;
-        res.cookie(name, value, options);
-    }
-    // Clear cookie if provided
-    if (data.clearCookie) {
-        res.clearCookie(data.clearCookie);
-    }
     const response = {
         success: data.success,
         statusCode: Number(data.statusCode),
@@ -17,6 +8,9 @@ const sendResponse = (res, data) => {
         data: data.data,
         error: data.error,
     };
+    if (data === null || data === void 0 ? void 0 : data.token) {
+        response.token = data.token;
+    }
     return res.status(response.statusCode).json(response);
 };
 exports.default = sendResponse;

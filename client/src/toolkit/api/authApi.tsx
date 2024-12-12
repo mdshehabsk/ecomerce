@@ -21,6 +21,13 @@ const authApi = baseApi.injectEndpoints({
         data: user
       }),
     }),
+    loginUser : builder.mutation({
+      query: (data) => ({
+        url:'/auth/login',
+        method: "POST",
+        data
+      })
+    }),
     verifyUser: builder.query({
       query: (token) => ({
         url: `/auth/verify-user?token=${token}`,
@@ -30,6 +37,6 @@ const authApi = baseApi.injectEndpoints({
 });
 
 // Export the auto-generated hooks
-export const { useRegisterUserMutation, useVerifyUserQuery } = authApi;
+export const { useRegisterUserMutation, useVerifyUserQuery,useLoginUserMutation } = authApi;
 
 export default authApi;

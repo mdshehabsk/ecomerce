@@ -16,12 +16,13 @@ exports.sendMail = void 0;
 const nodemailer_1 = __importDefault(require("nodemailer"));
 const ejs_1 = __importDefault(require("ejs"));
 const path_1 = __importDefault(require("path"));
+const config_1 = __importDefault(require("../config"));
 const sendMail = (_a) => __awaiter(void 0, [_a], void 0, function* ({ email, token, subject, username, }) {
     const transporter = nodemailer_1.default.createTransport({
         service: "gmail",
         auth: {
-            user: process.env.MAIL_USER,
-            pass: process.env.MAIL_PASS,
+            user: config_1.default.mail_user,
+            pass: config_1.default.mail_pass,
         },
     });
     // eslint-disable-next-line no-undef
@@ -31,7 +32,7 @@ const sendMail = (_a) => __awaiter(void 0, [_a], void 0, function* ({ email, tok
         username,
     });
     const mailSend = yield transporter.sendMail({
-        from: `pickaboo <${process.env.MAIL_USER}>`,
+        from: `pickaboo <${config_1.default.mail_user}>`,
         to: email,
         subject,
         html: fileVal,

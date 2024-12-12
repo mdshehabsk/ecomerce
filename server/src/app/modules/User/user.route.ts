@@ -1,5 +1,6 @@
 import {Router} from "express";
 import { UserController } from "./user.controller";
+import { isLogin } from "../../middleware/auth";
 
 
 
@@ -9,7 +10,7 @@ import { UserController } from "./user.controller";
 const router = Router();
 
 
-router.route('/get-user-data').get(UserController.getUserData)
+router.get('/get-user-data',isLogin, UserController.getUserData)
 
 
 export const UserRoutes = router;

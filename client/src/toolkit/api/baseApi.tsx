@@ -2,6 +2,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type { BaseQueryFn } from "@reduxjs/toolkit/query";
 import axios from "axios";
 import type { AxiosRequestConfig, AxiosError } from "axios";
+import { TState } from "../store";
+
 
 
 
@@ -13,10 +15,7 @@ export interface IApiError {
   error?: string | { path: string; message: string }[];
 }
 
-const axiosBaseQuery =
-  (
-    { baseUrl }: { baseUrl: string } = { baseUrl: "" },
-  ): BaseQueryFn<
+const axiosBaseQuery = ({ baseUrl }: { baseUrl: string } = { baseUrl: "" }): BaseQueryFn<
     {
       url?: string;
       method?: AxiosRequestConfig["method"];
@@ -27,14 +26,19 @@ const axiosBaseQuery =
     unknown,
     IApiError
   > =>
-  async ({ url, method, data, params, headers }): Promise<any> => {
+  async ({ url, method, data, params, headers } , {getState} ): Promise<any> => {
+    
+    const token = (getState() as TState).AuthSlice.token
     try {
       const result = await axios({
         url: baseUrl + url,
         method,
         data,
         params,
-        headers,
+        headers : {
+          ...headers,
+          Authorization : `Bearer ${token}`
+        },
         withCredentials: true,
       });
       return { data: result.data };

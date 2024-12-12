@@ -1,14 +1,13 @@
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import { NextAuthOptions } from "next-auth";
-
 const config = {
   googleClientId: process.env.GOOGLE_CLIENT_ID as string,
   googleClientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-
+  
   facebookClientId: process.env.FACEBOOK_CLIENT_ID as string,
   facebookClientSecret: process.env.FACEBOOK_CLIENT_SECRET as string,
-
+  
   nextAuthSecret: process.env.NEXTAUTH_SECRET,
 };
 

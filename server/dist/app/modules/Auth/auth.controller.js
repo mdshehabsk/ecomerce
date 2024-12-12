@@ -21,15 +21,61 @@ const authRegister = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, v
     const data = req.body;
     const { emailExist, googleId, userSaved } = yield auth_service_1.AuthServices.userRegister(data);
     if (emailExist) {
-        (0, sendResponse_1.default)(res, { statusCode: http_status_1.default.FORBIDDEN, success: false, data: null, error: 'email already exist', });
+        (0, sendResponse_1.default)(res, {
+            statusCode: http_status_1.default.FORBIDDEN,
+            success: false,
+            data: null,
+            error: "email already exist",
+        });
     }
     if (googleId) {
-        (0, sendResponse_1.default)(res, { statusCode: http_status_1.default.FORBIDDEN, success: false, data: null, error: 'login with google method' });
+        (0, sendResponse_1.default)(res, {
+            statusCode: http_status_1.default.FORBIDDEN,
+            success: false,
+            data: null,
+            error: "login with google method",
+        });
     }
     if (userSaved) {
-        (0, sendResponse_1.default)(res, { statusCode: http_status_1.default.OK, success: true, message: 'user create successfull please verify your email' });
+        (0, sendResponse_1.default)(res, {
+            statusCode: http_status_1.default.OK,
+            success: true,
+            message: "user create successfull please verify your email",
+        });
+    }
+}));
+const authLogin = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const data = req.body;
+    const { token, userNotFound, verifyUser } = yield auth_service_1.AuthServices.userLogin(data);
+    if (userNotFound) {
+        return (0, sendResponse_1.default)(res, {
+            statusCode: http_status_1.default.NOT_FOUND,
+            success: false,
+            error: 'Wrong Crentials'
+        });
+    }
+    if (verifyUser) {
+        return (0, sendResponse_1.default)(res, {
+            statusCode: http_status_1.default.OK,
+            success: true,
+            token,
+            message: 'Login Successfull'
+        });
+    }
+}));
+const verifyUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { token } = req.query;
+    const { userVerify, userToken } = yield auth_service_1.AuthServices.verifyUser(token);
+    if (userVerify) {
+        (0, sendResponse_1.default)(res, {
+            statusCode: http_status_1.default.OK,
+            success: true,
+            message: "verifcation successfull",
+        });
     }
 }));
 exports.AuthController = {
-    authRegister
+    authRegister,
+    authLogin,
+    verifyUser,
 };

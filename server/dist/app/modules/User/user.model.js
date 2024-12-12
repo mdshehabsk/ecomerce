@@ -18,11 +18,11 @@ const mongoose_1 = require("mongoose");
 const UserSchema = new mongoose_1.Schema({
     username: {
         type: String,
-        required: true
+        required: true,
     },
     email: {
         type: String,
-        require: true
+        required: true,
     },
     password: {
         type: String,
@@ -33,24 +33,22 @@ const UserSchema = new mongoose_1.Schema({
     googleId: {
         type: String,
         unique: true,
-        sparse: true
+        sparse: true,
     },
     facebookId: {
         type: String,
         unique: true,
-        sparse: true
+        sparse: true,
     },
     isEmailVerified: {
         type: Boolean,
         default: false,
     },
-}, {
-    timestamps: true,
 });
 UserSchema.pre('save', function (next) {
     return __awaiter(this, void 0, void 0, function* () {
         const user = this;
-        if (user.password) {
+        if (user.password && user.isModified('password')) {
             user.password = yield bcrypt_1.default.hash(user.password, 10);
         }
         next();

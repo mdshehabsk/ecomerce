@@ -34,6 +34,26 @@ const authRegister = catchAsync(async (req, res) => {
   }
 });
 
+const authLogin = catchAsync(async (req,res)=> {
+  const data = req.body;
+  const {token,userNotFound,verifyUser} = await AuthServices.userLogin(data)
+  if(userNotFound){
+   return sendResponse(res, {
+      statusCode: httpStatus.NOT_FOUND,
+      success: false,
+      error:'Wrong Crentials'
+    } )
+  }
+  if(verifyUser) {
+   return sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      token,
+      message: 'Login Successfull'
+    })
+  }
+})
+
 const verifyUser = catchAsync(async (req, res) => {
   const { token } = req.query;
 
@@ -43,20 +63,12 @@ const verifyUser = catchAsync(async (req, res) => {
       statusCode: httpStatus.OK,
       success: true,
       message: "verifcation successfull",
-      cookie: {
-        name: "user_ID",
-        value: userToken,
-        options: {
-          httpOnly: true,
-          secure: true,
-          sameSite: "none",
-        },
-      },
     });
   }
 });
 
 export const AuthController = {
   authRegister,
+  authLogin,
   verifyUser,
 };

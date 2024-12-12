@@ -34,6 +34,21 @@ const AuthRegisterSchema = z.object({
     }),
 });
 
+
+const AuthLoginSchema = z.object({
+  body : z.object({
+    email: z
+    .string({ required_error: "Email is required" })
+    .email({ message: "This is not a valid email" }),
+    password: z
+    .string({
+      invalid_type_error: "Password must be a valid string",
+      required_error: "Password is required",
+    })
+    .min(1, { message: "Password is required" })
+    .max(30, { message: "Password cannot be more than 30 characters" }),
+  })
+})
 const AuthVerifySchema = z.object({
   query: z.object({
     token: z.string({ required_error: "token is missing" }),
@@ -41,5 +56,6 @@ const AuthVerifySchema = z.object({
 });
 export const AuthValidation = {
   AuthRegisterSchema,
+  AuthLoginSchema,
   AuthVerifySchema,
 };

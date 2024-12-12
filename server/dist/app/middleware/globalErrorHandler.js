@@ -11,7 +11,6 @@ const handleDuplicateError_1 = require("../errors/handleDuplicateError");
 const handleValidationError_1 = require("../errors/handleValidationError");
 const handleZodError_1 = require("../errors/handleZodError");
 const globalErrorHandler = (err, req, res, next) => {
-    console.log(err);
     // setting default values
     let statusCode = 500;
     let message = "Something went wrong";

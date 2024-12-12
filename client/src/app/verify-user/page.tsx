@@ -4,11 +4,14 @@ import { useVerifyUserQuery } from "@/toolkit/api/authApi";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/toolkit/hook";
+import { setToken } from "@/toolkit/slice/authSlice";
 
 const MyComponent = () => {
   const searchParams = useSearchParams();
-
+  const router = useRouter()
   const token = searchParams.get("token");
+  const dispatch = useAppDispatch()
   if (!token) {
     router.push("/not-found");
   }
@@ -18,6 +21,7 @@ const MyComponent = () => {
       router.push("/not-found");
     }
     if (isSuccess) {
+      dispatch(setToken(token))
       router.push("/");
     }
   }, [data, isSuccess, isError, isLoading]);

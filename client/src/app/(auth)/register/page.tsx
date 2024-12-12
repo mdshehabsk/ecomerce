@@ -88,11 +88,10 @@ const Register = () => {
   }, [isSuccess, data]);
 
   const { username, email, password, cpassword } = inputVal;
-
   return (
     <div className="my-5">
       {isError && (
-        <div className="w-full py-3 bg-gray-50 flex items-center justify-center">
+        <div className="w-full bg-gray-50 flex items-center justify-center">
           <p className="text-orangeColor">
             {isError && "message" in error && error?.message}
           </p>
@@ -111,7 +110,7 @@ const Register = () => {
             required
           />
           {fieldErrors.username && (
-            <span className="text-orangeColor my-1 block">
+            <span className="text-orangeColor  block">
               {fieldErrors.username}
             </span>
           )}
@@ -129,7 +128,7 @@ const Register = () => {
           />
         </div>
         {fieldErrors.email && (
-          <span className="text-orangeColor my-1 block">
+          <span className="text-orangeColor block">
             {fieldErrors.email}
           </span>
         )}
@@ -142,7 +141,7 @@ const Register = () => {
           toggleShowPassword={() => togglePasswordVisibility("password")}
         />
         {fieldErrors.password && (
-          <span className="text-orangeColor my-1 block">
+          <span className="text-orangeColor  block">
             {fieldErrors.password}
           </span>
         )}
@@ -155,7 +154,7 @@ const Register = () => {
           toggleShowPassword={() => togglePasswordVisibility("cpassword")}
         />
         {fieldErrors.cpassword && (
-          <span className="text-orangeColor my-1 block">
+          <span className="text-orangeColor  block">
             {fieldErrors.cpassword}
           </span>
         )}
@@ -170,7 +169,7 @@ const Register = () => {
         </div>
 
         <p className="text-center text-gray-600 mt-4">
-          Already have an account?{" "}
+          Already have an account?
           <Link href="/login" className="text-orangeColor hover:underline">
             Sign In
           </Link>
