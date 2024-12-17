@@ -10,6 +10,7 @@ const router = Router()
 router.post('/register', validateBodyRequest(AuthValidation.AuthRegisterSchema), AuthController.authRegister )
 
 router.post('/login',validateBodyRequest(AuthValidation.AuthLoginSchema),AuthController.authLogin)
+router.post('/login/google', validateBodyRequest(AuthValidation.AuthLoginGoogleSchema),AuthController.authLoginGoogle)
 
 router.get('/user', async (req,res)=> {
     const user = await User.find()

@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 import ReduxProvider from '@/toolkit/Redux-Provider';
+
 import Header from "@/components/Header";
 import Footer from "@/components/Footer/Footer";
 export const metadata: Metadata = {

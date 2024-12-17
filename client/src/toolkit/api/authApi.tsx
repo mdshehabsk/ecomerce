@@ -1,4 +1,5 @@
 import baseApi from "./baseApi";
+import userApi from "./userApi";
 interface IRegisterApiResponse {
   success: boolean;
   statusCode: number;
@@ -18,15 +19,22 @@ const authApi = baseApi.injectEndpoints({
       query: (user) => ({
         url: "/auth/register",
         method: "POST",
-        data: user
+        data: user,
       }),
     }),
-    loginUser : builder.mutation({
+    loginUser: builder.mutation({
       query: (data) => ({
-        url:'/auth/login',
+        url: '/auth/login',
         method: "POST",
-        data
-      })
+        data,
+      }),
+    }),
+    loginWithGoogle: builder.mutation({
+      query: (data) => ({
+        url: '/auth/login/google',
+        method: "POST",
+        data,
+      }),
     }),
     verifyUser: builder.query({
       query: (token) => ({
@@ -37,6 +45,10 @@ const authApi = baseApi.injectEndpoints({
 });
 
 // Export the auto-generated hooks
-export const { useRegisterUserMutation, useVerifyUserQuery,useLoginUserMutation } = authApi;
+
+
+
+// Export the auto-generated hooks
+export const { useRegisterUserMutation, useVerifyUserQuery,useLoginUserMutation,useLoginWithGoogleMutation } = authApi;
 
 export default authApi;

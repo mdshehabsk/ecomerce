@@ -16,8 +16,7 @@ import Image from "next/image";
 import Popover from "./Popover";
 import Dropdown from "./Account/Dropdown";
 function Navbar() {
-  const { isLoading, isError, isSuccess, data, error } =
-    useGetUserDataQuery(undefined);
+  const { isLoading, isError, isSuccess, data, error } = useGetUserDataQuery(undefined);
   const {token} = useAppSelector(state => state.AuthSlice);
   const [showDropdown, setShowDropdown] = useState(false);
   const pathname = usePathname();

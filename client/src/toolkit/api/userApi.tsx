@@ -9,7 +9,7 @@ if(global.window !== undefined){
 const userApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
       getUserData : builder.query({
-        query: () => ({
+        query: (undefined) => ({
             url:'/user/get-user-data',
             method:'GET',
             headers:{
@@ -21,3 +21,5 @@ const userApi = baseApi.injectEndpoints({
   });
 
 export const {useGetUserDataQuery} = userApi
+
+export default userApi

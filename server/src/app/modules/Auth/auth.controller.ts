@@ -36,7 +36,7 @@ const authRegister = catchAsync(async (req, res) => {
 
 const authLogin = catchAsync(async (req,res)=> {
   const data = req.body;
-  const {token,userNotFound,verifyUser} = await AuthServices.userLogin(data)
+  const {token,userNotFound,verifyUser,user} = await AuthServices.userLogin(data)
   if(userNotFound){
    return sendResponse(res, {
       statusCode: httpStatus.NOT_FOUND,
@@ -49,10 +49,31 @@ const authLogin = catchAsync(async (req,res)=> {
       statusCode: httpStatus.OK,
       success: true,
       token,
-      message: 'Login Successfull'
+      message: 'Login Successfull',
+      data:user
     })
   }
 })
+
+
+const authLoginGoogle = catchAsync(async (req,res) =>  {
+  const {token} = req.body
+  const {loginSuccess,myToken} = await AuthServices.userLoginGoogle(token)
+  if(!loginSuccess) {
+    return sendResponse(res, {
+      statusCode: httpStatus.UNAUTHORIZED,
+      success: false,
+      error: 'Unauthorized',
+    })
+  }else {
+    return sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Login Successfull',
+      token: myToken
+    })
+  }
+} )
 
 const verifyUser = catchAsync(async (req, res) => {
   const { token } = req.query;
@@ -70,5 +91,6 @@ const verifyUser = catchAsync(async (req, res) => {
 export const AuthController = {
   authRegister,
   authLogin,
+  authLoginGoogle,
   verifyUser,
 };

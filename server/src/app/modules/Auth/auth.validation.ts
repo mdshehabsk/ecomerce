@@ -54,8 +54,15 @@ const AuthVerifySchema = z.object({
     token: z.string({ required_error: "token is missing" }),
   }),
 });
+
+const AuthLoginGoogleSchema = z.object({
+  body: z.object({
+    token : z.string({ required_error: "Token is required" })
+  })
+})
 export const AuthValidation = {
   AuthRegisterSchema,
   AuthLoginSchema,
+  AuthLoginGoogleSchema,
   AuthVerifySchema,
 };
