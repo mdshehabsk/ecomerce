@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai";
+import { FaAngleDown } from "react-icons/fa6";
 import { FiMenu } from "react-icons/fi";
 import { IoMdCart } from "react-icons/io";
 import BannerLeft from "./Banner/BannerLeft";
@@ -9,8 +10,15 @@ import { useAppDispatch, useAppSelector } from "@/toolkit/hook";
 import { sidebarOpen } from "@/toolkit/slice/SidebarSlice";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
+import { useGetUserDataQuery } from "@/toolkit/api/userApi";
+import userIcon from "@/images/user.png";
+import Image from "next/image";
+import Popover from "./Popover";
+import Dropdown from "./Account/Dropdown";
 function Navbar() {
+  const { isLoading, isError, isSuccess, data, error } = useGetUserDataQuery(undefined);
+  const {token} = useAppSelector(state => state.AuthSlice);
+  const [showDropdown, setShowDropdown] = useState(false);
   const pathname = usePathname();
 
   const { sidebarShow } = useAppSelector((state) => state.Sidebar);
@@ -26,6 +34,12 @@ function Navbar() {
     return;
   }
 
+  function handleDropdown() {
+    setShowDropdown(true);
+  }
+  function handlePopoverClose () {
+    setShowDropdown(false)
+  }
   return (
     <>
       <header className="w-full min-h-max bg-mainBlueColor flex items-center py-2 lg:py-0 sticky top-0 z-50 ">
@@ -35,7 +49,7 @@ function Navbar() {
               <div className="  hidden lg:block  cursor-pointer group/banner lg:py-7 transition-all duration-500  group-banner ">
                 <FiMenu className="text-slate-100 text-xl lg:text-2xl  " />
                 <div
-                  className={`hidden  absolute top-full left-0   group-hover/banner:block lg:w-[33%] xl:w-[25%]  `}
+                  className={`hidden  absolute top-full left-0   group-hover/banner:block lg:w-[33%] xl:w-[25%]`}
                 >
                   <BannerLeft />
                 </div>
@@ -68,12 +82,32 @@ function Navbar() {
                 <p className="hidden md:block">Cart</p>
               </div>
               <span className="h-[20px] w-[2px] bg-white md:hidden "></span>
-              <Link
-                href="/login"
-                className="md:border md:px-6 py-2 rounded cursor-pointer md:order-1 md:hover:bg-white md:hover:text-mainBlueColor duration-500 "
-              >
-                Login
-              </Link>
+
+              {!isLoading && !isError && data && token ? (
+                <div className="relative">
+                  <div
+                    onClick={handleDropdown}
+                    className="flex gap-2 items-center cursor-pointer"
+                  >
+                    
+                    <Image src={userIcon} alt="no image" />
+                    <div className="hidden md:flex items-center gap-2  ">
+                      <span>My Account</span>
+                      <FaAngleDown className="font-light" />
+                    </div>
+                  </div>
+                  <Popover isOpen={showDropdown} onClose={handlePopoverClose} >
+                    <Dropdown />
+                  </Popover>
+                </div>
+              ) : (
+                <Link
+                  href="/login"
+                  className="md:border md:px-6 py-2 rounded cursor-pointer md:order-1 md:hover:bg-white md:hover:text-mainBlueColor duration-500 "
+                >
+                  Login
+                </Link>
+              )}
             </div>
           </div>
         </div>
