@@ -47,8 +47,8 @@ const ProductDetails = () => {
                   </div>
                 </div>
               </div>
-              <div className="border-t md:border-l border-neutral-300 mt-1 basis-full md:basis-7/12  ">
-                <h1 className="text-xl  font-semibold px-3">
+              <div className="border-t py-3 md:border-l border-neutral-300 mt-1 basis-full md:basis-7/12  ">
+                <h1 className="text-2xl  font-semibold px-3">
                   Amazfit Pop 3S AMOLED Bluetooth Calling Smart Watch Global
                   Version {size}
                 </h1>
@@ -115,16 +115,17 @@ const ProductDetails = () => {
                   }   overflow-y-hidden  px-3 `}
                 >
                   <h2 className="font-semibold">More Information</h2>
-                  <div className="flex items-center gap-3  border-y py-2 my-2 text-sm  ">
+                  <div className="flex items-center gap-3   py-2 my-2 text-sm  ">
                     <p
                       className="font-semibold
         "
                     >
-                      Type :{" "}
-                    </p>{" "}
+                      Type :
+                    </p>
                     <span> Refrigaretor</span>
                   </div>
-                  <div className="flex items-center gap-3  border-y py-2 my-2 text-sm  ">
+                  <hr/>
+                  <div className="flex items-center gap-3   py-2 my-2 text-sm  ">
                     <p
                       className="font-semibold
         "
@@ -133,6 +134,7 @@ const ProductDetails = () => {
                     </p>{" "}
                     <span> 2 Years official warrenty</span>
                   </div>
+                  <hr/>
                   <h3>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Aspernatur doloremque eum corporis harum ratione hic impedit

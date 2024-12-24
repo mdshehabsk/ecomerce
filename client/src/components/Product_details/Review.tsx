@@ -7,6 +7,7 @@ const Review = () => {
     <>
     <RatingSummary/>
     <SingleReview/>
+    <hr/>
     <SingleReview/>
     </>
   )

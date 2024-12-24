@@ -16,8 +16,8 @@ import Image from "next/image";
 import Popover from "./Popover";
 import Dropdown from "./Account/Dropdown";
 function Navbar() {
-  const { isLoading, isError, isSuccess, data, error } = useGetUserDataQuery(undefined);
-  const {token} = useAppSelector(state => state.AuthSlice);
+  const { isLoading, isError, data } = useGetUserDataQuery(undefined);
+  const { token } = useAppSelector((state) => state.AuthSlice);
   const [showDropdown, setShowDropdown] = useState(false);
   const pathname = usePathname();
 
@@ -37,8 +37,8 @@ function Navbar() {
   function handleDropdown() {
     setShowDropdown(true);
   }
-  function handlePopoverClose () {
-    setShowDropdown(false)
+  function handlePopoverClose() {
+    setShowDropdown(false);
   }
   return (
     <>
@@ -89,14 +89,13 @@ function Navbar() {
                     onClick={handleDropdown}
                     className="flex gap-2 items-center cursor-pointer"
                   >
-                    
                     <Image src={userIcon} alt="no image" />
                     <div className="hidden md:flex items-center gap-2  ">
                       <span>My Account</span>
                       <FaAngleDown className="font-light" />
                     </div>
                   </div>
-                  <Popover isOpen={showDropdown} onClose={handlePopoverClose} >
+                  <Popover isOpen={showDropdown} onClose={handlePopoverClose}>
                     <Dropdown />
                   </Popover>
                 </div>

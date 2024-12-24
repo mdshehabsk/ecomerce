@@ -3,7 +3,8 @@ import { IoMdStar } from "react-icons/io";
 import productOne from "@/images/product/product-1.jpg";
 const SingleReview = () => {
   return (
-    <div className="p-3 border-b border-zinc-300 ">
+   <>
+    <div className="p-3  border-zinc-300 ">
       <div className="flex gap-1   ">
         <div className="w-[60px] rounded-full   ">
           <Image src={productOne} alt="no image" />
@@ -31,20 +32,21 @@ const SingleReview = () => {
         </div>
       </div>
       <div className="flex my-2 gap-1 ">
-        <div className="w-[100px] h-[100px] border  border-black/10 ">
+        <div className="w-[80px] h-[80px] border  border-black/10  cursor-pointer ">
           <Image src={productOne} alt="no image" />
         </div>
-        <div className="w-[100px] h-[100px] border  border-black/10 ">
+         <div className="w-[80px] h-[80px] border  border-black/10  cursor-pointer ">
           <Image src={productOne} alt="no image" />
         </div>
-        <div className="w-[100px] h-[100px] border  border-black/10 ">
+         <div className="w-[80px] h-[80px] border  border-black/10  cursor-pointer ">
           <Image src={productOne} alt="no image" />
         </div>
-        <div className="w-[100px] h-[100px] border  border-black/10 ">
+         <div className="w-[80px] h-[80px] border  border-black/10 cursor-pointer  ">
           <Image src={productOne} alt="no image" />
         </div>
       </div>
     </div>
+   </>
   );
 };
 
