@@ -5,26 +5,32 @@ import { CiShoppingCart } from "react-icons/ci";
 import { IoBagHandleOutline } from "react-icons/io5";
 import Image from "next/image";
 import useScreenSize from "@/hooks/useScreenSize";
+import { RiFullscreenLine } from "react-icons/ri";
 import { useState } from "react";
 import Review from "./Review";
+import ImagePopover from "../Image_popover/ImagePopover";
 
 const ProductDetails = () => {
   const { size, device } = useScreenSize();
   const [isExpandInfo, setIsExpandInfo] = useState(false);
+  const [imagePopoverOpen, setImagePopoverOpen] = useState(false);
 
+  const handleImagePopover = () => {
+    setImagePopoverOpen(!imagePopoverOpen);
+  };
   const handleToggleExpandInfo = () => {
     setIsExpandInfo(!isExpandInfo);
   };
   return (
-    <>
-      <>
         <div className="bg-gray-50  ">
           <div className="my-container mx-auto bg-white xs  ">
             <div className="flex flex-wrap justify-between ">
-              <div className=" p-3 basis-full md:basis-5/12  md:sticky top-[80px] left-0 max-h-[92vh]">
+              <div className="  p-3 basis-full md:basis-5/12 lg:basis-4/12 md:sticky top-[80px] left-0 max-h-[92vh]">
                 <div className="relative  md:h-full flex flex-col ">
-                  <div className="mx-auto md:h-full w-full flex justify-center items-center ">
-                    <Image src={productOne} alt="no Image" />
+                  <div className="mx-auto md:h-full w-full flex justify-center items-center relative ">
+                    <RiFullscreenLine className="absolute top-0 right-0 text-2xl cursor-pointer" onClick={handleImagePopover} />
+                    <Image src={productOne} alt="no Image"  />
+                   
                   </div>
                   <div className="flex justify-center items-baseline md:block bottom-0 md:h-[120px] w-full ">
                     <div className="flex gap-1 justify-center w-full ">
@@ -47,7 +53,7 @@ const ProductDetails = () => {
                   </div>
                 </div>
               </div>
-              <div className="border-t py-3 md:border-l border-neutral-300 mt-1 basis-full md:basis-7/12  ">
+              <div className=" border-t py-3 md:border-l border-neutral-300 mt-1 basis-full md:basis-7/12 grow overflow-hidden ">
                 <h1 className="text-2xl  font-semibold px-3">
                   Amazfit Pop 3S AMOLED Bluetooth Calling Smart Watch Global
                   Version {size}
@@ -99,11 +105,11 @@ const ProductDetails = () => {
                 </div>
                 {/* buy the product */}
                 <div className="flex gap-2 md:gap-6 items-center border-y py-2 px-3   ">
-                  <div className="flex w-[150px] p-3 gap-3 items-center border  hover:bg-mainBlueColor hover:text-white transition active:translate-y-1  ">
+                  <div className="flex justify-center font-medium basis-[200px] p-3 gap-3 items-center border  hover:bg-mainBlueColor hover:text-white transition active:translate-y-1 cursor-pointer  ">
                     <IoBagHandleOutline />
                     <button className="text-sm">Add to Cart</button>
                   </div>
-                  <div className="flex justify-center items-center bg-mainBlueColor w-[150px] text-white p-3  gap-3 hover:opacity-80  transition active:translate-y-1 cursor-pointer ">
+                  <div className="flex basis-[200px] justify-center items-center bg-orangeColor hover:bg-transparent hover:border-orangeColor border hover:text-orangeColor  text-white p-3 font-medium  gap-3  transition active:translate-y-1 cursor-pointer ">
                     <CiShoppingCart />
                     <button className="text-sm">Buy now</button>
                   </div>
@@ -112,7 +118,7 @@ const ProductDetails = () => {
                 <div
                   className={`mt-5 ${
                     isExpandInfo ? "max-h-fit" : "max-h-[400px]"
-                  }   overflow-y-hidden  px-3 `}
+                  }   overflow-hidden  px-3 `}
                 >
                   <h2 className="font-semibold">More Information</h2>
                   <div className="flex items-center gap-3   py-2 my-2 text-sm  ">
@@ -285,9 +291,8 @@ const ProductDetails = () => {
               </div>
             </div>
           </div>
+          <ImagePopover handlePopoverClose={handleImagePopover} isPopoverOpen={imagePopoverOpen} />
         </div>
-      </>
-    </>
   );
 };
 

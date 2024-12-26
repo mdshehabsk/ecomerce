@@ -6,6 +6,9 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+
 Image {
     max-width: 100%;
     max-height: 100%;
