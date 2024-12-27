@@ -3,15 +3,14 @@ import { BiBarChart } from "react-icons/bi";
 import { RiProductHuntLine } from "react-icons/ri";
 import { FiCommand } from "react-icons/fi";
 import { SlWrench } from "react-icons/sl";
-import { MdKeyboardArrowRight } from "react-icons/md";
 import { RiMenu2Fill } from "react-icons/ri";
 import { CiSettings } from "react-icons/ci";
-import Link from "next/link";
+
 import { useAppDispatch, useAppSelector } from "@/toolkit/hook";
 import { sidebarClose } from "@/toolkit/slice/AdminSidebarSlice";
 import { RxCross2 } from "react-icons/rx";
-import { useState } from "react";
-
+import SidebarLink from "./SidebarLink";
+import useScreenSize from "@/hooks/useScreenSize";
 const sidebarItems = [
   {
     id: 1,
@@ -93,11 +92,7 @@ const sidebarItems = [
 ];
 
 const Sidebar = () => {
-  const [activeItem, setActiveItem] = useState<null | number>(1);
-
-  const handleItemClick = (item: number) => {
-    setActiveItem(activeItem === item ? null : item);
-  };
+  const {size} = useScreenSize()
   const { sidebarShow } = useAppSelector((state) => state.AdminSidebar);
   const dispatch = useAppDispatch();
   return (
@@ -113,62 +108,23 @@ const Sidebar = () => {
           sidebarShow ? "left-0" : "-left-full"
         }  fixed md:left-0  md:static z-20 transition-["position"]  duration-300 `}
       >
-        <div className="p-3 text-white flex items-center gap-2 ">
-          <div className="flex items-center gap-1  ">
-            {sidebarShow ? (
+        <div className="p-3 text-white flex items-center gap-2 justify-between ">
+            <h2 className=" ml-[15px] text-xl "> Dashboard </h2>
+            {sidebarShow && size < 768 ? (
               <RxCross2
-                className="text-3xl cursor-pointer "
-                onClick={() => dispatch(sidebarClose())}
+              className="text-3xl cursor-pointer "
+              onClick={() => dispatch(sidebarClose())}
               />
             ) : (
               <RiMenu2Fill className="text-xl" />
             )}
-            <span className=" ml-[15px] text-xl "> Dashboard </span>
-          </div>
+   
         </div>
 
-        <ul className="mt-[50px]">
-          {sidebarItems.map((item,ind) => (
-            item.link ? <Link  key={item.id}      className={`text-white flex flex-wrap items-center  hover:bg-gray-700 transition-['background']  w-full  `} href={item.link}>    <div className={`flex items-center gap-2  hover:bg-gray-700 transition-['background'] p-3 w-full ${activeItem === item.id && "bg-gray-700"} `}>
-            <item.icon className="text-xl" />
-            <span className=""> {item.name} </span>
-            
-            
-          </div> </Link> :
-            <li
-              
-              onClick={() => handleItemClick(item.id)}
-              key={item.id}
-              className="text-white flex flex-wrap items-center  "
-            >
-              <div className={`flex items-center gap-2  hover:bg-gray-700 transition-['background'] p-3 w-full ${activeItem === item.id && "bg-gray-700"} `}>
-                <item.icon className="text-xl" />
-                <span className=""> {item.name} </span>
-                {item.submenu && (
-                  <MdKeyboardArrowRight
-                    className={`ml-auto  ${
-                      activeItem === item.id && " rotate-90 "
-                    } `}
-                  />
-                )}
-              </div>
-              {activeItem === item.id && (
-                <ul className="basis-full  bg-gray-800">
-                  {item.submenu &&
-                    item.submenu.map((subItem) => (
-                      <li
-                        key={subItem.id}
-                        className="py-2 border-t border-gray-700 hover:bg-gray-700  pl-5 "
-                      >
-                        <Link href={subItem.link} className="block ">
-                          {subItem.name}
-                        </Link>
-                      </li>
-                    ))}
-                </ul>
-              )}
-            </li>
-          ))}
+        <ul className="mt-[50px]" >
+          {
+            sidebarItems?.map((item,ind) => <SidebarLink key={ind} singleLink={item} /> )
+          }
         </ul>
       </div>
     </>
