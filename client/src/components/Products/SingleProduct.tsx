@@ -6,7 +6,7 @@ import {AiOutlineStar} from 'react-icons/ai'
 
 const SingleProduct = () => {
   return (
-    <Link href='/product-details' className="group/product">
+    <Link href='/product-details/4' className="group/product">
       <div className="flex  justify-center overflow-hidden ">
         <Image
           src={Product}
