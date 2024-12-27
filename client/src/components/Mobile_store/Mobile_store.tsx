@@ -22,7 +22,7 @@ const Mobile_store = () => {
     const swiperRef = useRef<any>();
     return (
       <>
-         <section className="my-20 relative shadow-lg pb-8 " >
+         <section className="my-20 relative shadow-md shadow-slate-100 pb-8 " >
          <div className="my_container mx-auto">
           <div className="product_section_one_header flex justify-between flex-wrap">
              <div className="flex items-center" >

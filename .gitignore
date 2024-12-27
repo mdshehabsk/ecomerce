@@ -6,5 +6,4 @@
 .yarn/install-state.gz
 *.yaml
 *.yml
-.env
 !local.env
