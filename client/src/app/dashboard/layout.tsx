@@ -16,7 +16,7 @@ const DashboardLayout = ({
     <div className="flex w-screen h-screen   ">
       <Sidebar />
 
-      <div className="flex-1 bg-gray-200 p-2 md:p-4 overflow-y-auto ">
+      <div className="flex-1  p-2 md:p-4 overflow-y-auto ">
         <div className="flex justify-between items-center bg-white shadow-sm my-2 p-4 md:hidden ">
           <h2 className="text-xl font-bold text-mainBlueColor " >Dashboard</h2>
           <RiMenu2Fill className="text-2xl font-bold " onClick={handleSidebarShow} />
