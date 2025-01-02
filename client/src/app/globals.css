@@ -29,6 +29,24 @@ Image {
     .product_filter_price_box {
         @apply hover:border hover:border-orange-500 transition-[hover]  text-xs rounded-md w-[100px] px-2 py-2 outline-none border border-slate-400 
     }
+
+    .my-table-th {
+        @apply text-left p-2 border-x border-black/10 whitespace-nowrap
+    }
+    .my-table-td {
+        @apply border-x p-2 whitespace-nowrap
+    }
+}
+
+input.custom-number-field::-webkit-outer-spin-button,
+input.custom-number-field::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+}
+
+/* Firefox */
+input.custom-number-field[type=number] {
+  -moz-appearance: textfield !important;
 }
 .my_container {
     /* max-width: 1124px; */
