@@ -104,12 +104,12 @@ const Sidebar = () => {
         onClick={() => dispatch(sidebarClose())}
       ></div>
       <div
-        className={` min-w-[250px] md:basis-[23%] h-full bg-gray-800  overflow-x-hidden ${
+        className={`  md:basis-[23%] h-full bg-gray-800  overflow-x-hidden ${
           sidebarShow ? "left-0" : "-left-full"
         }  fixed md:left-0  md:static z-20 transition-["position"]  duration-300 `}
       >
         <div className="p-3 text-white flex items-center gap-2 justify-between ">
-            <h2 className=" ml-[15px] text-xl "> Dashboard </h2>
+            <h2 className=" ml-[15px] text-xl "> Pickaboo Dashboard </h2>
             {sidebarShow && size < 768 ? (
               <RxCross2
               className="text-3xl cursor-pointer "

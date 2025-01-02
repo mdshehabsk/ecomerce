@@ -32,7 +32,7 @@ const SidebarLink: React.FC<TProps> = ({ singleLink }) => {
   return (
     <>
       <li
-        className={`text-white flex  items-center justify-between   hover:bg-gray-700 transition-['background'] ${(singleLink?.link === pathname || isSubMenuOpen) ? 'bg-gray-700' : ''}  w-full cursor-pointer `}
+        className={`text-white flex select-none items-center justify-between   hover:bg-gray-700 transition-['background'] ${(singleLink?.link === pathname || isSubMenuOpen) ? 'bg-gray-700' : ''}  w-full cursor-pointer `}
         onClick={() => handleSubMenuOpen()}
       >
         <div
