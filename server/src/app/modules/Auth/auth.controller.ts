@@ -34,51 +34,51 @@ const authRegister = catchAsync(async (req, res) => {
   }
 });
 
-const authLogin = catchAsync(async (req,res)=> {
+const authLogin = catchAsync(async (req, res) => {
   const data = req.body;
-  const {token,userNotFound,verifyUser,user} = await AuthServices.userLogin(data)
-  if(userNotFound){
-   return sendResponse(res, {
+
+  const { token, userNotFound, userNotVeryfied, user } =
+    await AuthServices.userLogin(data);
+  if (userNotFound || userNotVeryfied) {
+    return sendResponse(res, {
       statusCode: httpStatus.NOT_FOUND,
       success: false,
-      error:'Wrong Crentials'
-    } )
+      error: "Wrong Crentials",
+    });
   }
-  if(verifyUser) {
-   return sendResponse(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      token,
-      message: 'Login Successfull',
-      data:user
-    })
-  }
-})
 
+  return sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    token,
+    message: "Login Successfull",
+    data: user,
+  });
+});
 
-const authLoginGoogle = catchAsync(async (req,res) =>  {
-  const {token} = req.body
-  const {loginSuccess,myToken} = await AuthServices.userLoginGoogle(token)
-  if(!loginSuccess) {
+const authLoginGoogle = catchAsync(async (req, res) => {
+  const { token } = req.body;
+  const { loginSuccess, myToken } = await AuthServices.userLoginGoogle(token);
+  if (!loginSuccess) {
     return sendResponse(res, {
       statusCode: httpStatus.UNAUTHORIZED,
       success: false,
-      error: 'Unauthorized',
-    })
-  }else {
+      error: "Unauthorized",
+    });
+  } else {
     return sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
-      message: 'Login Successfull',
-      token: myToken
-    })
+      message: "Login Successfull",
+      token: myToken,
+    });
   }
-} )
+});
 
 const verifyUser = catchAsync(async (req, res) => {
   const { token } = req.query;
 
-  const { userVerify, userToken } = await AuthServices.verifyUser(token);
+  const { userVerify } = await AuthServices.verifyUser(token);
   if (userVerify) {
     sendResponse(res, {
       statusCode: httpStatus.OK,

@@ -8,7 +8,7 @@ import { UserService } from "./user.service";
 
 
 
-export const getUserData = catchAsync( async(req,res)=> {
+const getUserData = catchAsync( async(req,res)=> {
 
     const id = req.user._id
     const foundUser = await UserService.getUser(id);

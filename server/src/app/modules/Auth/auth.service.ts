@@ -50,14 +50,18 @@ const userLogin = async (user: ILoginUser) => {
     }
   }
   const verifyUser = await bcrypt.compare(password,userExist.password)
-  if(verifyUser){
+  if(!verifyUser) {
+    return  {
+      userNotVeryfied: true
+    }
+  }
+
     const token =  createToken(
       { _id: userExist._id },
       config.jwt_secret,
       config.jwt_expire,
     );
     return {
-      verifyUser : true,
       token,
       user: {
         _id: userExist._id,
@@ -65,8 +69,6 @@ const userLogin = async (user: ILoginUser) => {
         email: userExist.email,
       }
     }
-  }
-  throw new Error("user login faild");
 }
 
 const userLoginGoogle = async (token: string) : Promise<{loginSuccess: boolean,myToken: string}> => {

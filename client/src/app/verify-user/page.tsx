@@ -24,6 +24,7 @@ const MyComponent = () => {
       dispatch(setToken(token))
       router.push("/");
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, isSuccess, isError, isLoading]);
   return <div></div>;
 };

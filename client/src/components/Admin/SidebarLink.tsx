@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IconType } from "react-icons";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { usePathname, useRouter } from "next/navigation";
@@ -29,6 +29,14 @@ const SidebarLink: React.FC<TProps> = ({ singleLink }) => {
       return router.push(singleLink?.link);
     }
   }
+  useEffect(()=> {
+ 
+   const findMatch = singleLink?.submenu?.some(subMenuItem => subMenuItem?.link == pathname)
+   console.log()
+   if(findMatch){
+    setIsSubMenuOpen(findMatch)
+   }
+  },[pathname])
   return (
     <>
       <li

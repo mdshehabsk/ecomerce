@@ -2,10 +2,12 @@ import { NextFunction, Request, Response } from "express";
 import { AnyZodObject, z } from "zod";
 import sendResponse from "../utils/sendResponse";
 import httpStatus from "http-status";
+import { getImagesWithResulation } from "../modules/Cloudinary/resulation";
 
-const validateBodyRequest = (schema: AnyZodObject) => {
+export const validateBodyRequest = (schema: AnyZodObject) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     // data validation check
+    console.log(req.body)
     try {
       schema.parse({
         body: req.body,
@@ -61,6 +63,38 @@ export const validateQueryRequest = (schema: AnyZodObject) => {
   };
 };
 
-export  {
-  validateBodyRequest
+export const validateImageFilesRequest = (schema: AnyZodObject) => {
+  return async (req: Request, res: Response, next: NextFunction) => {
+    // data validation check
+    try {
+      if(!req.files|| !Array.isArray(req.files)){
+        return sendResponse(res, {
+          statusCode: httpStatus.BAD_REQUEST,
+          success: false,
+         error:"Images not found"
+        });
+      }
+      const imagesWithResulation = await getImagesWithResulation(req.files)
+      schema.parse({
+        images: imagesWithResulation
+      });
+      req.files = imagesWithResulation
+      next();
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        const formattedErrors = error.errors.map((err) => ({
+          path: err.path[0],
+          message: err.message,
+        }));
+        return sendResponse(res, {
+          statusCode: httpStatus.BAD_REQUEST,
+          success: false,
+          error: formattedErrors,
+          message: "validation faild",
+          data: null,
+        });
+      }
+      next(error);
+    }
+  };
 };

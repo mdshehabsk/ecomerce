@@ -32,7 +32,7 @@ const Popover : React.FC<TProps> = ({ isOpen = false , children, onClose }) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [popoverOpen]);
+  }, [onClose, popoverOpen]);
 
   return (
     <div

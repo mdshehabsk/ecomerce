@@ -1,11 +1,17 @@
 "use client";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { RxCross2 } from "react-icons/rx";
 import Oven from '@/images/slider/oven-102.jpg'
-const ImagePopover = ({
+import { FC } from "react";
+interface TProps {
+  isPopoverOpen: boolean,
+  handlePopoverClose : () => void,
+  imageUrl: string | StaticImageData
+}
+const ImagePopover : FC<TProps> = ({
   isPopoverOpen = false,
   handlePopoverClose = () => {},
-  imageUrl = Oven
+  imageUrl = Oven 
 }) => {
   return (
     <div
@@ -19,7 +25,7 @@ const ImagePopover = ({
         </div>
       </div>
       <div className="w-full h-full flex justify-center items-center">
-          <Image src={imageUrl}  alt='no image' />
+          <Image src={imageUrl}  alt='no image'  width={500}  height={800} />
       </div>
     </div>
   );
