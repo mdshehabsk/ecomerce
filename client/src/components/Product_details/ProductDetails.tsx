@@ -17,14 +17,10 @@ import React from "react";
 }
 
 
-/* eslint-disable no-unused-vars */
- enum EProductStatus {
-  PUBLISH = 'publish',
-  DRAFT = 'draft'
-}
+
 
  interface IProduct  {
-  _id: string
+  _id?: string
   name : string
   slug: string
   base_price: number
@@ -33,15 +29,13 @@ import React from "react";
   more_info: IMoreInformation[]
   description: string
   imageArr: string[]
-  categories: string[]
-  status: EProductStatus.PUBLISH | EProductStatus.DRAFT
 }
 
 const ProductDetails: React.FC<{product: IProduct}> = ({product}) => {
   const { size, device } = useScreenSize();
   const [isExpandInfo, setIsExpandInfo] = useState(false);
   const [imagePopoverOpen, setImagePopoverOpen] = useState(false);
-  const [currentImage,setCurrentImage] = useState(product?.imageArr[0])
+  const [currentImage,setCurrentImage] = useState(product?.imageArr?.[0])
   const handleImagePopover = () => {
     setImagePopoverOpen(!imagePopoverOpen);
   };
@@ -53,7 +47,7 @@ const ProductDetails: React.FC<{product: IProduct}> = ({product}) => {
     setCurrentImage(image)
   }
 
-  const description = useMemo(() =>     <div dangerouslySetInnerHTML={{__html: product.description}} ></div> , [product.description] )
+  const description = useMemo(() =>     <div dangerouslySetInnerHTML={{__html: product?.description}} ></div> , [product?.description] )
   return (
         <div className="bg-gray-50  ">
           <div className="my-container mx-auto bg-white xs  ">

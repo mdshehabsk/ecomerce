@@ -32,7 +32,6 @@ const SidebarLink: React.FC<TProps> = ({ singleLink }) => {
   useEffect(()=> {
  
    const findMatch = singleLink?.submenu?.some(subMenuItem => subMenuItem?.link == pathname)
-   console.log()
    if(findMatch){
     setIsSubMenuOpen(findMatch)
    }

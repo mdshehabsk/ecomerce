@@ -30,7 +30,7 @@ const createProduct = async (body: IProduct,files: TgetImagesWithResulation) => 
 
 
 const getSingleProduct = async (slug: string) => {
-    const product = await Product.findOne({slug})
+    const product = await Product.findOne({slug}).select('-categories -status')
     return product
 }
 

@@ -13,7 +13,6 @@ const ProductDetailsPage = async () => {
   const product = await getProduct()
 
   return (
-
    <ProductDetails product={product} />
    
   );
