@@ -1,18 +1,27 @@
+import Link from "next/link";
 import React from "react";
 
 // import react icon
 import { AiOutlineRight } from "react-icons/ai";
 
-interface PropsType {
-    children:React.ReactNode | React.ReactNode[],
-    name:string
+interface IProps {
+  item: {
+    label: string;
+    value: string;
+  };
+  children: JSX.Element | JSX.Element[]
 }
-function ListItem({children,name}:PropsType) {
+function ListItem({ item ,children}: IProps) {
   return (
     <li className="banner_list_item  mt-2 group  ">
-    <a className="font-medium group-hover:text-mainBlueColor  "> {name} </a>
-    <AiOutlineRight  className="group-hover:text-mainBlueColor " />
-    {children}
+      <Link
+        href={item.value}
+        className="font-medium group-hover:text-mainBlueColor  "
+      >
+        {item.label}
+      </Link>
+      <AiOutlineRight className="group-hover:text-mainBlueColor " />
+      {children}
     </li>
   );
 }

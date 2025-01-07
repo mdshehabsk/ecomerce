@@ -3,14 +3,19 @@ import { sidebarClose } from "@/toolkit/slice/SidebarSlice";
 import Link from "next/link";
 
 
-function SidebarSubmenuListItem({ children }: { children: string }) {
+interface IsubMenuItem {
+  label: string
+  value: string
+}
+
+function SidebarSubmenuListItem({subMenuItem}:{subMenuItem:IsubMenuItem}) {
   const dispatch = useAppDispatch()
   function linkClick  () {
     dispatch(sidebarClose())
   }
   return (
     <li className="py-2 ">
-      <Link href={`/product/${children}`} onClick={linkClick}  className='active:text-mainBlueColor'  >{children}</Link>
+      <Link href={`/product/${subMenuItem?.value}`} onClick={linkClick}  className='active:text-mainBlueColor'  > {subMenuItem?.label} </Link>
     </li>
   );
 }

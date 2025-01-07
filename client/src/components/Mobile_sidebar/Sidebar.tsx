@@ -14,27 +14,28 @@ import { RxCross2 } from "react-icons/rx";
 import { useAppDispatch, useAppSelector } from "@/toolkit/hook";
 import { sidebarClose } from "@/toolkit/slice/SidebarSlice";
 
-import Image from "next/image";
+import * as categories from '@/../src/helper.json'
+import { StaticImageData } from "next/image";
 const  Sidebar = () => {
   const initialState = {
-    smartphone: false,
-    electronics: false,
+    smartphones: false,
+    'electronics-appliances': false,
     mobile_accessories: false,
     computer: false,
-    computer_accessories: false,
+    'computer-accessories': false,
     lifestyle: false,
   };
   const reducerFn = (state: typeof initialState, action: { type: keyof typeof initialState }) => {
     switch (action.type) {
-      case "smartphone":
+      case "smartphones":
         return { ...initialState, [action.type]: !state[action.type] };
-      case "electronics":
+      case "electronics-appliances":
         return { ...initialState, [action.type]: !state[action.type] };
       case 'mobile_accessories' :
         return { ...initialState, [action.type]: !state[action.type] };
       case 'computer' :
         return { ...initialState, [action.type]: !state[action.type] };
-      case 'computer_accessories':
+      case 'computer-accessories':
         return { ...initialState, [action.type]: !state[action.type] };
       case 'lifestyle':
         return { ...initialState, [action.type]: !state[action.type] };
@@ -45,6 +46,14 @@ const  Sidebar = () => {
   const [value, dispatch] = useReducer(reducerFn, initialState);
   const {sidebarShow} = useAppSelector(state => state.Sidebar)
   const dispatchRTK = useAppDispatch()
+  const imageObj = {
+    smartphones: mobile,
+    'electronics-appliances': electronics,
+    'mobile-accessories': mobile_accessories,
+    computer,
+   'computer-accessories': call,
+    lifestyle
+  }
   return (
     <div
       className={`h-full w-screen transform transition duration-500 bg-black/30  ${
@@ -62,7 +71,33 @@ const  Sidebar = () => {
           onClick={() => dispatchRTK(sidebarClose())}
         />
         <ul className=" py-4 max-w-full ">
-          <SidebarListItem
+          {
+            categories?.map(categoryItem =>   <SidebarListItem
+              key={categoryItem?.name.label}
+              img={imageObj[categoryItem?.name?.value as keyof typeof imageObj] }
+              name={categoryItem.name}
+              submenuClick={() => dispatch({ type: "smartphones" })}
+            >
+              <SidebarSubmenu isOpen={value.smartphones}>
+                {
+                  categoryItem?.subCategories?.map(subCategoryItem =>  <SidebarSubmenuListItem key={subCategoryItem?.label}  subMenuItem={subCategoryItem} /> )
+                }
+                {/* <SidebarSubmenuListItem>Samsung</SidebarSubmenuListItem>
+                <SidebarSubmenuListItem>Infinis</SidebarSubmenuListItem>
+                <SidebarSubmenuListItem>Oppo</SidebarSubmenuListItem>
+                <SidebarSubmenuListItem>Oneplus</SidebarSubmenuListItem>
+                <SidebarSubmenuListItem>Techo</SidebarSubmenuListItem>
+                <SidebarSubmenuListItem>Nokia</SidebarSubmenuListItem>
+                <SidebarSubmenuListItem>Motorola</SidebarSubmenuListItem>
+                <SidebarSubmenuListItem>Nothing</SidebarSubmenuListItem>
+                <SidebarSubmenuListItem>Realme</SidebarSubmenuListItem>
+                <SidebarSubmenuListItem>Xiaomi</SidebarSubmenuListItem>
+                <SidebarSubmenuListItem>Vivo </SidebarSubmenuListItem>
+                <SidebarSubmenuListItem>Iphone</SidebarSubmenuListItem> */}
+              </SidebarSubmenu>
+            </SidebarListItem> )
+          }
+          {/* <SidebarListItem
             img={mobile}
             name="Smartphone"
             submenuClick={() => dispatch({ type: "smartphone" })}
@@ -191,13 +226,13 @@ const  Sidebar = () => {
               <SidebarSubmenuListItem>Womens Fragrences</SidebarSubmenuListItem>
               <SidebarSubmenuListItem>Scented Candles</SidebarSubmenuListItem>
             </SidebarSubmenu>
-          </SidebarListItem>
+          </SidebarListItem> */}
         </ul>
         <div className="border-y-2 border-gray-100">
           <h2 className="font-bold mt-2">Other</h2>
-          <ul className="px-4 py-2">
+          {/* <ul className="px-4 py-2">
             <SidebarListItem img={call} iconNone={true} name=" Contact Us" />
-          </ul>
+          </ul> */}
         </div>
         <div className="flex ">
           <button className="bg-red-600 font-semibold text-white block w-full py-4 rounded-xl">

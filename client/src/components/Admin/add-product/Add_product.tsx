@@ -4,7 +4,8 @@ import toast, { Toaster } from "react-hot-toast";
 import { RxCross1 } from "react-icons/rx";
 import React, { useEffect, useState } from "react";
 import Quill from "@/components/RichText/Quiill";
-import { menuData } from "./helper";
+
+import * as categories from '@/../src/helper.json'
 import { useCreateProductMutation } from "@/toolkit/api/productApi";
 import Box from "./Box";
 import Spinner from "@/components/Loader/Spinner";
@@ -28,13 +29,13 @@ const Add_product = () => {
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
   const [imageArr, setImageArr] = useState<FileList | null>();
   const [categoryItems, setCategoryItems] = useState(
-    menuData?.map((categoryItem) => ({ ...categoryItem, selected: false }))
+    categories?.map((categoryItem) => ({ ...categoryItem, selected: false }))
   );
   const [subCategoryItems, setSubCategoryItems] = useState(
     categoryItems
       ?.filter((categoryItem) => categoryItem.selected)
       ?.flatMap((categoryItem) =>
-        categoryItem.subMenuItems?.map((categoryItem) => ({
+        categoryItem.subCategories?.map((categoryItem) => ({
           ...categoryItem,
           selected: false,
         }))
@@ -123,7 +124,7 @@ const Add_product = () => {
       categoryItems
         ?.filter((categoryItem) => categoryItem.selected)
         ?.flatMap((categoryItem) =>
-          categoryItem.subMenuItems?.map((categoryItem) => ({
+          categoryItem.subCategories?.map((categoryItem) => ({
             ...categoryItem,
             selected: false,
           }))
