@@ -34,7 +34,22 @@ const getSingleProduct = async (slug: string) => {
     return product
 }
 
+
+const getProductByCategory = async (category: string, page = 1, limit = 20) => {
+    const totalProductItems = await Product.countDocuments(({categories: category}))
+    const skip = (page-1) * limit
+    const products = await Product.find({categories: category}).skip(skip).limit(limit).select('-status -categories -description')
+    const data = {
+        meta: {
+            totalItems : totalProductItems
+        },
+        products
+    }
+    return data
+}
+
 export const ProductService = {
     createProduct,
-    getSingleProduct
+    getSingleProduct,
+    getProductByCategory
 }

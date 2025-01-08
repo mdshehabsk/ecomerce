@@ -21,5 +21,6 @@ router.post(
 );
 
 router.get('/get-single-product/:slug',ProductsController.getSingleProduct)
+router.get('/get-products-by-category/:category',ProductsController.getProductByCategory)
 
 export const ProductRoutes = router;

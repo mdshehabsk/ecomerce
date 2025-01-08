@@ -1,13 +1,49 @@
-
+'use server'
 import Category_product_item from "@/components/Products/Category_product_item/Category_product_item";
 import Product_desktop_filter from "@/components/Products/Product_mobile_filter_sort/Product_filter/Product_desktop_filter";
 import Product_mobile_filter_modal from "@/components/Products/Product_mobile_filter_sort/Product_filter/Product_mobile_filter_modal";
 import Product_mobile_filter_sort_nav from "@/components/Products/Product_mobile_filter_sort/Product_mobile_filter_sort_nav";
 import Product_desktop_sort from "@/components/Products/Product_mobile_filter_sort/Product_sort/Product_desktop_sort";
 import Product_mobile_sort_modal from "@/components/Products/Product_mobile_filter_sort/Product_sort/Product_mobile_sort_modal";
+import ProductPaginations from "@/components/Products/ProductPaginations";
 import bannerImage from '@/images/product/product-banner.jpg';
+import { IProduct } from "@/types/product";
 import Image from "next/image";
-const ProductPage = () => {
+
+interface IGetProductByCategoryApi {
+  success: boolean,
+  message: string
+  statusCode: number
+  data: {
+    meta: {
+      totalItems : number
+    },
+    products : Omit<IProduct,'description | more_info'>[]
+  },
+}
+
+const getProductsByCategory = async (category: string,page : string | undefined ) : Promise<IGetProductByCategoryApi> => {
+  try {
+    const res = await fetch(`http://localhost:3001/api/v1/product/get-products-by-category/${category}?page=${page}&limit=20`,{cache: 'no-store'})
+    const data = await res.json()
+    if (!res.ok) {
+      throw new Error(`Failed to fetch products: ${res.statusText}`);
+    }
+    return data
+  } catch (error) {
+    console.error(error);
+    throw new Error('Unable to fetch products by category.');
+  }
+}
+ async function handleGetCurrnePage (number: number)  {
+  'use server'
+  console.log(number)
+ }
+const ProductPage = async ({params,searchParams}:{params: {category: string},searchParams: {[key:string]: string  | undefined}} ) => {
+  const {category} = params
+  const {page} = searchParams
+  const {data} = await getProductsByCategory(category,page)
+
   return (
     <>
       <div className="md:hidden">
@@ -26,20 +62,21 @@ const ProductPage = () => {
           <div className="basis-full md:basis-9/12 grow ">
             <div className="flex justify-between items-center">
               <div>
-                <h2 className="font-semibold text-slate-800">Infinix</h2>
-                <p className="text-sm">13 items in infinix</p>
+                <h2 className="font-semibold text-slate-800 capitalize"> {category} </h2>
+                <p className="text-sm"> {data?.meta?.totalItems}  items in {category} </p>
               </div>
               <Product_desktop_sort  />
             </div>
             <div className="w-full h-px bg-gray-300 my-4"></div>
             <main className=" gap-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-10  ">
-              <Category_product_item />
-              <Category_product_item />
-              <Category_product_item />
-              <Category_product_item />
-              <Category_product_item />
-              <Category_product_item />
+              {
+               data?.products?.map((product) =>  <Category_product_item key={product?._id} product={product} /> )
+              }
+
             </main>
+            <div className="flex justify-center my-4">
+            <ProductPaginations itemPerPage={20} totalItems={233} getCurrentPage={handleGetCurrnePage} />
+            </div>
           </div>
         </div>
       </div>

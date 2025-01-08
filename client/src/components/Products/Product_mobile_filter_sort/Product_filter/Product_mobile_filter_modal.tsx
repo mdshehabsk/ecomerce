@@ -209,7 +209,7 @@ const Product_mobile_filter_modal = () => {
                   <div className="express-delivary">
                     <div className="flex gap-2">
                       <div>
-                        <input type="checkbox" id="expre</div>ss-delivary" />{" "}
+                        <input type="checkbox" id="express-delivary" />{" "}
                       </div>
                       <label htmlFor="express-delivary">Express Delivary</label>
                     </div>

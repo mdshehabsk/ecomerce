@@ -39,7 +39,31 @@ const getSingleProduct = catchAsync(async (req,res) => {
     })
 })
 
+
+const getProductByCategory = catchAsync(async (req,res) => {
+    const {category} = req.params
+    const {limit,page} = req.query
+    const products = await ProductService.getProductByCategory(category, Number(page), Number(limit))
+
+    if(!products) {
+        return sendResponse(res, {
+            statusCode: httpStatus.NOT_FOUND,
+            success: false,
+            data: products,
+            error: 'product not found'
+        })
+    }
+    return sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        data: products,
+        message: 'products get successfull'
+    })
+})
+
 export const ProductsController = {
     createProduct,
+    getProductByCategory,
     getSingleProduct
 }
+

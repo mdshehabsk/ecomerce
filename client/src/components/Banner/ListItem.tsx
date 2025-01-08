@@ -15,7 +15,7 @@ function ListItem({ item ,children}: IProps) {
   return (
     <li className="banner_list_item  mt-2 group  ">
       <Link
-        href={item.value}
+        href={`/product/${item.value}`}
         className="font-medium group-hover:text-mainBlueColor  "
       >
         {item.label}

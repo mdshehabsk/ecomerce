@@ -52,6 +52,7 @@ const productSchema = new Schema<IProduct>({
     },
     status : {
         type: String,
+        enum : EProductStatus,
         default: EProductStatus.DRAFT
     }
 },{timestamps: true})

@@ -4,8 +4,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { RxCross1 } from "react-icons/rx";
 import React, { useEffect, useState } from "react";
 import Quill from "@/components/RichText/Quiill";
-
-import * as categories from '@/../src/helper.json'
+import categories from '@/helper.json'
 import { useCreateProductMutation } from "@/toolkit/api/productApi";
 import Box from "./Box";
 import Spinner from "@/components/Loader/Spinner";

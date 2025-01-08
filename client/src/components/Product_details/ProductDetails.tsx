@@ -10,26 +10,9 @@ import { useMemo, useState } from "react";
 import Review from "./Review";
 import ImagePopover from "../Image_popover/ImagePopover";
 import React from "react";
-
- interface IMoreInformation {
-  key: string
-  value: string
-}
+import { IProduct } from "@/types/product";
 
 
-
-
- interface IProduct  {
-  _id?: string
-  name : string
-  slug: string
-  base_price: number
-  discount: number
-  stock: number
-  more_info: IMoreInformation[]
-  description: string
-  imageArr: string[]
-}
 
 const ProductDetails: React.FC<{product: IProduct}> = ({product}) => {
   const { size, device } = useScreenSize();

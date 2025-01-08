@@ -20,15 +20,12 @@ type TSortingItem = {
   value: TSortingItemValue
 }
 type TProps = {
-  getCurrentSortItem : (arg0: TSortingItemValue | undefined) => void
+  getCurrentSortItem ?: (arg0: TSortingItemValue | undefined) => void
 }
 
 
-const defaultProps = {
-  getCurrentSortItem: () => {},
-};
 
-const Product_desktop_sort = ({getCurrentSortItem}:TProps) => {
+const Product_desktop_sort = ({getCurrentSortItem }:TProps) => {
   const [showSortMenu, setShowSortMenu] = useState(false);;
   const [currentSortItem, setCurrentSortItem] = useState<TSortingItem >()
   const SortBtnClick = () => {
@@ -40,7 +37,10 @@ const Product_desktop_sort = ({getCurrentSortItem}:TProps) => {
   }
 
   useEffect(()=> {
-     getCurrentSortItem(currentSortItem?.value);
+    if(getCurrentSortItem) {
+
+      getCurrentSortItem(currentSortItem?.value);
+    }
   },[currentSortItem,getCurrentSortItem])
 
 
@@ -80,6 +80,6 @@ const Product_desktop_sort = ({getCurrentSortItem}:TProps) => {
   );
 };
 
-Product_desktop_sort.defaultProps = defaultProps;
+
 
 export default Product_desktop_sort;
