@@ -5,7 +5,10 @@ export interface IMoreInformation {
     key: string
     value: string
 }
-
+export interface IMetaInformation {
+    key: string,
+    value: string[]
+}
 
 /* eslint-disable no-unused-vars */
 export enum EProductStatus {
@@ -20,7 +23,8 @@ export interface IProduct  {
     base_price: number
     discount: number
     stock: number
-    more_info: IMoreInformation[]
+    more_info: IMoreInformation[],
+    meta_info: IMetaInformation
     description: string
     imageArr: string[]
     categories: string[]

@@ -4,12 +4,15 @@ import toast, { Toaster } from "react-hot-toast";
 import { RxCross1 } from "react-icons/rx";
 import React, { useEffect, useState } from "react";
 import Quill from "@/components/RichText/Quiill";
-import categories from '@/helper.json'
+import categories from '@/categories.json'
+import filter from '@/filter.json'
+import Select from 'react-select'
 import { useCreateProductMutation } from "@/toolkit/api/productApi";
 import Box from "./Box";
 import Spinner from "@/components/Loader/Spinner";
 import ProductDetails from "@/components/Product_details/ProductDetails";
 import PreviewPopover from "./PreviewPopover";
+
 const Add_product = () => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
@@ -27,19 +30,13 @@ const Add_product = () => {
   >([]);
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
   const [imageArr, setImageArr] = useState<FileList | null>();
-  const [categoryItems, setCategoryItems] = useState(
-    categories?.map((categoryItem) => ({ ...categoryItem, selected: false }))
-  );
-  const [subCategoryItems, setSubCategoryItems] = useState(
-    categoryItems
-      ?.filter((categoryItem) => categoryItem.selected)
-      ?.flatMap((categoryItem) =>
-        categoryItem.subCategories?.map((categoryItem) => ({
-          ...categoryItem,
-          selected: false,
-        }))
-      )
-  );
+  const [selectCategoryItem,setSelectCategoryItem] = useState<{id: number, label: string,value: string} | null>()
+  const [selectSubCategoryItem,setSubSelectCategoryItem] = useState<{id: number, label: string,value: string} | null>()
+  const subCategories = categories?.find(item => item.name.id === selectCategoryItem?.id )?.subCategories
+  const metaInfo = filter.find(item =>item.id.includes(selectSubCategoryItem?.id as number ))?.filters
+
+
+  const [filterVal,setFilterVal] = useState({})
   const [mutate, { data, isLoading, isSuccess, error, isError }] =
     useCreateProductMutation();
   const { name, slug, base_price, discount, stock } = mainInputVal;
@@ -90,46 +87,8 @@ const Add_product = () => {
     }
   }
 
-  function handleCategoryItemClick(item: (typeof categoryItems)[number]) {
-    const newArr = categoryItems?.map((categoryItem) => {
-      if (categoryItem.name.value === item.name.value) {
-        return {
-          ...categoryItem,
-          selected: !categoryItem?.selected,
-        };
-      } else {
-        return categoryItem;
-      }
-    });
 
-    setCategoryItems(newArr);
-  }
 
-  function handleCategorySubItemClick(item: (typeof subCategoryItems)[number]) {
-    const newArr = subCategoryItems?.map((subCategoryItem) => {
-      if (subCategoryItem.value === item.value) {
-        return {
-          ...subCategoryItem,
-          selected: !subCategoryItem?.selected,
-        };
-      } else {
-        return subCategoryItem;
-      }
-    });
-    setSubCategoryItems(newArr);
-  }
-  useEffect(() => {
-    setSubCategoryItems(
-      categoryItems
-        ?.filter((categoryItem) => categoryItem.selected)
-        ?.flatMap((categoryItem) =>
-          categoryItem.subCategories?.map((categoryItem) => ({
-            ...categoryItem,
-            selected: false,
-          }))
-        )
-    );
-  }, [categoryItems]);
 
   // slug
   useEffect(() => {
@@ -149,22 +108,21 @@ const Add_product = () => {
     formData.append("base_price", base_price.toString());
     formData.append("discount", discount.toString());
     formData.append("stock", stock.toString());
-    const selectedCategoriesItems = categoryItems
-      ?.filter((item) => item.selected)
-      ?.map((item) => item.name.value);
-    const selectedSubCategoriesItems = subCategoryItems
-      .filter((item) => item.selected)
-      ?.map((item) => item.value);
-    const mergedCategories = [
-      ...selectedCategoriesItems,
-      ...selectedSubCategoriesItems,
-    ];
-    formData.append("categories", JSON.stringify(mergedCategories));
+    const categoriesArr =  [selectCategoryItem?.value,selectSubCategoryItem?.value]
+    const selectedMeta = Object.entries(filterVal).map(([key, value]:[string,any]) => {
+      const selectedValues = value.options
+        .filter((option) => option.selected)
+        .map(option => option.value);
+    
+      return { key,value: selectedValues };
+    });
+    console.log(moreInfoArr)
+    formData.append('meta_info',JSON.stringify(selectedMeta))
+    formData.append("categories", JSON.stringify(categoriesArr));
     formData.append("more_info", JSON.stringify(moreInfoArr));
     Array.from((imageArr as FileList) || Object)?.forEach((image) => {
       formData.append("images", image);
     });
-    formData.append("status", status);
     mutate(formData);
   }
   useEffect(() => {
@@ -192,6 +150,76 @@ const Add_product = () => {
   function handleDeleteMoreInfo(ind: number)  {
     setMoreInfoArr(prev => prev.filter((_moreInfo,index) => index !== ind ))
   }
+
+  const  handleCategoryChange  =(selectItem: {id: number,label: string,value:string} | null) => setSelectCategoryItem(selectItem)
+  const handleSubCategoryChange = (selectItem: {id: number,label: string,value:string} | null) => setSubSelectCategoryItem(selectItem)
+
+useEffect(()=> {
+  const modifiedMeta = Object?.fromEntries(
+    Object.entries(metaInfo || {}).map(([key, value]) => [
+        key,
+        {
+            ...value,
+            options: value.options.map((option: {value: string,selected: boolean}) => ({
+                value: option,
+                selected: false
+            }))
+        }
+    ])
+);
+setFilterVal(modifiedMeta)
+},[metaInfo])
+  
+
+const handleMetaInfoMultipleClick = (key: string, selectedItem) => {
+  let newFilter = {}
+  for(let i in filterVal) {
+    if(key === i) {
+      newFilter = {
+        ...filterVal,
+        [key] : {
+          ...filterVal[i],
+          options: filterVal[i].options?.map(elem => {
+            if(elem.value === selectedItem.value) {
+              return {
+                ...elem,
+                selected: !elem.selected
+              }
+            }
+            return elem
+          })
+        }
+      }
+    }
+  }
+  setFilterVal(newFilter)
+}
+const handleMetaInfoSingleClick = (key: string, selectedItem ) => {
+  let newFilter = {}
+  for(let i in filterVal) {
+    if(key === i) {
+      newFilter = {
+        ...filterVal,
+        [key] : {
+          ...filterVal[i],
+          options: filterVal[i].options?.map(elem => {
+            if(elem.value === selectedItem.value) {
+              return {
+                ...elem,
+                selected: !elem.selected
+              }
+            }
+            return {
+              ...elem,
+              selected: false
+            }
+          })
+        }
+      }
+    }
+  }
+  setFilterVal(newFilter)
+}
   return (
     <div className="py-8">
       <div className="flex items-center justify-between sticky top-0 left-0 right-0 bg-white py-2 ">
@@ -441,7 +469,7 @@ const Add_product = () => {
           setValue={setDescription}
           className="w-full  h-[300px] "
         />
-        <div className="my-14">
+        <div className="my-4">
           {fieldErrors.description && (
             <span className="text-orangeColor text-sm block">
               {fieldErrors.description}
@@ -449,7 +477,7 @@ const Add_product = () => {
           )}
         </div>
       </div>
-      <div className="my-[100px] flex flex-wrap justify-between ">
+      <div className="mt-[100px] flex  gap-2 justify-between ">
         <div className=" basis-full lg:basis-6/12">
           <label className="my-3 inline-block font-medium">
             Select Category
@@ -459,24 +487,12 @@ const Add_product = () => {
               {fieldErrors.categories}
             </span>
           )}
-          <div className="flex gap-2 flex-wrap ">
-            {categoryItems.map((categoryItem) => (
-              <div
-                onClick={() => handleCategoryItemClick(categoryItem)}
-                key={categoryItem?.name?.label}
-                className={`flex items-center px-6 py-2 border  ${
-                  categoryItem.selected
-                    ? "bg-mainBlueColor/85 text-white"
-                    : "border-mainBlueColor text-black"
-                }  gap-1 rounded-full cursor-pointer text-sm `}
-              >
-                <span> {categoryItem?.name?.label} </span>
-              </div>
-            ))}
+          <div >
+
+            <Select  options={categories?.map(item => item.name)}  onChange={handleCategoryChange} />
           </div>
         </div>
-        {(categoryItems?.filter((categoryItem) => categoryItem.selected))
-          .length > 0 && (
+        {selectCategoryItem  && (
           <div className="basis-full  lg:basis-6/12 ">
             <label
               className="my-3 inline-block font-medium "
@@ -484,23 +500,84 @@ const Add_product = () => {
             >
               Select Sub Category
             </label>
-            <div className="flex gap-2 flex-wrap ">
-              {subCategoryItems.map((subcategoryItem) => (
-                <div
-                  onClick={() => handleCategorySubItemClick(subcategoryItem)}
-                  key={subcategoryItem?.label}
-                  className={`flex items-center px-6 py-2 border  ${
-                    subcategoryItem.selected
-                      ? "bg-mainBlueColor/85 text-white"
-                      : "border-mainBlueColor text-black"
-                  }  gap-1 rounded-full cursor-pointer text-sm `}
-                >
-                  <span> {subcategoryItem?.label} </span>
-                </div>
-              ))}
+            <div >
+             
+              <Select options={subCategories} onChange={handleSubCategoryChange} />
             </div>
           </div>
         )}
+      </div>
+      <div className="my-5" >
+        <h2 className="text-xl font-semibold" >Meta Info</h2>
+      
+        {filterVal && Object.entries(filterVal).map(([key, config]) => (
+        <div key={key}>
+          <h3 className="capitalize font-medium text-lg " >{key}</h3>
+          <div className="flex gap-2 flex-wrap " >
+            {config.type === "multiple"
+              ? config.options.map((option : string,ind : number) => (
+                //   <div className="flex gap-1" key={ind} >
+                //     <label key={option} className="capitalize"  >
+                //     {option}
+                //   </label>
+                //   <input
+                //   type="checkbox"
+                //   value={option}
+                //   name={option}
+                  
+                //   // onChange={(e) =>
+                //   //   handleChange(
+                //   //     key,
+                //   //     config.options.filter(
+                //   //       (opt) =>
+                //   //         document.getElementById(`${key}-${opt}`).checked
+                //   //     ),
+                //   //     true
+                //   //   )
+                //   // }
+                //   id={`${key}-${option}`}
+                // />
+                //   </div>
+                <div 
+                  onClick={() => handleMetaInfoMultipleClick(key,option)}
+                  key={ind}
+                  className={`flex items-center px-6 py-2 border    gap-1 rounded-full cursor-pointer text-sm  ${
+                    option.selected
+                      ? "bg-mainBlueColor/85 text-white"
+                      : "border-mainBlueColor text-black"
+                  } `}
+                >
+                  <span> {option.value} </span>
+                </div>
+                ))
+              : config.options.map((option : string,ind : number) => (
+                //  <div className="flex gap-1"  key={ind} >
+                //     <input
+                //       type="radio"
+                //       name={key}
+                //       value={option.value}
+                //       // onChange={(e) => handleChange(key, e.target.value, false)}
+                //     />
+                //    <label key={option.value}>
+                //     {option.value}
+                //   </label>
+                //  </div>
+                <div 
+                onClick={() => handleMetaInfoSingleClick(key,option)}
+                key={ind}
+                className={`flex items-center px-6 py-2 border    gap-1 rounded-full cursor-pointer text-sm ${
+                  option.selected
+                    ? "bg-mainBlueColor/85 text-white"
+                    : "border-mainBlueColor text-black"
+                } `}
+              >
+                <span> {option.value} </span>
+              </div>
+                ))}
+          </div>
+        </div>
+      ))}
+  
       </div>
       <Toaster position="top-center" />
 
@@ -526,3 +603,6 @@ const Add_product = () => {
 };
 
 export default Add_product;
+
+
+

@@ -1,6 +1,6 @@
 import ListItem from "./ListItem";
 import SubmenuListItem from "./SubmenuListItem";
-import categories from "@/helper.json";
+import categories from "@/categories.json";
 function BannerLeft() {
   function chunkArray(
     array: { label: string; value: string }[],

@@ -20,7 +20,7 @@ type TSortingItem = {
   value: TSortingItemValue
 }
 type TProps = {
-  getCurrentSortItem ?: (arg0: TSortingItemValue | undefined) => void
+  getCurrentSortItem : (arg0: TSortingItemValue | undefined) => void
 }
 
 

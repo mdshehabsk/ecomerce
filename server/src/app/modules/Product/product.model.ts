@@ -13,6 +13,18 @@ const moreInfoSchema = new Schema<IMoreInformation> ({
     }
 })
 
+const metaInfoSchema = new Schema({
+    key: {
+        type: String,
+        required: true
+    },
+    value: {
+        type: Schema.Types.Mixed, // Allow mixed data type
+        required: true,
+
+    }
+})
+
 const productSchema = new Schema<IProduct>({
     name: {
         type: String,
@@ -42,6 +54,7 @@ const productSchema = new Schema<IProduct>({
         min: 0
     },
     more_info: [moreInfoSchema],
+    meta_info: [metaInfoSchema],
     categories:{
         type: [String],
         required: true
@@ -54,7 +67,8 @@ const productSchema = new Schema<IProduct>({
         type: String,
         enum : EProductStatus,
         default: EProductStatus.DRAFT
-    }
+    },
+
 },{timestamps: true})
 
 export const Product = model<IProduct>('Product',productSchema)

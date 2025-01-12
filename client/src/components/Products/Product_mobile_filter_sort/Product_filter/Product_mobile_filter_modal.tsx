@@ -4,58 +4,60 @@ import { useAppDispatch, useAppSelector } from "@/toolkit/hook";
 import { mobileFilterModalToggle } from "@/toolkit/slice/ProductSortAndFilter";
 import React, { useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { BsFillPlayCircleFill } from "react-icons/bs";
+import { BsChevronDown, BsFillPlayCircleFill } from "react-icons/bs";
 
-type FilterSectionType =
-  | "price"
-  | "ram"
-  | "processor"
-  | "expressDelivary"
-  | "color";
-
-type FilterValueType = {
-  price: {
-    min: undefined | number;
-    max: undefined | number;
-  };
-  ram: {
-    count: null | number;
-    checkedItems: {} | { [key: string]: boolean };
-  };
-};
+const filterItems = [
+  {
+    title: "RAM(GB)",
+    type: "checkbox",
+    options: ["2GB", "3GB", "4GB", "8GB", "16GB"],
+  },
+  {
+    title: "Processor",
+    type: "checkbox",
+    options: ["Intel i5", "Intel i7", "AMD Ryzen 5", "Mediatek Helio G32"],
+  },
+  {
+    title: "Clock Speed (GHz)",
+    type: "checkbox",
+    options: ["2.0", "2.5", "3.0", "3.5", "4.0"],
+  },
+];
 
 const Product_mobile_filter_modal = () => {
   const dispatch = useAppDispatch();
   const { filterIsModal } = useAppSelector(
     (state) => state.ProductSortAndFilter
   );
-  const [filterSection, setFilterSection] =
-    useState<FilterSectionType>("price");
-  const [filterValue, setFilterValue] = useState<FilterValueType>({
-    price: {
-      min: undefined,
-      max: undefined,
-    },
-    ram: {
-      count: null,
-      checkedItems: {},
-    },
+
+  const [checkboxFilters,setCheckboxFilter] = useState(filterItems?.map(item => ({...item,select: true})));
+  const [priceSectionOpen,setPriceSectionOpen] = useState(true)
+  const [filterPrice, setFilterPrice] = useState({
+    min: undefined,
+    max: undefined,
   });
-  const filterInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFilterValue({
-      ...filterValue,
-      price: {
-        ...filterValue.price,
-        [e.target.name]: e.target.value,
-      },
-    });
+  const toggleSection = (filterItem: typeof checkboxFilters[number]) => {
+    const newArray = checkboxFilters.map(item => {
+      if(item.title === filterItem.title) {
+        return {
+          ...item,
+          select: !item.select
+        }
+      }
+      return item
+    })
+    setCheckboxFilter(newArray)
   };
+  function handleClose () {
+   dispatch(mobileFilterModalToggle())
+  }
   return (
-    <>
+    <div    className={` w-screen h-screen ${
+      filterIsModal ? "right-0" : "-right-[1000px]"
+    } fixed z-[50] transition-all duration-500 overflow-y-auto  top-0 bg-black/25 flex justify-end `} onClick={handleClose} >
       <div
-        className={`bg-white w-full h-screen ${
-          filterIsModal ? "bottom-0" : "-bottom-[1000px]"
-        } fixed z-[99] transition-all duration-500 `}
+        className={`bg-white  h-full w-[80%]  z-[60] transition-all duration-500 overflow-y-auto  `}
+        onClick={event => event.stopPropagation()}
       >
         <div className="bg-sky-600 flex items-center px-2 py-3 gap-2 ">
           <AiOutlineArrowLeft
@@ -64,165 +66,81 @@ const Product_mobile_filter_modal = () => {
           />
           <p className="text-white text-xl">Filter</p>
         </div>
-        <div className="flex gap-3 ">
-          <div className="basis-4/12  bg-gray-100 ">
-            <div
-              onClick={() => setFilterSection("price")}
-              className={`product_filter_item ${
-                filterSection === "price" && "bg-orange-500 text-white"
-              } `}
-            >
-              Price
-            </div>
-            <div
-              onClick={() => setFilterSection("ram")}
-              className={`product_filter_item ${
-                filterSection === "ram" && "bg-orange-500 text-white"
-              } `}
-            >
-              RAM(GB)
-            </div>
-            <div
-              onClick={() => setFilterSection("processor")}
-              className={`product_filter_item ${
-                filterSection === "processor" && "bg-orange-500 text-white"
-              } `}
-            >
-              Processor
-            </div>
-            <div
-              onClick={() => setFilterSection("expressDelivary")}
-              className={`product_filter_item ${
-                filterSection === "expressDelivary" &&
-                "bg-orange-500 text-white"
-              } `}
-            >
-              Express Delivery
-            </div>
-            <div
-              onClick={() => setFilterSection("color")}
-              className={`product_filter_item ${
-                filterSection === "color" && "bg-orange-500 text-white"
-              } `}
-            >
-              Color
-            </div>
-          </div>
-          <div className="px-2 py-3 grow ">
-            {(() => {
-              if (filterSection === "price") {
-                return (
-                  <div className="flex gap-2 flex-wrap ">
-                    <input
-                      name="min"
-                      value={filterValue.price.min}
-                      type="number"
-                      placeholder="min"
-                      min={0}
-                      className=" product_filter_price_box "
-                      onChange={filterInputChange}
-                    />
+        <div className="my-4 px-2 py-1 shadow">
+        {/* Section Header */}
+        <div
+          onClick={() => setPriceSectionOpen(!priceSectionOpen) }
+          className="flex justify-between items-center cursor-pointer"
+        >
+          <span className="text-black font-semibold"> Price </span>
+          <BsChevronDown />
+        </div>
 
-                    <input
-                      name="max"
-                      value={filterValue.price.max}
-                      type="number"
-                      placeholder="max"
-                      className=" product_filter_price_box  "
-                      onChange={filterInputChange}
-                    />
-                    <button className="border border-orange-500 p-2 rounded-md ">
-                      <BsFillPlayCircleFill className="text-orange-500 text-lg  " />
-                    </button>
-                  </div>
-                );
-              } else if (filterSection === "ram") {
-                return (
-                  <div className="ram">
-                    <div className="flex gap-2">
-                      <div className="flex gap-2">
-                        <div>
-                          <input type="checkbox" id="3" />
-                        </div>
-                      </div>
-                      <label htmlFor="3">3GB</label>
-                    </div>
-                    <div className="flex gap-2">
-                      <div>
-                        <input type="checkbox" id="4" />
-                      </div>
-                      <label htmlFor="4">4GB</label>
-                    </div>
-                    <div className="flex gap-2">
-                      <div>
-                        <input type="checkbox" id="6" />
-                      </div>
-                      <label htmlFor="6">6GB</label>
-                    </div>
-                  </div>
-                );
-              } else if (filterSection === "processor") {
-                return (
-                  <div className="processor">
-                    <div className="flex gap-2">
-                      <div>
-                        <input type="checkbox" id="3" />
-                      </div>
-                      <label htmlFor="3"> Mediatek Hello A22 </label>
-                    </div>
-                    <div className="flex gap-2">
-                      <div>
-                        <input type="checkbox" id="4" />
-                      </div>
-                      <label htmlFor="4">MediaTek helio G88</label>
-                    </div>
-                    <div className="flex gap-2 font-light">
-                      <div className="flex gap-2">
-                        <div>
-                          <input type="checkbox" id="6" />
-                        </div>
-                      </div>
-                      <label htmlFor="6">MediaTek Helio G96 Ultra Gaming</label>
-                    </div>
-                    <div className="flex gap-2">
-                      <div>
-                        <input type="checkbox" id="6" />
-                      </div>
-                      <label htmlFor="6">Helio A22</label>
-                    </div>
-                    <div className="flex gap-2">
-                      <div>
-                        <input type="checkbox" id="6" />
-                      </div>
-                      <label htmlFor="6">Helio G37</label>
-                    </div>
-                    <div className="flex gap-2">
-                      <div>
-                        <input type="checkbox" id="6" />
-                      </div>
-                      <label htmlFor="6">MediaTek Helio G99</label>
-                    </div>
-                  </div>
-                );
-              } else if (filterSection === "expressDelivary") {
-                return (
-                  <div className="express-delivary">
-                    <div className="flex gap-2">
-                      <div>
-                        <input type="checkbox" id="express-delivary" />{" "}
-                      </div>
-                      <label htmlFor="express-delivary">Express Delivary</label>
-                    </div>
-                  </div>
-                );
-              } else if (filterSection === "color") {
-                return <div className="color"></div>;
-              }
-            })()}
+        {/* Section Content */}
+        <div
+          className={`${
+            priceSectionOpen ? "h-auto" : "h-0 overflow-y-hidden"
+          } transition-[height] duration-300 flex flex-col gap-2 my-2  `}
+        >
+          <div className=" flex flex-wrap gap-1 ">
+            <div className="grow" >
+            <input
+              type="number"
+              min={0}
+              value={filterPrice?.min}
+              placeholder="min"
+              className="text-center py-2 outline-none border border-black/40 w-full "
+            />
+            </div>
+           <div className="grow" >
+           <input
+              type="number"
+               placeholder="max"
+              className="text-center py-2 outline-none border border-black/40 w-full  "
+              value={filterPrice?.max}
+            />
+           </div>
           </div>
+          <button className="py-2 px-4 bg-orangeColor text-white rounded">
+            Apply
+          </button>
         </div>
       </div>
-    </>
+      {checkboxFilters.map((filter, ind) => (
+        <div key={filter.title} className="my-4 px-2 py-1 shadow">
+          {/* Section Header */}
+          <div
+            onClick={() => toggleSection(filter)}
+            className="flex justify-between items-center cursor-pointer"
+          >
+            <span className="text-black font-semibold">{filter.title}</span>
+            <BsChevronDown />
+          </div>
+
+          {/* Section Content */}
+          <div
+            className={`${
+              filter.select ? "h-auto" : "h-0 overflow-y-hidden"
+            } transition-[height] duration-300 flex flex-col gap-2 my-2`}
+          >
+            {filter.type === "checkbox" && (
+              <div className="flex flex-col gap-2  ">
+                {"options" in filter &&
+                  filter.options !== undefined &&
+                  filter?.options.map((option) => (
+                    <label key={option} className="flex items-center gap-2">
+                      <input type="checkbox" />
+                      {option}
+                    </label>
+                  ))}
+              </div>
+            )}
+          </div>
+        </div>
+      ))}
+  
+      </div>
+    </div>
   );
 };
 

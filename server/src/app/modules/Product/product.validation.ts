@@ -53,13 +53,14 @@ const CreateProductZodSchema = z.object({
           }
 
           // Validate each item in the array
-          return parsed.every(
+          const valid = parsed.every(
             (item) =>
               typeof item === "object" &&
               item !== null &&
               typeof item.key === "string" && // Ensure key is a string
               item.value !== undefined // Ensure value is valid (you can refine further based on your requirements)
           );
+          return valid
         } catch {
           return false; // Parsing failed
         }

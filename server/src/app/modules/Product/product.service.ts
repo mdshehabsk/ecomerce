@@ -9,9 +9,11 @@ const createProduct = async (body: IProduct,files: TgetImagesWithResulation) => 
   const uploadedImages =  await cloudinaryImageUpload(files,'pickaboo/product')
   const uploadedImagesURLS = uploadedImages.map(uploadedImage => uploadedImage.url)
 
-    const {name,slug,description,more_info,base_price,discount,stock,categories,status} = body
+    const {name,slug,description,more_info,base_price,discount,stock,categories,status,meta_info} = body
     const parsedMoreInfo = JSON.parse(more_info as unknown as string)
     const parsedCategories = JSON.parse(categories as unknown as string)
+    const parsedMeta = JSON.parse(meta_info as unknown as string)
+
     const product = await Product.create({
         categories: parsedCategories,
         more_info: parsedMoreInfo,
@@ -22,7 +24,8 @@ const createProduct = async (body: IProduct,files: TgetImagesWithResulation) => 
         discount: Number(discount),
         stock: Number(stock),
         imageArr: uploadedImagesURLS,
-        status
+        status,
+        meta_info: parsedMeta
     })
 
     return {product}

@@ -9,7 +9,7 @@ import ProductPaginations from "@/components/Products/ProductPaginations";
 import bannerImage from '@/images/product/product-banner.jpg';
 import { IProduct } from "@/types/product";
 import Image from "next/image";
-
+import Product_by_category from "@/components/Product_by_category/Product_by_category";
 interface IGetProductByCategoryApi {
   success: boolean,
   message: string
@@ -31,25 +31,18 @@ const getProductsByCategory = async (category: string,page : string | undefined 
     }
     return data
   } catch (error) {
-    console.error(error);
     throw new Error('Unable to fetch products by category.');
   }
 }
- async function handleGetCurrnePage (number: number)  {
-  'use server'
-  console.log(number)
- }
+
 const ProductPage = async ({params,searchParams}:{params: {category: string},searchParams: {[key:string]: string  | undefined}} ) => {
   const {category} = params
   const {page} = searchParams
   const {data} = await getProductsByCategory(category,page)
-
   return (
     <>
-      <div className="md:hidden">
+      {/* <div className="md:hidden">
         <Product_mobile_filter_sort_nav />
-        <Product_mobile_filter_modal />
-        <Product_mobile_sort_modal />
       </div>
       <div className="product-banner hidden md:flex">
         <Image src={bannerImage} alt="no Image" className="w-full" />
@@ -65,7 +58,7 @@ const ProductPage = async ({params,searchParams}:{params: {category: string},sea
                 <h2 className="font-semibold text-slate-800 capitalize"> {category} </h2>
                 <p className="text-sm"> {data?.meta?.totalItems}  items in {category} </p>
               </div>
-              <Product_desktop_sort  />
+              <Product_desktop_sort getCurrentSortItem={(value)=> {}} />
             </div>
             <div className="w-full h-px bg-gray-300 my-4"></div>
             <main className=" gap-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-10  ">
@@ -75,11 +68,12 @@ const ProductPage = async ({params,searchParams}:{params: {category: string},sea
 
             </main>
             <div className="flex justify-center my-4">
-            <ProductPaginations itemPerPage={20} totalItems={233} getCurrentPage={handleGetCurrnePage} />
+            <ProductPaginations itemPerPage={20} totalItems={data?.meta?.totalItems} />
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
+      <Product_by_category data={data} category={category} />
     </>
   );
 };

@@ -1,7 +1,6 @@
 'use client'
 import { useAppDispatch } from "@/toolkit/hook";
 // import react icon
-
 import { AiOutlineFilter } from "react-icons/ai";
 import { BsSortDown } from "react-icons/bs";
 
@@ -10,9 +9,19 @@ import {
   mobileFilterModalToggle,
   mobileSortModalToggle,
 } from "@/toolkit/slice/ProductSortAndFilter";
+import Product_mobile_sort_modal from "./Product_sort/Product_mobile_sort_modal";
+import Product_mobile_filter_modal from "./Product_filter/Product_mobile_filter_modal";
+import { FC } from "react";
 
-const Product_mobile_filter_sort = () => {
+
+
+
+const Product_mobile_filter_sort_nav  = () => {
   const dispatch = useAppDispatch();
+
+  function getSelectedSortValue(value: string) {
+    console.log(value)
+  }
   return (
     <div className="flex ">
       <div
@@ -29,8 +38,10 @@ const Product_mobile_filter_sort = () => {
         <AiOutlineFilter className="text-xl" />
         <p>Filter</p>
       </div>
+      <Product_mobile_sort_modal getSelectedSortValue={getSelectedSortValue}  />
+      <Product_mobile_filter_modal />
     </div>
   );
 };
 
-export default Product_mobile_filter_sort;
+export default Product_mobile_filter_sort_nav;

@@ -14,7 +14,7 @@ import { RxCross2 } from "react-icons/rx";
 import { useAppDispatch, useAppSelector } from "@/toolkit/hook";
 import { sidebarClose } from "@/toolkit/slice/SidebarSlice";
 
-import  categories from '@/helper.json'
+import  categories from '@/categories.json'
 import { StaticImageData } from "next/image";
 const  Sidebar = () => {
   const initialState = {
