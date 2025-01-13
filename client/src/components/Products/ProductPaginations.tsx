@@ -56,13 +56,6 @@ const ProductPaginations: FC<TProps> = ({ totalItems, itemPerPage, getCurrentPag
       getCurrentPage(currentPage);
     }
   }, [currentPage, getCurrentPage]);
-
-  useEffect(() => {
-    if (currentPage) {
-      updateQueryParam(currentPage);
-    }
-  }, [currentPage]);
-
   return (
     <div className="flex gap-1 items-center">
       <button

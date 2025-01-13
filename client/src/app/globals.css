@@ -7,7 +7,9 @@
 @tailwind utilities;
 
 
-
+html {
+    scroll-behavior: smooth;
+}
 
 Image {
     max-width: 100%;

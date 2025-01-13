@@ -12,15 +12,14 @@ const sortingItems = [
   { label: "Position", value: "position" },
 ] as const;
 
-type TSortingItemValue = (typeof sortingItems)[number]['value']
-type TSortingItemLabel = (typeof sortingItems)[number]['label']
+
 
 type TSortingItem = {
-  label: TSortingItemLabel,
-  value: TSortingItemValue
+  label: string,
+  value: string
 }
 type TProps = {
-  getCurrentSortItem : (arg0: TSortingItemValue | undefined) => void
+  getCurrentSortItem : (arg0:  string ) => void
 }
 
 
@@ -37,9 +36,8 @@ const Product_desktop_sort = ({getCurrentSortItem }:TProps) => {
   }
 
   useEffect(()=> {
-    if(getCurrentSortItem) {
-
-      getCurrentSortItem(currentSortItem?.value);
+    if(getCurrentSortItem && currentSortItem) {
+      getCurrentSortItem(currentSortItem.value);
     }
   },[currentSortItem,getCurrentSortItem])
 

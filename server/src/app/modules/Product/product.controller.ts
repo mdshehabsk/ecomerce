@@ -43,6 +43,13 @@ const getSingleProduct = catchAsync(async (req,res) => {
 const getProductByCategory = catchAsync(async (req,res) => {
     const {category} = req.params
     const {limit,page} = req.query
+    const query = req.query
+    const queryObj: Record<string ,string[] | string | undefined> = {}
+    for(let i in query) {
+        const value = query[i]?.toString()
+        queryObj[i] = value?.split(',') 
+    }
+    console.log(queryObj)
     const products = await ProductService.getProductByCategory(category, Number(page), Number(limit))
 
     if(!products) {

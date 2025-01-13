@@ -21,10 +21,19 @@ interface IGetProductByCategoryApi {
     products : Omit<IProduct,'description | more_info'>[]
   },
 }
-
-const getProductsByCategory = async (category: string,page : string | undefined ) : Promise<IGetProductByCategoryApi> => {
+const serializeQuery = (obj: Record<string, string | string[] | undefined>) =>
+  Object.entries(obj)
+    .map(([key, value]) => {
+      if (Array.isArray(value)) {
+        // Convert arrays into comma-separated strings
+        return `${key}=${value.join(',')}`;
+      }
+      return `${key}=${encodeURIComponent(value as string)}`;
+    })
+    .join('&');
+const getProductsByCategory = async (category: string,queryString : string ) : Promise<IGetProductByCategoryApi> => {
   try {
-    const res = await fetch(`http://localhost:3001/api/v1/product/get-products-by-category/${category}?page=${page}&limit=20`,{cache: 'no-store'})
+    const res = await fetch(`http://localhost:3001/api/v1/product/get-products-by-category/${category}?${queryString}`,{cache: 'no-store'})
     const data = await res.json()
     if (!res.ok) {
       throw new Error(`Failed to fetch products: ${res.statusText}`);
@@ -37,8 +46,8 @@ const getProductsByCategory = async (category: string,page : string | undefined 
 
 const ProductPage = async ({params,searchParams}:{params: {category: string},searchParams: {[key:string]: string  | undefined}} ) => {
   const {category} = params
-  const {page} = searchParams
-  const {data} = await getProductsByCategory(category,page)
+  const queryString = serializeQuery(searchParams);
+  const {data} = await getProductsByCategory(category,queryString)
   return (
     <>
       {/* <div className="md:hidden">

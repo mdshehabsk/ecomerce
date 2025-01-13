@@ -33,10 +33,10 @@ const Add_product = () => {
   const [selectCategoryItem,setSelectCategoryItem] = useState<{id: number, label: string,value: string} | null>()
   const [selectSubCategoryItem,setSubSelectCategoryItem] = useState<{id: number, label: string,value: string} | null>()
   const subCategories = categories?.find(item => item.name.id === selectCategoryItem?.id )?.subCategories
-  const metaInfo = filter.find(item =>item.id.includes(selectSubCategoryItem?.id as number ))?.filters
+  const currentMeta = filter.find(item =>item.id.includes(selectSubCategoryItem?.id as number ))?.filters
 
 
-  const [filterVal,setFilterVal] = useState({})
+  const [filterVal,setFilterVal] = useState<{type: string,label:string,value:string,options:{value: string , selected: boolean}[]}[]  >([])
   const [mutate, { data, isLoading, isSuccess, error, isError }] =
     useCreateProductMutation();
   const { name, slug, base_price, discount, stock } = mainInputVal;
@@ -109,15 +109,14 @@ const Add_product = () => {
     formData.append("discount", discount.toString());
     formData.append("stock", stock.toString());
     const categoriesArr =  [selectCategoryItem?.value,selectSubCategoryItem?.value]
-    const selectedMeta = Object.entries(filterVal).map(([key, value]:[string,any]) => {
-      const selectedValues = value.options
-        .filter((option) => option.selected)
-        .map(option => option.value);
+    // const selectedMeta = Object.entries(filterVal).map(([key, value]:[string,any]) => {
+    //   const selectedValues = value.options
+    //     .filter((option) => option.selected)
+    //     .map(option => option.value);
     
-      return { key,value: selectedValues };
-    });
-    console.log(moreInfoArr)
-    formData.append('meta_info',JSON.stringify(selectedMeta))
+    //   return { key,value: selectedValues };
+    // });
+    // formData.append('meta_info',JSON.stringify(selectedMeta))
     formData.append("categories", JSON.stringify(categoriesArr));
     formData.append("more_info", JSON.stringify(moreInfoArr));
     Array.from((imageArr as FileList) || Object)?.forEach((image) => {
@@ -155,71 +154,62 @@ const Add_product = () => {
   const handleSubCategoryChange = (selectItem: {id: number,label: string,value:string} | null) => setSubSelectCategoryItem(selectItem)
 
 useEffect(()=> {
-  const modifiedMeta = Object?.fromEntries(
-    Object.entries(metaInfo || {}).map(([key, value]) => [
-        key,
-        {
-            ...value,
-            options: value.options.map((option: {value: string,selected: boolean}) => ({
-                value: option,
-                selected: false
-            }))
-        }
-    ])
-);
-setFilterVal(modifiedMeta)
-},[metaInfo])
+
+const modifiedMeta = currentMeta?.map(item => ({
+  ...item,
+  options: item?.options?.map(optionItem=> ({value: optionItem.toString(),selected: false}))
+}))
+if(modifiedMeta){
+  setFilterVal(modifiedMeta)
+}
+},[currentMeta])
   
 
-const handleMetaInfoMultipleClick = (key: string, selectedItem) => {
-  let newFilter = {}
-  for(let i in filterVal) {
-    if(key === i) {
-      newFilter = {
-        ...filterVal,
-        [key] : {
-          ...filterVal[i],
-          options: filterVal[i].options?.map(elem => {
-            if(elem.value === selectedItem.value) {
-              return {
-                ...elem,
-                selected: !elem.selected
-              }
-            }
-            return elem
-          })
-        }
-      }
-    }
-  }
-  setFilterVal(newFilter)
-}
-const handleMetaInfoSingleClick = (key: string, selectedItem ) => {
-  let newFilter = {}
-  for(let i in filterVal) {
-    if(key === i) {
-      newFilter = {
-        ...filterVal,
-        [key] : {
-          ...filterVal[i],
-          options: filterVal[i].options?.map(elem => {
-            if(elem.value === selectedItem.value) {
-              return {
-                ...elem,
-                selected: !elem.selected
-              }
-            }
+const handleMetaInfoMultipleClick = ( filterItem : typeof filterVal[number], option:typeof filterVal[number]['options'][number]) => {
+  const newFilterVal = filterVal?.map(item => {
+    if(item.value === filterItem?.value) {
+      return {
+        ...item,
+        options: item?.options?.map(optionItem=> {
+          if(optionItem?.value === option.value) {
             return {
-              ...elem,
-              selected: false
+              ...optionItem,
+              selected: !optionItem.selected
             }
-          })
-        }
+          }
+          return optionItem
+        })
       }
     }
-  }
-  setFilterVal(newFilter)
+    return item
+  })
+  setFilterVal(newFilterVal)
 }
+const handleMetaInfoSingleClick = (filterItem : typeof filterVal[number] ,option:typeof filterVal[number]['options'][number]) => {
+  const newFilterVal = filterVal?.map(item => {
+    if(item.value === filterItem?.value) {
+      return {
+        ...item,
+        options: item?.options?.map(optionItem=> {
+          if(optionItem?.value === option.value) {
+            return {
+              ...optionItem,
+              selected: !optionItem.selected
+            }
+          }
+          return  {
+            ...optionItem,
+            selected: false
+          }
+        })
+      }
+    }
+    return item
+  })
+  setFilterVal(newFilterVal)
+  }
+
+
   return (
     <div className="py-8">
       <div className="flex items-center justify-between sticky top-0 left-0 right-0 bg-white py-2 ">
@@ -510,12 +500,12 @@ const handleMetaInfoSingleClick = (key: string, selectedItem ) => {
       <div className="my-5" >
         <h2 className="text-xl font-semibold" >Meta Info</h2>
       
-        {filterVal && Object.entries(filterVal).map(([key, config]) => (
-        <div key={key}>
-          <h3 className="capitalize font-medium text-lg " >{key}</h3>
+        {filterVal?.map((item,ind) => (
+        <div key={ind}>
+          <h3 className="capitalize font-medium text-lg " >{item?.label}</h3>
           <div className="flex gap-2 flex-wrap " >
-            {config.type === "multiple"
-              ? config.options.map((option : string,ind : number) => (
+            {item.type === "multiple"
+              ? item.options.map((option) => (
                 //   <div className="flex gap-1" key={ind} >
                 //     <label key={option} className="capitalize"  >
                 //     {option}
@@ -539,7 +529,7 @@ const handleMetaInfoSingleClick = (key: string, selectedItem ) => {
                 // />
                 //   </div>
                 <div 
-                  onClick={() => handleMetaInfoMultipleClick(key,option)}
+                  onClick={() => handleMetaInfoMultipleClick(item, option)}
                   key={ind}
                   className={`flex items-center px-6 py-2 border    gap-1 rounded-full cursor-pointer text-sm  ${
                     option.selected
@@ -550,20 +540,9 @@ const handleMetaInfoSingleClick = (key: string, selectedItem ) => {
                   <span> {option.value} </span>
                 </div>
                 ))
-              : config.options.map((option : string,ind : number) => (
-                //  <div className="flex gap-1"  key={ind} >
-                //     <input
-                //       type="radio"
-                //       name={key}
-                //       value={option.value}
-                //       // onChange={(e) => handleChange(key, e.target.value, false)}
-                //     />
-                //    <label key={option.value}>
-                //     {option.value}
-                //   </label>
-                //  </div>
+              : item.options.map((option ) => (
                 <div 
-                onClick={() => handleMetaInfoSingleClick(key,option)}
+                onClick={() => handleMetaInfoSingleClick(item,option)}
                 key={ind}
                 className={`flex items-center px-6 py-2 border    gap-1 rounded-full cursor-pointer text-sm ${
                   option.selected
