@@ -1,10 +1,10 @@
 'use client'
-import Product_desktop_filter from "../Products/Product_mobile_filter_sort/Product_filter/Product_desktop_filter";
+import Product_desktop_filter from "../Products/Product_filter/Product_desktop_filter";
 import Product_mobile_filter_sort_nav from "../Products/Product_mobile_filter_sort/Product_mobile_filter_sort_nav";
 import categories from '@/categories.json'
 import filter from '@/filter.json'
 import Image from "next/image";
-import Product_desktop_sort from "../Products/Product_mobile_filter_sort/Product_sort/Product_desktop_sort";
+import Product_desktop_sort from "../Products/Product_sort/Product_desktop_sort";
 import Category_product_item from "../Products/Category_product_item/Category_product_item";
 import ProductPaginations from "../Products/ProductPaginations";
 import { IProduct } from "@/types/product";
@@ -33,8 +33,8 @@ const Product_by_category: FC<TProps> = ({data,category}) => {
   const getCurrentFilters = (filters: Record<string, string[] | string | number | (string | number)[]> ) => {
     setCurrentFilters(filters)
   };
-  const params = new URLSearchParams(useSearchParams as any);
   useEffect(()=> {
+    const params = new URLSearchParams(useSearchParams as any);
     Object.entries(currentFilters).forEach(([key, value]) => {
       if (Array.isArray(value)) {
         value.forEach(v => params.append(key, v.toString()));
@@ -43,14 +43,15 @@ const Product_by_category: FC<TProps> = ({data,category}) => {
       }
     });
     params.set('page',currentPage.toString())
-    params.set('sort',currentSortItem)
-    router.push(`${pathname}?${params.toString()}`);
-  },[currentFilters,currentPage,currentSortItem])
-
+    if(currentSortItem){
+      params.set('sort',currentSortItem)
+    }
+    router.push(`${pathname}?${params.toString()}`,{scroll: false});
+  },[currentFilters, currentPage, currentSortItem, pathname, router])
   return (
     <>
       <div className="md:hidden">
-        <Product_mobile_filter_sort_nav  />
+        <Product_mobile_filter_sort_nav initialFilters={initialFilter || []} getCurrentFilters={getCurrentFilters}  getCurrentSortItem={(value) => setCurrentSortItem(value)} />
       </div>
       <div className="product-banner hidden md:flex">
         <Image src={bannerImage} alt="no Image" className="w-full" />
@@ -82,7 +83,7 @@ const Product_by_category: FC<TProps> = ({data,category}) => {
             <div className="flex justify-center my-4">
               <ProductPaginations
                 itemPerPage={20}
-                totalItems={30}
+                totalItems={data?.meta?.totalItems}
                 getCurrentPage={(number)=> setCurrentPage(number) }
               />
             </div>

@@ -109,14 +109,13 @@ const Add_product = () => {
     formData.append("discount", discount.toString());
     formData.append("stock", stock.toString());
     const categoriesArr =  [selectCategoryItem?.value,selectSubCategoryItem?.value]
-    // const selectedMeta = Object.entries(filterVal).map(([key, value]:[string,any]) => {
-    //   const selectedValues = value.options
-    //     .filter((option) => option.selected)
-    //     .map(option => option.value);
-    
-    //   return { key,value: selectedValues };
-    // });
-    // formData.append('meta_info',JSON.stringify(selectedMeta))
+    const selectedMeta = filterVal?.map(item => {
+      return {
+        key: item.value,
+        value: item?.options?.filter(filterItem => filterItem?.selected).map(mapedItem => mapedItem.value)
+      }
+    })
+    formData.append('meta_info',JSON.stringify(selectedMeta))
     formData.append("categories", JSON.stringify(categoriesArr));
     formData.append("more_info", JSON.stringify(moreInfoArr));
     Array.from((imageArr as FileList) || Object)?.forEach((image) => {

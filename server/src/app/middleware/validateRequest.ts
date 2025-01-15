@@ -7,7 +7,7 @@ import { getImagesWithResulation } from "../modules/Cloudinary/resulation";
 export const validateBodyRequest = (schema: AnyZodObject) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     // data validation check
-    console.log(req.body)
+
     try {
       schema.parse({
         body: req.body,

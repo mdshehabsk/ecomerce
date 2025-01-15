@@ -1,15 +1,14 @@
 "use client";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AiFillCaretDown } from "react-icons/ai";
 const sortingItems = [
-  { label: "Newest First", value: "newest_first" },
-  { label: "Oldest First", value: "oldest_first" },
-  { label: "Name A to Z", value: "name_a_to_z" },
-  { label: "Name Z to A", value: "name_z_to_a" },
-  { label: "Price High to Low", value: "price_high_to_low" },
-  { label: "Price Low to High", value: "price_low_to_high" },
-  { label: "Express Delivery", value: "express_delivery" },
-  { label: "Position", value: "position" },
+  { label: "Newest First", value: "date-1" },
+  { label: "Oldest First", value: "date1" },
+  { label: "Name A to Z", value: "name1" },
+  { label: "Name Z to A", value: "name-1" },
+  { label: "Price High to Low", value: "price-1" },
+  { label: "Price Low to High", value: "price1" },
 ] as const;
 
 
@@ -25,7 +24,8 @@ type TProps = {
 
 
 const Product_desktop_sort = ({getCurrentSortItem }:TProps) => {
-  const [showSortMenu, setShowSortMenu] = useState(false);;
+  const searchParams = useSearchParams();
+  const [showSortMenu, setShowSortMenu] = useState(false);
   const [currentSortItem, setCurrentSortItem] = useState<TSortingItem >()
   const SortBtnClick = () => {
     setShowSortMenu((prev) => !prev);
@@ -39,9 +39,15 @@ const Product_desktop_sort = ({getCurrentSortItem }:TProps) => {
     if(getCurrentSortItem && currentSortItem) {
       getCurrentSortItem(currentSortItem.value);
     }
-  },[currentSortItem,getCurrentSortItem])
+  },[currentSortItem])
 
-
+  useEffect(()=> {
+    const value = searchParams.get('sort')
+    const currentSortItem = sortingItems?.find(item => item.value === value)
+    if(currentSortItem){
+      setCurrentSortItem(currentSortItem)
+    }
+  },[searchParams])
   return (
     <div className="md:flex items-center gap-1 hidden ">
       {showSortMenu && (
@@ -68,7 +74,7 @@ const Product_desktop_sort = ({getCurrentSortItem }:TProps) => {
           }  z-50 basis-full absolute top-full left-0 border border-gray-300 w-full bg-white `}
         >
           {sortingItems?.map((sortingItem, ind) => (
-            <li onClick={()=> handleSortingItem(sortingItem)} key={ind} className=" cursor-pointer hover:text-orangeColor px-2 py-1 my-1 hover:bg-slate-100 font-light transition duration-150 ">
+            <li onClick={()=> handleSortingItem(sortingItem)} key={ind} className={`cursor-pointer hover:text-orangeColor px-2 py-1 my-1 hover:bg-slate-100 font-light transition duration-150 ${currentSortItem?.value === sortingItem?.value ? 'text-orangeColor' : null} `}>
               {sortingItem.label}
             </li>
           ))}

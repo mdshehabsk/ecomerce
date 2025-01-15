@@ -10,6 +10,7 @@ type Tprops = {
   getCurrentFilters: (
     args0: Record<string, string[] | string | number | (string | number)[]>
   ) => void;
+
 };
 const ProductDesktopFilter: FC<Tprops> = ({
   initialFilters,
@@ -89,10 +90,10 @@ const ProductDesktopFilter: FC<Tprops> = ({
     if (getCurrentFilters) {
       getCurrentFilters(obj);
     }
-  }, [ priceSubmit,filters]);
+  }, [priceSubmit, filters, priceSubmit]);
 
   useEffect(() => {
-    const newArray = filters?.map((item) => {
+    setFilters(prev => prev.map(item => {
       const value = searchParams.getAll(item.value);
       const array = item.options?.map((option) => {
         if (value.includes(option.value.toString())) {
@@ -109,11 +110,10 @@ const ProductDesktopFilter: FC<Tprops> = ({
         ...item,
         options: array,
       };
-    });
+    } ))
     const minPrice = searchParams.get('min')
     const maxPrice = searchParams.get('max')
     setFilterPrice({min: minPrice as string,max: maxPrice as string})
-    setFilters(newArray)
   }, [searchParams]);
   return (
     <div className="">
@@ -160,7 +160,7 @@ const ProductDesktopFilter: FC<Tprops> = ({
           </div>
           <button
             className="py-2 px-4 bg-orangeColor text-white rounded"
-            onClick={() => setPriceSubmit(true)}
+            onClick={()=> setPriceSubmit(!priceSubmit)}
           >
             Apply
           </button>

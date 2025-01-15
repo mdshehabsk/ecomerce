@@ -3,40 +3,47 @@ import React, { FC, useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "@/toolkit/hook";
 import { mobileSortModalToggle } from "@/toolkit/slice/ProductSortAndFilter";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import { useSearchParams } from "next/navigation";
 
-const sortOptions = [
-  { label: "Newest First", value: "newest_first" },
-  { label: "Oldest First", value: "oldest_first" },
-  { label: "Name A to Z", value: "name_az" },
-  { label: "Name Z to A", value: "name_za" },
-  { label: "Price High to Low", value: "price_high_low" },
-  { label: "Price Low to High", value: "price_low_high" },
-  { label: "Position", value: "position" },
-  { label: "Express Delivery", value: "express_delivery" },
-];
+const sortingItems = [
+  { label: "Newest First", value: "date-1" },
+  { label: "Oldest First", value: "date1" },
+  { label: "Name A to Z", value: "name1" },
+  { label: "Name Z to A", value: "name-1" },
+  { label: "Price High to Low", value: "price-1" },
+  { label: "Price Low to High", value: "price1" },
+] as const;
 type TProps = {
   getSelectedSortValue : (args0: string) => void
 }
 const Product_mobile_sort_modal : FC<TProps> = ({getSelectedSortValue}) => {
   const { sortIsModal } = useAppSelector((state) => state.ProductSortAndFilter);
   const dispatch = useAppDispatch();
-
+  const searchParams = useSearchParams()
   const [selectedSort, setSelectedSort] = useState<string>("");
-  const [finalselectedSort, setFinalSelectedSort] = useState<string>("");
+  const [applySort,setApplySort] = useState<boolean>(false);
   const handleSortChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedSort(event.target.value);
   };
 
   const handleSortSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setFinalSelectedSort(selectedSort)
+    setApplySort(!applySort)
     dispatch(mobileSortModalToggle());
   };
   useEffect(()=> {
     if(getSelectedSortValue){
-      getSelectedSortValue(finalselectedSort)
+      getSelectedSortValue(selectedSort)
     }
-  },[finalselectedSort,getSelectedSortValue])
+  },[applySort])
+
+  useEffect(()=> {
+    const value = searchParams.get('sort')
+    const currentSortItem = sortingItems?.find(item => item.value === value)
+    if(currentSortItem){
+      setSelectedSort(currentSortItem.value)
+    }
+  },[searchParams])
   return (
     <>
       <div
@@ -54,7 +61,7 @@ const Product_mobile_sort_modal : FC<TProps> = ({getSelectedSortValue}) => {
           <div className="w-full h-px bg-gray-200"></div>
 
           <form onSubmit={handleSortSubmit}>
-            {sortOptions.map((sortItem, ind) => (
+            {sortingItems.map((sortItem, ind) => (
               <div key={ind} className="w-full px-4 py-1">
                 <input
                   type="radio"

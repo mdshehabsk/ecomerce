@@ -9,18 +9,28 @@ import {
   mobileFilterModalToggle,
   mobileSortModalToggle,
 } from "@/toolkit/slice/ProductSortAndFilter";
-import Product_mobile_sort_modal from "./Product_sort/Product_mobile_sort_modal";
-import Product_mobile_filter_modal from "./Product_filter/Product_mobile_filter_modal";
+import Product_mobile_sort_modal from '../Product_sort/Product_mobile_sort_modal';
+import Product_mobile_filter_modal from "../Product_filter/Product_mobile_filter_modal";
+
+import filter from "@/filter.json";
 import { FC } from "react";
 
 
+type TProps = {
+    initialFilters: (typeof filter)[number]["filters"];
+    getCurrentFilters: (
+      args0: Record<string, string[] | string | number | (string | number)[]>
+    ) => void;
+    getCurrentSortItem : (name: string) => void
+}
 
-
-const Product_mobile_filter_sort_nav  = () => {
+const Product_mobile_filter_sort_nav : FC<TProps> = ({getCurrentFilters,getCurrentSortItem,initialFilters}) => {
   const dispatch = useAppDispatch();
 
   function getSelectedSortValue(value: string) {
-    console.log(value)
+    if(getCurrentSortItem){
+      getCurrentSortItem(value)
+    }
   }
   return (
     <div className="flex ">
@@ -39,7 +49,7 @@ const Product_mobile_filter_sort_nav  = () => {
         <p>Filter</p>
       </div>
       <Product_mobile_sort_modal getSelectedSortValue={getSelectedSortValue}  />
-      <Product_mobile_filter_modal />
+      <Product_mobile_filter_modal  initialFilters={initialFilters} getCurrentFilters={getCurrentFilters} />
     </div>
   );
 };
