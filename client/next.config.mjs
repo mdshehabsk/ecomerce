@@ -2,6 +2,11 @@
 const nextConfig = {
     experimental:{
         missingSuspenseWithCSRBailout: false,
+    },
+    images: {
+        remotePatterns: [{
+            hostname: 'res.cloudinary.com'
+        }],
     }
 };
 

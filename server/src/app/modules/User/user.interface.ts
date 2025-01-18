@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Model, Types, Document } from "mongoose";
+import {Types, Document } from "mongoose";
 
 
 export interface IUser extends Document {

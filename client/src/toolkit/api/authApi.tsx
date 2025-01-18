@@ -1,5 +1,4 @@
 import baseApi from "./baseApi";
-import userApi from "./userApi";
 interface IRegisterApiResponse {
   success: boolean;
   statusCode: number;

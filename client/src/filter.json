@@ -1,0 +1,304 @@
+[
+    {
+        "id": [101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112],
+        "filters": [
+            {
+                "label": "Ram(GB)",
+                "value": "ram",
+                "type": "multiple",
+                "options": [
+                    "2",
+                   "3",
+                    "6",
+                   "8",
+                   "12"
+                ]
+            },
+            {
+                "label": "Processor",
+                "value": "processor",
+                "type": "single",
+                "options": [
+                    "Mediatek",
+                    "Snapdragon",
+                    "Unisoc"
+                ]
+            }
+        ]
+    },
+    {
+        "id": [201],
+        "filters": [
+            {
+                "label": "Inverter",
+                "value": "inverter",
+                "type": "single",
+                "options": [
+                    "Yes",
+                    "No"
+                ]
+            },
+            {
+                "label": "Brand",
+                "value": "brand",
+                "type": "multiple",
+                "options": [
+                    "Samsung",
+                    "LG",
+                    "Panasonic"
+                ]
+            },
+            {
+                "label": "Express Delivery",
+                "value": "express-delivary",
+                "type": "single",
+                "options": [
+                    "Yes",
+                    "No"
+                ]
+            }
+        ]
+    },
+    {
+        "id": [202],
+        "filters": [
+            {
+                "label": "Category",
+                "value": "category",
+                "type": "single",
+                "options": [
+                    "Non-Smart",
+                    "Smart"
+                ]
+            },
+            {
+                "label": "Regulation",
+                "value": "regulation",
+                "type": "multiple",
+                "options": [
+                    "2K",
+                    "4K",
+                    "8K"
+                ]
+            },
+            {
+                "label": "Brand",
+                "value": "brand",
+                "type": "single",
+                "options": [
+                    "Sony",
+                    "Samsung",
+                    "LG"
+                ]
+            }
+        ]
+    },
+    {
+        "id": [203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222],
+        "filters": [
+            {
+                "label": "Brand",
+                "value": "brand",
+                "type": "single",
+                "options": [
+                    "BOSCH",
+                    "Haier",
+                    "Hitachi",
+                    "Kelvinator",
+                    "LG",
+                    "Samsung",
+                    "Sharp",
+                    "Toshin",
+                    "Walton",
+                    "Whirlpool",
+                    "Danaaz",
+                    "Minister",
+                    "MyONE",
+                    "Hisense"
+                ]
+            },
+            {
+                "label": "Express Delivery",
+                "value": "express-delivary",
+                "type": "single",
+                "options": [
+                    "Yes",
+                    "No"
+                ]
+            }
+        ]
+    },
+    {
+        "id": [301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317],
+        "filters": [
+            {
+                "label": "Brand",
+                "value": "brand",
+                "type": "single",
+                "options": [
+                    "Amazon",
+                    "Anker",
+                    "AWEI",
+                    "Baseus",
+                    "Digital X",
+                    "Harman Kardon",
+                    "Hoco",
+                    "Honor",
+                    "HP",
+                    "JBL",
+                    "Joyroom",
+                    "LDNIO",
+                    "Lenovo",
+                    "Logitech",
+                    "Oraimo",
+                    "QCY",
+                    "Realme",
+                    "Recci",
+                    "Redmi",
+                    "REMAX",
+                    "Sony",
+                    "Xiaomi",
+                    "Yison",
+                    "WiWU",
+                    "Vertux",
+                    "Poly",
+                    "Xinji",
+                    "Megastar",
+                    "HiFuture",
+                    "Sanag",
+                    "Tribit",
+                    "Xpert",
+                    "EarFun",
+                    "ThundeRobot"
+                ]
+            }
+        ]
+    },
+    {
+        "id": [400],
+        "filters": [
+            {
+                "label": "Storage",
+                "value": "storage",
+                "type": "multiple",
+                "options": [
+                    "128GB",
+                    "256GB",
+                    "512GB",
+                    "1TB"
+                ]
+            },
+            {
+                "label": "Brand",
+                "value": "brand",
+                "type": "multiple",
+                "options": [
+                    "Dell",
+                    "HP",
+                    "Asus",
+                    "Apple"
+                ]
+            }
+        ]
+    },
+    {
+        "id": [401],
+        "filters": [
+            {
+                "label": "Screen Size",
+                "value": "screenSize",
+                "type": "single",
+                "options": [
+                    "10 inches",
+                    "11 inches",
+                    "12.9 inches"
+                ]
+            },
+            {
+                "label": "Processor",
+                "value": "processor",
+                "type": "single",
+                "options": [
+                    "Apple M1",
+                    "Intel i5",
+                    "Intel i7"
+                ]
+            }
+        ]
+    },
+    {
+        "id": [500],
+        "filters": [
+            {
+                "label": "Connectivity",
+                "value": "connectivity",
+                "type": "single",
+                "options": [
+                    "Bluetooth",
+                    "Wired"
+                ]
+            },
+            {
+                "label": "Brand",
+                "value": "brand",
+                "type": "multiple",
+                "options": [
+                    "Logitech",
+                    "Razer",
+                    "Corsair",
+                    "SteelSeries"
+                ]
+            }
+        ]
+    },
+    {
+        "id": [501],
+        "filters": [
+            {
+                "label": "Resolution",
+                "value": "resolution",
+                "type": "multiple",
+                "options": [
+                    "720p",
+                    "1080p",
+                    "4K"
+                ]
+            },
+            {
+                "label": "FPS",
+                "value": "fps",
+                "type": "single",
+                "options": [
+                    "30fps",
+                    "60fps",
+                    "120fps"
+                ]
+            }
+        ]
+    },
+    {
+        "id": [600],
+        "filters": [
+            {
+                "label": "Gender",
+                "value": "gender",
+                "type": "single",
+                "options": [
+                    "Men",
+                    "Women",
+                    "Unisex"
+                ]
+            },
+            {
+                "label": "Brand",
+                "value": "brand",
+                "type": "multiple",
+                "options": [
+                    "Rolex",
+                    "Casio",
+                    "Omega"
+                ]
+            }
+        ]
+    }
+]

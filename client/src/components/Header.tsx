@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai";
+import { AiOutlineSearch } from "react-icons/ai";
 import { FaAngleDown } from "react-icons/fa6";
 import { FiMenu } from "react-icons/fi";
 import { IoMdCart } from "react-icons/io";

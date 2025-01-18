@@ -6,21 +6,31 @@ import { IoBagHandleOutline } from "react-icons/io5";
 import Image from "next/image";
 import useScreenSize from "@/hooks/useScreenSize";
 import { RiFullscreenLine } from "react-icons/ri";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Review from "./Review";
 import ImagePopover from "../Image_popover/ImagePopover";
+import React from "react";
+import { IProduct } from "@/types/product";
 
-const ProductDetails = () => {
+
+
+const ProductDetails: React.FC<{product: IProduct}> = ({product}) => {
   const { size, device } = useScreenSize();
   const [isExpandInfo, setIsExpandInfo] = useState(false);
   const [imagePopoverOpen, setImagePopoverOpen] = useState(false);
-
+  const [currentImage,setCurrentImage] = useState(product?.imageArr?.[0])
   const handleImagePopover = () => {
     setImagePopoverOpen(!imagePopoverOpen);
   };
   const handleToggleExpandInfo = () => {
     setIsExpandInfo(!isExpandInfo);
   };
+
+  const handleCurrentImage = (image:string) => {
+    setCurrentImage(image)
+  }
+
+  const description = useMemo(() =>     <div dangerouslySetInnerHTML={{__html: product?.description}} ></div> , [product?.description] )
   return (
         <div className="bg-gray-50  ">
           <div className="my-container mx-auto bg-white xs  ">
@@ -29,12 +39,17 @@ const ProductDetails = () => {
                 <div className="relative  md:h-full flex flex-col ">
                   <div className="mx-auto md:h-full w-full flex justify-center items-center relative ">
                     <RiFullscreenLine className="absolute top-0 right-0 text-2xl cursor-pointer" onClick={handleImagePopover} />
-                    <Image src={productOne} alt="no Image"  />
+                    <Image src={currentImage } alt="no Image" width={400} height={400} />
                    
                   </div>
                   <div className="flex justify-center items-baseline md:block bottom-0 md:h-[120px] w-full ">
                     <div className="flex gap-1 justify-center w-full ">
-                      <div className=" max-w-[80px]  lg:max-w-[110px] cursor-pointer border  border-blue-600  ">
+                      {
+                        product?.imageArr?.map((singleImage,ind) =>  <div onClick={() => handleCurrentImage(singleImage)}  key={ind} className=" max-w-[80px]  lg:max-w-[110px] cursor-pointer border  border-blue-600  ">
+                          <Image src={singleImage} alt="no Image" width={100} height={100} />
+                        </div> )
+                      }
+                      {/* <div className=" max-w-[80px]  lg:max-w-[110px] cursor-pointer border  border-blue-600  ">
                         <Image src={productOne} alt="no Image" />
                       </div>
                       <div className=" max-w-[80px]   lg:max-w-[110px]  cursor-pointer border border-slate-200 ">
@@ -48,15 +63,14 @@ const ProductDetails = () => {
                       </div>
                       <div className=" max-w-[80px] lg:max-w-[110px]  cursor-pointer border border-slate-200 ">
                         <Image src={productOne} alt="no Image" />
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
               </div>
               <div className=" border-t py-3 md:border-l border-neutral-300 mt-1 basis-full md:basis-7/12 grow overflow-hidden ">
                 <h1 className="text-2xl  font-semibold px-3">
-                  Amazfit Pop 3S AMOLED Bluetooth Calling Smart Watch Global
-                  Version {size}
+                  {product?.name}
                 </h1>
                 <div className="flex my-2 items-center gap-3 border-y py-2 px-3 ">
                   <div className="flex items-center gap-2 bg-orangeColor text-white px-2 py-2 rounded-sm ">
@@ -76,15 +90,16 @@ const ProductDetails = () => {
                 <div className="mt-2 flex items-center gap-4 py-2 border-b px-3 ">
                   <div>
                     <h3 className="font-semibold text-mainBlueColor text-xl md:text-2xl ">
-                      ৳ 31,900
+                      ৳ {product.base_price}
                     </h3>
                   </div>
                   <div>
                     <del className="md:text-lg font-normal  ">20,000</del>
                   </div>
-                  <div className=" p-2 px-3 bg-slate-100 rounded ">
-                    <p className=" text-sm md:text-base">-25%</p>
-                  </div>
+                    {product?.discount > 0 ? <div className=" p-2 px-3 bg-slate-100 rounded ">
+                    <p className=" text-sm md:text-base"> -{product.discount} %</p> 
+                  </div> : null }
+                  
                 </div>
                 {/* quantity */}
                 <div className="flex items-center gap-2 my-2 px-3 ">
@@ -121,27 +136,22 @@ const ProductDetails = () => {
                   }   overflow-hidden  px-3 `}
                 >
                   <h2 className="font-semibold">More Information</h2>
-                  <div className="flex items-center gap-3   py-2 my-2 text-sm  ">
+                  {product.more_info?.map((singleInfo) =>  <React.Fragment key={singleInfo.value} >
+                    <div  className="flex items-center gap-3   py-2 my-2 text-sm  ">
                     <p
                       className="font-semibold
         "
                     >
-                      Type :
+                      {singleInfo.key} :
                     </p>
-                    <span> Refrigaretor</span>
+                    <span> {singleInfo.value} </span>
                   </div>
                   <hr/>
-                  <div className="flex items-center gap-3   py-2 my-2 text-sm  ">
-                    <p
-                      className="font-semibold
-        "
-                    >
-                      Emi available :{" "}
-                    </p>{" "}
-                    <span> 2 Years official warrenty</span>
-                  </div>
+                  </React.Fragment> )}
+                 
+            
                   <hr/>
-                  <h3>
+                  {/* <h3>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Aspernatur doloremque eum corporis harum ratione hic impedit
                     eos perferendis non natus reprehenderit exercitationem, iste
@@ -277,7 +287,8 @@ const ProductDetails = () => {
                     Facere aut minus asperiores repellendus libero nihil vel
                     iure inventore mollitia explicabo eum laborum consequatur,
                     officia corrupti eius. Cum veniam harum ad. Aspernatur.
-                  </h3>
+                  </h3> */}
+                {description}
                 </div>
                 <div className="flex justify-center py-2 px-3 ">
                   <button
@@ -291,7 +302,7 @@ const ProductDetails = () => {
               </div>
             </div>
           </div>
-          <ImagePopover handlePopoverClose={handleImagePopover} isPopoverOpen={imagePopoverOpen} />
+          <ImagePopover handlePopoverClose={handleImagePopover} isPopoverOpen={imagePopoverOpen} imageUrl={currentImage} />
         </div>
   );
 };

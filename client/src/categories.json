@@ -1,0 +1,115 @@
+[
+  {
+    
+    "name": {"id": 100, "label": "SmartPhones", "value": "smartphones" },
+    "subCategories": [
+      { "id": 101, "label": "Samsung", "value": "samsung" },
+      { "id": 102, "label": "Infinix", "value": "infinix" },
+      { "id": 103, "label": "Oppo", "value": "oppo" },
+      { "id": 104, "label": "Oneplus", "value": "oneplus" },
+      { "id": 105, "label": "Techno", "value": "techno" },
+      { "id": 106, "label": "Nokia", "value": "nokia" },
+      { "id": 107, "label": "Motorola", "value": "motorola" },
+      { "id": 108, "label": "Nothing", "value": "nothing" },
+      { "id": 109, "label": "Realme", "value": "realme" },
+      { "id": 110, "label": "Xiaomi", "value": "xiaomi" },
+      { "id": 111, "label": "Vivo", "value": "vivo" },
+      { "id": 112, "label": "Iphone", "value": "iphone" }
+    ]
+  },
+  {
+   
+    "name": {  "id": 200,"label": "Electronics & Appliances", "value": "electronics-appliances" },
+    "subCategories": [
+      { "id": 201, "label": "Air Conditioner", "value": "air-conditioner" },
+      { "id": 202, "label": "Television", "value": "television" },
+      { "id": 203, "label": "Refrigerator & Freezer", "value": "refrigerator-freezer" },
+      { "id": 204, "label": "Room Heater", "value": "room-heater" },
+      { "id": 205, "label": "Air Purifier", "value": "air-purifier" },
+      { "id": 206, "label": "Iron", "value": "iron" },
+      { "id": 207, "label": "Geyser", "value": "geyser" },
+      { "id": 208, "label": "Washing Machine", "value": "washing-machine" },
+      { "id": 209, "label": "Home Theater & Sound System", "value": "home-theater-sound-system" },
+      { "id": 210, "label": "Grinder & Blender", "value": "grinder-blender" },
+      { "id": 211, "label": "Water Purifiers & Filter", "value": "water-purifiers-filter" },
+      { "id": 212, "label": "Oven", "value": "oven" },
+      { "id": 213, "label": "Electric Kettle", "value": "electric-kettle" },
+      { "id": 214, "label": "Rice Cooker", "value": "rice-cooker" },
+      { "id": 215, "label": "Air Fryer", "value": "air-fryer" },
+      { "id": 216, "label": "Induction Cooker", "value": "induction-cooker" },
+      { "id": 217, "label": "Gas Burner", "value": "gas-burner" },
+      { "id": 218, "label": "Kitchen Hood", "value": "kitchen-hood" },
+      { "id": 219, "label": "Fans", "value": "fans" },
+      { "id": 220, "label": "Tools & Hardware", "value": "tools-hardware" },
+      { "id": 221, "label": "IPS", "value": "ips" },
+      { "id": 222, "label": "Exercise & Fitness", "value": "exercise-fitness" }
+    ]
+  },
+  {
+   
+    "name": { "id": 300, "label": "Mobile Accessories", "value": "mobile-accessories" },
+    "subCategories": [
+      { "id": 301, "label": "Smart Watch", "value": "smart-watch" },
+      { "id": 302, "label": "Smart Watch Accessories", "value": "smart-watch-accessories" },
+      { "id": 303, "label": "True Wireless Airbuds", "value": "true-wireless-airbuds" },
+      { "id": 304, "label": "Bluetooth Headphone", "value": "bluetooth-headphone" },
+      { "id": 305, "label": "Wire Headphone", "value": "wire-headphone" },
+      { "id": 306, "label": "Speaker", "value": "speaker" },
+      { "id": 307, "label": "Power Band", "value": "power-band" },
+      { "id": 308, "label": "Smart Band", "value": "smart-band" },
+      { "id": 309, "label": "Smart Gadget", "value": "smart-gadget" },
+      { "id": 310, "label": "Action Cameras", "value": "action-cameras" },
+      { "id": 311, "label": "Gimbal", "value": "gimbal" },
+      { "id": 312, "label": "Charger & Adapter", "value": "charger-adapter" },
+      { "id": 313, "label": "Data Cable", "value": "data-cable" },
+      { "id": 314, "label": "Memory Card", "value": "memory-card" },
+      { "id": 315, "label": "Case & Cover", "value": "case-cover" },
+      { "id": 316, "label": "Screen Protector", "value": "screen-protector" },
+      { "id": 317, "label": "Selfie Sticks", "value": "selfie-sticks" }
+    ]
+  },
+  {
+ 
+    "name": {   "id": 400, "label": "Computer", "value": "computer" },
+    "subCategories": [
+      { "id": 401, "label": "Laptop & Notebook", "value": "laptop-notebook" },
+      { "id": 402, "label": "Tablet", "value": "tablet" },
+      { "id": 403, "label": "Mini Pc", "value": "mini-pc" }
+    ]
+  },
+  {
+  
+    "name": {  "id": 500, "label": "Computer Accessories", "value": "computer-accessories" },
+    "subCategories": [
+      { "id": 501, "label": "Mouse & Keyboard", "value": "mouse-keyboard" },
+      { "id": 502, "label": "IP Cameras", "value": "ip-cameras" },
+      { "id": 503, "label": "Pendrives", "value": "pendrives" },
+      { "id": 504, "label": "HDD & SSD", "value": "hdd-ssd" },
+      { "id": 505, "label": "Monitor", "value": "monitor" },
+      { "id": 506, "label": "Printer", "value": "printer" },
+      { "id": 507, "label": "Headset", "value": "headset" },
+      { "id": 508, "label": "Webcam", "value": "webcam" },
+      { "id": 509, "label": "UPS", "value": "ups" },
+      { "id": 510, "label": "Software & Antivirus", "value": "software-antivirus" },
+      { "id": 511, "label": "Converter & Cable", "value": "converter-cable" },
+      { "id": 512, "label": "Sound System", "value": "sound-system" },
+      { "id": 513, "label": "Router & Networking", "value": "router-networking" },
+      { "id": 514, "label": "Projectors", "value": "projectors" },
+      { "id": 515, "label": "Gaming Gears", "value": "gaming-gears" }
+    ]
+  },
+  {
+    
+    "name": {"id": 600, "label": "LifeStyle", "value": "lifestyle" },
+    "subCategories": [
+      { "id": 601, "label": "Men's Watches", "value": "mens-watches" },
+      { "id": 602, "label": "Women's Watches", "value": "womens-watches" },
+      { "id": 603, "label": "Shaver & Trimmer", "value": "shaver-trimmer" },
+      { "id": 604, "label": "Hair Straighteners", "value": "hair-straighteners" },
+      { "id": 605, "label": "Hair Dryers", "value": "hair-dryers" },
+      { "id": 606, "label": "Men's Fragrances", "value": "mens-fragrances" },
+      { "id": 607, "label": "Women's Fragrances", "value": "womens-fragrances" },
+      { "id": 608, "label": "Scented Candles", "value": "scented-candles" }
+    ]
+  }
+]
