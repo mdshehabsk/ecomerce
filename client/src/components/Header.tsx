@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import { FaAngleDown } from "react-icons/fa6";
+import { FaAngleDown , FaUser } from "react-icons/fa6";
 import { FiMenu } from "react-icons/fi";
 import { IoMdCart } from "react-icons/io";
 import BannerLeft from "./Banner/BannerLeft";
@@ -77,10 +77,10 @@ function Navbar() {
               </div>
             </div>
             <div className="flex justify-center items-center space-x-2 text-white order-2 lg:order-3 md:gap-3 lg:basis-3/12 ">
-              <div className="flex gap-1 cursor-pointer md:order-3">
+              <Link href='/checkout/cart' className="flex gap-1 cursor-pointer md:order-3">
                 <IoMdCart className=" text-xl  md:text-2xl " />
                 <p className="hidden md:block">Cart</p>
-              </div>
+              </Link>
               <span className="h-[20px] w-[2px] bg-white md:hidden "></span>
 
               {!isLoading && !isError && data && token ? (
@@ -89,7 +89,9 @@ function Navbar() {
                     onClick={handleDropdown}
                     className="flex gap-2 items-center cursor-pointer"
                   >
-                    <Image src={userIcon} alt="no image" />
+                   <div className="bg-gray-300 p-2 rounded" >
+                   <FaUser className="text-white " />
+                   </div>
                     <div className="hidden md:flex items-center gap-2  ">
                       <span>My Account</span>
                       <FaAngleDown className="font-light" />

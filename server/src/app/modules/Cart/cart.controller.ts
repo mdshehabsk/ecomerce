@@ -35,6 +35,19 @@ if(cart){
 })
 
 
+const getCarts = catchAsync(async(req,res)=> {
+    const userId = req.user._id
+    const carts = await CartSerivice.getCarts(userId)
+    sendResponse(res,{
+        statusCode: httpStatus.OK,
+        success: true,
+        data: carts,
+        message: 'get carts successfull'
+    })
+})
+
+
 export const CartController = {
-    addCartItem
+    addCartItem,
+    getCarts
 }

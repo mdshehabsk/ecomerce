@@ -36,6 +36,10 @@ const addCartItem = async ({userId,productId, quantity = 1}: {userId:mongoose.Ty
    throw new Error('add cart item faild')
 }
 
+
+const getCarts = async (userId: mongoose.Types.ObjectId) => await Cart.findOne({userId}).populate({path: 'items.productId',model: 'Product', select: '-description -meta_info -more_info -status -categories',})
+
 export const CartSerivice = {
-    addCartItem
+    addCartItem,
+    getCarts
 }
