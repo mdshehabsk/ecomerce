@@ -7,11 +7,6 @@ const createProduct = async (
   body: IProduct,
   files: TgetImagesWithResulation
 ) => {
-  const uploadedImages = await cloudinaryImageUpload(files, "pickaboo/product");
-  const uploadedImagesURLS = uploadedImages.map(
-    (uploadedImage) => uploadedImage.url
-  );
-
   const {
     name,
     slug,
@@ -24,9 +19,16 @@ const createProduct = async (
     status,
     meta_info,
   } = body;
+  const uploadedImages = await cloudinaryImageUpload(files, "pickaboo/product");
+  const uploadedImagesURLS = uploadedImages.map(
+    (uploadedImage) => uploadedImage.url
+  );
+
+
   const parsedMoreInfo = JSON.parse(more_info as unknown as string);
   const parsedCategories = JSON.parse(categories as unknown as string);
   const parsedMeta = JSON.parse(meta_info as unknown as string);
+
   const product = await Product.create({
     categories: parsedCategories,
     more_info: parsedMoreInfo,

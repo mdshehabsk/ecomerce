@@ -1,14 +1,7 @@
 'use server'
-import Category_product_item from "@/components/Products/Category_product_item/Category_product_item";
-import Product_desktop_filter from "@/components/Products/Product_mobile_filter_sort/Product_filter/Product_desktop_filter";
-import Product_mobile_filter_modal from "@/components/Products/Product_mobile_filter_sort/Product_filter/Product_mobile_filter_modal";
-import Product_mobile_filter_sort_nav from "@/components/Products/Product_mobile_filter_sort/Product_mobile_filter_sort_nav";
-import Product_desktop_sort from "@/components/Products/Product_mobile_filter_sort/Product_sort/Product_desktop_sort";
-import Product_mobile_sort_modal from "@/components/Products/Product_mobile_filter_sort/Product_sort/Product_mobile_sort_modal";
-import ProductPaginations from "@/components/Products/ProductPaginations";
-import bannerImage from '@/images/product/product-banner.jpg';
+
 import { IProduct } from "@/types/product";
-import Image from "next/image";
+
 import Product_by_category from "@/components/Product_by_category/Product_by_category";
 interface IGetProductByCategoryApi {
   success: boolean,
