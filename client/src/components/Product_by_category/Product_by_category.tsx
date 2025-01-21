@@ -80,7 +80,7 @@ const Product_by_category: FC<TProps> = ({data,category}) => {
                 <Category_product_item key={product?._id} product={product} />
               ))}
             </main>
-            <div className="flex justify-center my-4">
+            <div className="flex justify-center mt-20 bg-white items-end">
               <ProductPaginations
                 itemPerPage={20}
                 totalItems={data?.meta?.totalItems}

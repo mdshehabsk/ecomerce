@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { Product } from "./product.model";
 
 const CreateProductZodSchema = z.object({
   body: z.object({
@@ -7,40 +8,52 @@ const CreateProductZodSchema = z.object({
       .min(1, { message: "Name must contain at least 1 character." }),
     slug: z
       .string({ required_error: "Slug is required." })
-      .min(1, { message: "Slug must contain at least 1 character." }),
+      .min(1, { message: "Slug must contain at least 1 character." })
+      .refine(
+        async (value) => {
+          try {
+            const foundSlug = await Product.findOne({ slug: value });
+            return !foundSlug;
+          } catch (error) {
+            throw new Error("An error occurred while validating the slug.");
+          }
+        },
+        { message: "Slug must be unique." }
+      ),
+
     description: z
       .string({ required_error: "Description is required." })
       .min(100, {
         message: "Description must contain at least 100 characters.",
       }),
-      base_price: z
-      .preprocess(
-        (value) => {
-          const parsed = Number(value); // Convert to number
-          return isNaN(parsed) ? null : parsed; // Return null if not a valid number
-        },
-        z.number({ required_error: "Base price is required." })
-          .min(1, "Base price must be at least 1.") // Ensure minimum price
-      ),
-    discount: z
-      .preprocess(
-        (value) => {
-          const parsed = Number(value); // Convert to number
-          return isNaN(parsed) ? null : parsed; // Return null if not a valid number
-        },
-        z.number({ required_error: "Discount is required." })
-          .min(0, "Discount cannot be negative.") // Ensure discount is non-negative
-      ),
-    stock: z
-      .preprocess(
-        (value) => {
-          const parsed = Number(value); // Convert to number
-          return isNaN(parsed) ? null : parsed; // Return null if not a valid number
-        },
-        z.number({ required_error: "Stock is required." })
-          .int("Stock must be an integer.") // Ensure stock is an integer
-          .min(1, "Stock must be at least 1.") // Ensure stock is non-negative
-      ),
+    base_price: z.preprocess(
+      (value) => {
+        const parsed = Number(value); // Convert to number
+        return isNaN(parsed) ? null : parsed; // Return null if not a valid number
+      },
+      z
+        .number({ required_error: "Base price is required." })
+        .min(1, "Base price must be at least 1.") // Ensure minimum price
+    ),
+    discount: z.preprocess(
+      (value) => {
+        const parsed = Number(value); // Convert to number
+        return isNaN(parsed) ? null : parsed; // Return null if not a valid number
+      },
+      z
+        .number({ required_error: "Discount is required." })
+        .min(0, "Discount cannot be negative.") // Ensure discount is non-negative
+    ),
+    stock: z.preprocess(
+      (value) => {
+        const parsed = Number(value); // Convert to number
+        return isNaN(parsed) ? null : parsed; // Return null if not a valid number
+      },
+      z
+        .number({ required_error: "Stock is required." })
+        .int("Stock must be an integer.") // Ensure stock is an integer
+        .min(1, "Stock must be at least 1.") // Ensure stock is non-negative
+    ),
 
     more_info: z.string({ required_error: "More info is required." }).refine(
       (value) => {
@@ -60,7 +73,7 @@ const CreateProductZodSchema = z.object({
               typeof item.key === "string" && // Ensure key is a string
               item.value !== undefined // Ensure value is valid (you can refine further based on your requirements)
           );
-          return valid
+          return valid;
         } catch {
           return false; // Parsing failed
         }
@@ -72,16 +85,17 @@ const CreateProductZodSchema = z.object({
     ),
     categories: z.string({ required_error: "Categories required" }).refine(
       (value) => {
-      try {
-        const parsed = JSON.parse(value);
-        return Array.isArray(parsed) && parsed.length > 0
-      } catch {
-        return false; // Return false if JSON parsing fails
+        try {
+          const parsed = JSON.parse(value);
+          return Array.isArray(parsed) && parsed.length > 0;
+        } catch {
+          return false; // Return false if JSON parsing fails
+        }
+      },
+      {
+        message: "Categories must be a valid JSON array of string.",
       }
-    },{
-      message: "Categories must be a valid JSON array of string."
-    }),
-  
+    ),
   }),
 });
 
