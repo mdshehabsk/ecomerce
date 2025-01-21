@@ -59,12 +59,13 @@ const getProductByCategory = async ({
   const min = Number(query.min);
   const max = Number(query.max);
   const page = Number(query.page) || 1;
-  const limit = Number(query.limit) || 20;
+  const limit = Number(query.limit) || 20
   const sort = query.sort
   delete query.min;
   delete query.max;
   delete query.page;
   delete query.sort;
+  delete query.limit
   const totalProductItems = await Product.countDocuments({
     categories: category,
   });

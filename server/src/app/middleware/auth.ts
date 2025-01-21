@@ -17,19 +17,21 @@ interface CustomJwtPayload extends JwtPayload {
 
 
 export const isLogin = async (req: Request,res:Response,next: NextFunction) => {
-    const {authorization} = req.headers;
-    const authToken = authorization?.split(' ')[1]
-
-    if(!authToken){
-        throw new AppError(httpStatus.FORBIDDEN, "Your'e Not Authorize")
-    }
-    jwt.verify(authToken,config.jwt_secret,(err,decoded)=> {
-        if(err)
-        {
-          return next('Jwt invalid')
+   
+        const {authorization} = req.headers;
+        const authToken = authorization?.split(' ')[1]
+    
+        if (!authToken) {
+            return next(new AppError(httpStatus.FORBIDDEN, "You're Not Authorized"));
         }
-            const payload = decoded as CustomJwtPayload;
-            req.user = payload
-            next()
-    });
+        jwt.verify(authToken,config.jwt_secret,(err,decoded)=> {
+            if (err) {
+                return next(new AppError(httpStatus.UNAUTHORIZED, 'JWT is invalid'));
+            }            
+                const payload = decoded as CustomJwtPayload;
+                req.user = payload
+                next()
+        });
+    
+   
 }
