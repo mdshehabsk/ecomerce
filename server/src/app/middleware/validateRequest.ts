@@ -9,7 +9,7 @@ export const validateBodyRequest = (schema: AnyZodObject) => {
     // data validation check
 
     try {
-      schema.parse({
+     await schema.parseAsync({
         body: req.body,
       });
 

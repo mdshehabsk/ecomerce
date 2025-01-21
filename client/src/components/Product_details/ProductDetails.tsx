@@ -1,10 +1,9 @@
 "use client";
-import productOne from "@/images/product/product-1.jpg";
+
 import { AiOutlineStar } from "react-icons/ai";
 import { CiShoppingCart } from "react-icons/ci";
 import { IoBagHandleOutline } from "react-icons/io5";
 import Image from "next/image";
-import useScreenSize from "@/hooks/useScreenSize";
 import { RiFullscreenLine } from "react-icons/ri";
 import { useMemo, useState } from "react";
 import Review from "./Review";
@@ -15,6 +14,7 @@ import { IProduct } from "@/types/product";
 
 
 const ProductDetails: React.FC<{product: IProduct}> = ({product}) => {
+  const [quantity,setQuantity] = useState(1)
   const [isExpandInfo, setIsExpandInfo] = useState(false);
   const [imagePopoverOpen, setImagePopoverOpen] = useState(false);
   const [currentImage,setCurrentImage] = useState(product?.imageArr?.[0])
@@ -74,7 +74,7 @@ const ProductDetails: React.FC<{product: IProduct}> = ({product}) => {
                 <div className="mt-2 flex items-center gap-4 py-2 border-b px-3 ">
                   <div>
                     <h3 className="font-semibold text-mainBlueColor text-xl md:text-2xl ">
-                      ৳ {product.base_price}
+                      ৳ {(product?.base_price / 100) * (100 - product?.discount)}
                     </h3>
                   </div>
                   <div>
@@ -88,16 +88,16 @@ const ProductDetails: React.FC<{product: IProduct}> = ({product}) => {
                 {/* quantity */}
                 <div className="flex items-center gap-2 my-2 px-3 ">
                   <div>
-                    <p className=" text-base  opacity-70 ">Quantity :</p>
+                    <p className=" text-black text-base ">Quantity :</p>
                   </div>
                   <div className="flex border border-slate-200  ">
-                    <button className="font-bold text-xl  border-r py-2 px-4  ">
+                    <button onClick={()=> setQuantity( prev => Math.max(1,prev - 1) )} className="font-bold text-xl  border-r py-2 px-4  ">
                       -
                     </button>
                     <div className="flex py-2 px-4 ">
-                      <p>1</p>
+                      <p> {quantity} </p>
                     </div>
-                    <button className="font-bold text-xl  border-l py-2 px-4  ">
+                    <button onClick={()=> setQuantity(prev => prev + 1)}  className="font-bold text-xl  border-l py-2 px-4  ">
                       +
                     </button>
                   </div>
@@ -120,7 +120,7 @@ const ProductDetails: React.FC<{product: IProduct}> = ({product}) => {
                   }   overflow-hidden  px-3 `}
                 >
                   <h2 className="font-semibold">More Information</h2>
-                  {product.more_info?.map((singleInfo) =>  <React.Fragment key={singleInfo.value} >
+                  {product?.more_info?.map((singleInfo) =>  <React.Fragment key={singleInfo.value} >
                     <div  className="flex items-center gap-3   py-2 my-2 text-sm  ">
                     <p
                       className="font-semibold
@@ -128,7 +128,7 @@ const ProductDetails: React.FC<{product: IProduct}> = ({product}) => {
                     >
                       {singleInfo.key} :
                     </p>
-                    <span> {singleInfo.value} </span>
+                    <span> {singleInfo?.value} </span>
                   </div>
                   <hr/>
                   </React.Fragment> )}
