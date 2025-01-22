@@ -18,6 +18,7 @@ const user_model_1 = require("../User/user.model");
 const router = (0, express_1.Router)();
 router.post('/register', (0, validateRequest_1.validateBodyRequest)(auth_validation_1.AuthValidation.AuthRegisterSchema), auth_controller_1.AuthController.authRegister);
 router.post('/login', (0, validateRequest_1.validateBodyRequest)(auth_validation_1.AuthValidation.AuthLoginSchema), auth_controller_1.AuthController.authLogin);
+router.post('/login/google', (0, validateRequest_1.validateBodyRequest)(auth_validation_1.AuthValidation.AuthLoginGoogleSchema), auth_controller_1.AuthController.authLoginGoogle);
 router.get('/user', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const user = yield user_model_1.User.find();
     res.json(user);

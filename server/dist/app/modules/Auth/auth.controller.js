@@ -46,26 +46,44 @@ const authRegister = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, v
 }));
 const authLogin = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const data = req.body;
-    const { token, userNotFound, verifyUser } = yield auth_service_1.AuthServices.userLogin(data);
-    if (userNotFound) {
+    const { token, userNotFound, userNotVeryfied, user } = yield auth_service_1.AuthServices.userLogin(data);
+    if (userNotFound || userNotVeryfied) {
         return (0, sendResponse_1.default)(res, {
             statusCode: http_status_1.default.NOT_FOUND,
             success: false,
-            error: 'Wrong Crentials'
+            error: "Wrong Crentials",
         });
     }
-    if (verifyUser) {
+    return (0, sendResponse_1.default)(res, {
+        statusCode: http_status_1.default.OK,
+        success: true,
+        token,
+        message: "Login Successfull",
+        data: user,
+    });
+}));
+const authLoginGoogle = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { token } = req.body;
+    const { loginSuccess, myToken } = yield auth_service_1.AuthServices.userLoginGoogle(token);
+    if (!loginSuccess) {
+        return (0, sendResponse_1.default)(res, {
+            statusCode: http_status_1.default.UNAUTHORIZED,
+            success: false,
+            error: "Unauthorized",
+        });
+    }
+    else {
         return (0, sendResponse_1.default)(res, {
             statusCode: http_status_1.default.OK,
             success: true,
-            token,
-            message: 'Login Successfull'
+            message: "Login Successfull",
+            token: myToken,
         });
     }
 }));
 const verifyUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { token } = req.query;
-    const { userVerify, userToken } = yield auth_service_1.AuthServices.verifyUser(token);
+    const { userVerify } = yield auth_service_1.AuthServices.verifyUser(token);
     if (userVerify) {
         (0, sendResponse_1.default)(res, {
             statusCode: http_status_1.default.OK,
@@ -77,5 +95,6 @@ const verifyUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
 exports.AuthController = {
     authRegister,
     authLogin,
+    authLoginGoogle,
     verifyUser,
 };

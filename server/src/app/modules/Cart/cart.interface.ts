@@ -1,11 +1,12 @@
 import mongoose from "mongoose";
 
 export interface IItems {
-    productId: mongoose.Types.ObjectId,
+    product: mongoose.Types.ObjectId,
     quantity: number
+    _id?: mongoose.Types.ObjectId
 }
 export interface ICart {
     _id: mongoose.Types.ObjectId
-    userId: mongoose.Types.ObjectId
+    user: mongoose.Types.ObjectId
     items: IItems[]
 }

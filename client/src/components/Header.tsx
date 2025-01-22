@@ -11,11 +11,11 @@ import { sidebarOpen } from "@/toolkit/slice/SidebarSlice";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useGetUserDataQuery } from "@/toolkit/api/userApi";
-import userIcon from "@/images/user.png";
-import Image from "next/image";
 import Popover from "./Popover";
+import { useGetCartsQuery } from "@/toolkit/api/cartApi";
 import Dropdown from "./Account/Dropdown";
 function Navbar() {
+  const {data : cartsData} = useGetCartsQuery(undefined)
   const { isLoading, isError, data } = useGetUserDataQuery(undefined);
   const { token } = useAppSelector((state) => state.AuthSlice);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -40,6 +40,7 @@ function Navbar() {
   function handlePopoverClose() {
     setShowDropdown(false);
   }
+  const totalCartsItem = cartsData?.data?.items?.reduce((total,acc)=> total + acc.quantity,0)
   return (
     <>
       <header className="w-full min-h-max bg-mainBlueColor flex items-center py-2 lg:py-0 sticky top-0 z-50 ">
@@ -77,9 +78,13 @@ function Navbar() {
               </div>
             </div>
             <div className="flex justify-center items-center space-x-2 text-white order-2 lg:order-3 md:gap-3 lg:basis-3/12 ">
-              <Link href='/checkout/cart' className="flex gap-1 cursor-pointer md:order-3">
-                <IoMdCart className=" text-xl  md:text-2xl " />
+              <Link href='/checkout/cart' className="flex gap-1 cursor-pointer md:order-3 ">
+                <div className="relative">
+                <IoMdCart className=" text-xl  md:text-3xl " />
+                <p className="absolute -top-[20%] right-0 text-xs " > {totalCartsItem} </p>
+                </div>
                 <p className="hidden md:block">Cart</p>
+               
               </Link>
               <span className="h-[20px] w-[2px] bg-white md:hidden "></span>
 

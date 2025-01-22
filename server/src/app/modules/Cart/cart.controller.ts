@@ -1,53 +1,92 @@
 import httpStatus from "http-status";
-import catchAsync from "../../utils/catchAsync"
+import catchAsync from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
 import { CartSerivice } from "./cart.service";
 
-
-const addCartItem = catchAsync(async (req,res) => {
-    const userId = req.user._id;
-    const {productId,quantity} = req.body
-    if(!productId) {
-        return sendResponse(res, {
-            statusCode: httpStatus.NOT_FOUND,
-            success: false,
-            error : 'product id missing',
-        })
-    }
-   const {productNotFound,cart} = await CartSerivice.addCartItem({userId,productId,quantity})
-   if(productNotFound){
-       return sendResponse(res, {
-           statusCode: httpStatus.NOT_FOUND,
-           success: false,
-           error : 'invalid product id',
-        })
-    }
-if(cart){
+const addCartItem = catchAsync(async (req, res) => {
+  const userId = req.user._id;
+  const { productId, quantity } = req.body;
+  if (!productId) {
     return sendResponse(res, {
-        statusCode: httpStatus.CREATED,
-        success: true,
-        data: cart,
-        message : 'add cart successfull'
-    })
-}
+      statusCode: httpStatus.NOT_FOUND,
+      success: false,
+      error: "product id missing",
+    });
+  }
+  const { cart } = await CartSerivice.addCartItem({
+    userId,
+    productId,
+    quantity,
+  });
+  if (cart) {
+    return sendResponse(res, {
+      statusCode: httpStatus.CREATED,
+      success: true,
+      data: cart,
+      message: "add cart successfull",
+    });
+  }
+});
 
- 
-})
+const getCarts = catchAsync(async (req, res) => {
+  const userId = req.user._id;
+  const carts = await CartSerivice.getCarts(userId);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    data: carts,
+    message: "get carts successfull",
+  });
+});
 
 
-const getCarts = catchAsync(async(req,res)=> {
+const updateCartItem = catchAsync(async (req,res) => {
+    const {itemId} = req.params
     const userId = req.user._id
-    const carts = await CartSerivice.getCarts(userId)
-    sendResponse(res,{
+    const {quantity} = req.body
+   const {cartItemNotFound,carts,cartsNotFound} = await CartSerivice.updateCartItem({itemId ,userId,quantity})
+   if(cartItemNotFound) {
+   return sendResponse(res, {
+        statusCode: httpStatus.NOT_FOUND,
+        success: false,
+        error: 'cart item not found'
+      });
+   }
+   if(cartsNotFound){
+    return sendResponse(res, {
+        statusCode: httpStatus.NOT_FOUND,
+        success: false,
+        error: 'carts not found'
+      });
+   }
+   if(carts){
+    return sendResponse(res, {
         statusCode: httpStatus.OK,
         success: true,
-        data: carts,
-        message: 'get carts successfull'
-    })
+       message : 'cart update successfull',
+       data: carts
+      });
+   }
 })
 
 
+const deleteCartItem = catchAsync(async(req,res)=> {
+    const {itemId} = req.params
+    const userId = req.user._id
+    const {carts} = await CartSerivice.deleteCartItem({itemId,userId})
+    if(carts) {
+        return sendResponse(res, {
+            statusCode: httpStatus.OK,
+            success: true,
+            data: carts,
+            message: 'delete cart item successfull'
+        })
+    }
+})
+
 export const CartController = {
-    addCartItem,
-    getCarts
-}
+  addCartItem,
+  getCarts,
+  updateCartItem,
+  deleteCartItem
+};

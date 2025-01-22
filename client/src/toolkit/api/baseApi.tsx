@@ -55,5 +55,6 @@ const baseApi = createApi({
     baseUrl: "http://localhost:3001/api/v1",
   }),
   endpoints: () => ({}),
+  tagTypes : ['Carts']
 });
 export default baseApi;

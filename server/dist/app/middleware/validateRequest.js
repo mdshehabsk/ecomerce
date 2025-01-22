@@ -12,15 +12,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validateBodyRequest = exports.validateQueryRequest = void 0;
+exports.validateImageFilesRequest = exports.validateQueryRequest = exports.validateBodyRequest = void 0;
 const zod_1 = require("zod");
 const sendResponse_1 = __importDefault(require("../utils/sendResponse"));
 const http_status_1 = __importDefault(require("http-status"));
+const resulation_1 = require("../modules/Cloudinary/resulation");
 const validateBodyRequest = (schema) => {
     return (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
         // data validation check
         try {
-            schema.parse({
+            yield schema.parseAsync({
                 body: req.body,
             });
             next();
@@ -72,3 +73,40 @@ const validateQueryRequest = (schema) => {
     });
 };
 exports.validateQueryRequest = validateQueryRequest;
+const validateImageFilesRequest = (schema) => {
+    return (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+        // data validation check
+        try {
+            if (!req.files || !Array.isArray(req.files)) {
+                return (0, sendResponse_1.default)(res, {
+                    statusCode: http_status_1.default.BAD_REQUEST,
+                    success: false,
+                    error: "Images not found"
+                });
+            }
+            const imagesWithResulation = yield (0, resulation_1.getImagesWithResulation)(req.files);
+            schema.parse({
+                images: imagesWithResulation
+            });
+            req.files = imagesWithResulation;
+            next();
+        }
+        catch (error) {
+            if (error instanceof zod_1.z.ZodError) {
+                const formattedErrors = error.errors.map((err) => ({
+                    path: err.path[0],
+                    message: err.message,
+                }));
+                return (0, sendResponse_1.default)(res, {
+                    statusCode: http_status_1.default.BAD_REQUEST,
+                    success: false,
+                    error: formattedErrors,
+                    message: "validation faild",
+                    data: null,
+                });
+            }
+            next(error);
+        }
+    });
+};
+exports.validateImageFilesRequest = validateImageFilesRequest;
