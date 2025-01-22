@@ -10,10 +10,12 @@ import Review from "./Review";
 import ImagePopover from "../Image_popover/ImagePopover";
 import React from "react";
 import { IProduct } from "@/types/product";
+import { useAddCartItemMutation } from "@/toolkit/api/cartApi";
 
 
 
 const ProductDetails: React.FC<{product: IProduct}> = ({product}) => {
+  const [mutate,{data}] = useAddCartItemMutation()
   const [quantity,setQuantity] = useState(1)
   const [isExpandInfo, setIsExpandInfo] = useState(false);
   const [imagePopoverOpen, setImagePopoverOpen] = useState(false);
@@ -28,8 +30,14 @@ const ProductDetails: React.FC<{product: IProduct}> = ({product}) => {
   const handleCurrentImage = (image:string) => {
     setCurrentImage(image)
   }
-
   const description = useMemo(() =>     <div dangerouslySetInnerHTML={{__html: product?.description}} ></div> , [product?.description] )
+
+  const handleCartClick = () => {
+    mutate({
+      productId: product?._id,
+      quantity
+    })
+  }
   return (
         <div className="bg-gray-50  ">
           <div className="my-container mx-auto bg-white xs  ">
@@ -66,10 +74,10 @@ const ProductDetails: React.FC<{product: IProduct}> = ({product}) => {
                   </div>
                 </div>
                 {/* brand */}
-                <div className="flex gap-3 border-b py-2 px-3">
+                {/* <div className="flex gap-3 border-b py-2 px-3">
                   <p className="font-semibold">Brand:</p>
                   <span className="text-mainBlueColor">Xiaomi</span>
-                </div>
+                </div> */}
                 {/* price */}
                 <div className="mt-2 flex items-center gap-4 py-2 border-b px-3 ">
                   <div>
@@ -104,9 +112,9 @@ const ProductDetails: React.FC<{product: IProduct}> = ({product}) => {
                 </div>
                 {/* buy the product */}
                 <div className="flex gap-2 md:gap-6 items-center border-y py-2 px-3   ">
-                  <div className="flex justify-center font-medium basis-[200px] p-3 gap-3 items-center border  hover:bg-mainBlueColor hover:text-white transition active:translate-y-1 cursor-pointer  ">
+                  <div onClick={handleCartClick} className="flex justify-center font-medium basis-[200px] p-3 gap-3 items-center border  hover:bg-mainBlueColor hover:text-white transition active:translate-y-1 cursor-pointer  ">
                     <IoBagHandleOutline />
-                    <button className="text-sm">Add to Cart</button>
+                    <button className="text-sm"  >Add to Cart</button>
                   </div>
                   <div className="flex basis-[200px] justify-center items-center bg-orangeColor hover:bg-transparent hover:border-orangeColor border hover:text-orangeColor  text-white p-3 font-medium  gap-3  transition active:translate-y-1 cursor-pointer ">
                     <CiShoppingCart />

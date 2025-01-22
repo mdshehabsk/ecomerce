@@ -18,6 +18,7 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const user_model_1 = require("../User/user.model");
 const auth_utils_1 = require("./auth.utils");
 const sendMail_1 = require("../../mail/sendMail");
+const config_2 = __importDefault(require("../../../firebase/config"));
 const userRegister = (user) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, email, password } = user;
     const userExist = yield user_model_1.User.findOne({ email, isEmailVerified: false });
@@ -56,14 +57,47 @@ const userLogin = (user) => __awaiter(void 0, void 0, void 0, function* () {
         };
     }
     const verifyUser = yield bcrypt_1.default.compare(password, userExist.password);
-    if (verifyUser) {
-        const token = (0, auth_utils_1.createToken)({ _id: userExist._id }, config_1.default.jwt_secret, config_1.default.jwt_expire);
+    if (!verifyUser) {
         return {
-            verifyUser: true,
-            token,
+            userNotVeryfied: true
         };
     }
-    throw new Error("user login faild");
+    const token = (0, auth_utils_1.createToken)({ _id: userExist._id }, config_1.default.jwt_secret, config_1.default.jwt_expire);
+    return {
+        token,
+        user: {
+            _id: userExist._id,
+            username: userExist.username,
+            email: userExist.email,
+        }
+    };
+});
+const userLoginGoogle = (token) => __awaiter(void 0, void 0, void 0, function* () {
+    const decodedToken = yield config_2.default.auth().verifyIdToken(token);
+    const { name, sub, email } = decodedToken;
+    const userExist = yield user_model_1.User.findOne({ email });
+    const myToken = (0, auth_utils_1.createToken)({ _id: userExist === null || userExist === void 0 ? void 0 : userExist.id }, config_1.default.jwt_secret, config_1.default.jwt_expire);
+    const response = { loginSuccess: true, myToken: '' };
+    if (userExist && !userExist.googleId && decodedToken) {
+        yield userExist.updateOne({ googleId: sub, username: name });
+        response.loginSuccess = true,
+            response.myToken = myToken;
+    }
+    else if (!userExist && decodedToken) {
+        const user = yield user_model_1.User.create({ email, googleId: sub, username: name });
+        yield user.save();
+        response.loginSuccess = true,
+            response.myToken = myToken;
+    }
+    else if (userExist === null || userExist === void 0 ? void 0 : userExist.googleId) {
+        response.loginSuccess = true,
+            response.myToken = myToken;
+    }
+    else {
+        response.loginSuccess = false,
+            response.myToken = '';
+    }
+    return response;
 });
 const verifyUser = (token) => __awaiter(void 0, void 0, void 0, function* () {
     const verified = (0, auth_utils_1.verifyToken)(token, config_1.default.jwt_secret);
@@ -83,4 +117,5 @@ exports.AuthServices = {
     userRegister,
     userLogin,
     verifyUser,
+    userLoginGoogle
 };

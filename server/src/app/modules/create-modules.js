@@ -14,7 +14,7 @@ const extensions = [
 ];
 
 // Define the folder name
-const folder = "Product";
+const folder = "Cart";
 
 // Function to create files in a folder
 async function createFiles(folder) {

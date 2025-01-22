@@ -53,8 +53,14 @@ const AuthVerifySchema = zod_1.z.object({
         token: zod_1.z.string({ required_error: "token is missing" }),
     }),
 });
+const AuthLoginGoogleSchema = zod_1.z.object({
+    body: zod_1.z.object({
+        token: zod_1.z.string({ required_error: "Token is required" })
+    })
+});
 exports.AuthValidation = {
     AuthRegisterSchema,
     AuthLoginSchema,
+    AuthLoginGoogleSchema,
     AuthVerifySchema,
 };

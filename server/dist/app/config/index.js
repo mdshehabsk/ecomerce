@@ -14,5 +14,8 @@ exports.default = {
     jwt_secret: process.env.JWT_SECRET,
     jwt_expire: process.env.JWET_EXPIRE,
     mail_user: process.env.MAIL_USER,
-    mail_pass: process.env.MAIL_PASS
+    mail_pass: process.env.MAIL_PASS,
+    cloudinary_cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    cloudinary_api_key: process.env.CLOUDINARY_API_KEY,
+    cloudinary_api_secret: process.env.CLOUDINARY_API_SECRET
 };

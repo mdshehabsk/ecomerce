@@ -21,11 +21,11 @@ const isLogin = (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
     const { authorization } = req.headers;
     const authToken = authorization === null || authorization === void 0 ? void 0 : authorization.split(' ')[1];
     if (!authToken) {
-        throw new AppError_1.AppError(http_status_1.default.FORBIDDEN, "Your'e Not Authorize");
+        return next(new AppError_1.AppError(http_status_1.default.FORBIDDEN, "You're Not Authorized"));
     }
     jsonwebtoken_1.default.verify(authToken, config_1.default.jwt_secret, (err, decoded) => {
         if (err) {
-            return next('Jwt invalid');
+            return next(new AppError_1.AppError(http_status_1.default.UNAUTHORIZED, 'JWT is invalid'));
         }
         const payload = decoded;
         req.user = payload;

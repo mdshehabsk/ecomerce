@@ -12,24 +12,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserController = void 0;
-// import studentZodSchema from '../student/student.validation';
-const http_status_1 = __importDefault(require("http-status"));
-const catchAsync_1 = __importDefault(require("../../utils/catchAsync"));
-const sendResponse_1 = __importDefault(require("../../utils/sendResponse"));
-const user_service_1 = require("./user.service");
-const getUserData = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const id = req.user._id;
-    const foundUser = yield user_service_1.UserService.getUser(id);
-    if (foundUser) {
-        (0, sendResponse_1.default)(res, {
-            statusCode: http_status_1.default.OK,
-            data: foundUser,
-            success: true,
-            message: 'user get successfull',
-        });
-    }
-}));
-exports.UserController = {
-    getUserData
-};
+exports.getImagesWithResulation = void 0;
+const sharp_1 = __importDefault(require("sharp"));
+// eslint-disable-next-line no-undef
+const getImagesWithResulation = (images) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield Promise.all(images === null || images === void 0 ? void 0 : images.map((image) => __awaiter(void 0, void 0, void 0, function* () {
+        const metadata = yield (0, sharp_1.default)(image.buffer).metadata();
+        return Object.assign(Object.assign({}, metadata), image);
+    })));
+    return result;
+});
+exports.getImagesWithResulation = getImagesWithResulation;
