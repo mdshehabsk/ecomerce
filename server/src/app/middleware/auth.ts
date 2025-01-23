@@ -26,7 +26,7 @@ export const isLogin = async (req: Request,res:Response,next: NextFunction) => {
         }
         jwt.verify(authToken,config.jwt_secret,(err,decoded)=> {
             if (err) {
-                return next(new AppError(httpStatus.UNAUTHORIZED, 'JWT is invalid'));
+                return next(new AppError(httpStatus.UNAUTHORIZED, "You're Not Authorized"));
             }            
                 const payload = decoded as CustomJwtPayload;
                 req.user = payload

@@ -1,11 +1,11 @@
 "use client";
-
+import toast, { Toaster } from 'react-hot-toast';
 import { AiOutlineStar } from "react-icons/ai";
 import { CiShoppingCart } from "react-icons/ci";
 import { IoBagHandleOutline } from "react-icons/io5";
 import Image from "next/image";
 import { RiFullscreenLine } from "react-icons/ri";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Review from "./Review";
 import ImagePopover from "../Image_popover/ImagePopover";
 import React from "react";
@@ -15,7 +15,7 @@ import { useAddCartItemMutation } from "@/toolkit/api/cartApi";
 
 
 const ProductDetails: React.FC<{product: IProduct}> = ({product}) => {
-  const [mutate,{data}] = useAddCartItemMutation()
+  const [mutate,{data,isError,error}] = useAddCartItemMutation()
   const [quantity,setQuantity] = useState(1)
   const [isExpandInfo, setIsExpandInfo] = useState(false);
   const [imagePopoverOpen, setImagePopoverOpen] = useState(false);
@@ -38,6 +38,11 @@ const ProductDetails: React.FC<{product: IProduct}> = ({product}) => {
       quantity
     })
   }
+  useEffect(()=> {
+    if(error && 'errorMessage' in error && isError) {
+      toast.error(error.errorMessage as string)
+    }
+  },[isError,error])
   return (
         <div className="bg-gray-50  ">
           <div className="my-container mx-auto bg-white xs  ">
@@ -155,6 +160,7 @@ const ProductDetails: React.FC<{product: IProduct}> = ({product}) => {
             </div>
           </div>
           <ImagePopover handlePopoverClose={handleImagePopover} isPopoverOpen={imagePopoverOpen} imageUrl={currentImage} />
+          <Toaster position='top-center' />
         </div>
   );
 };
