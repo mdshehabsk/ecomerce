@@ -10,14 +10,15 @@ import "swiper/css/pagination";
 // import required modules
 import SingleProduct from "@/components/Products/SingleProduct";
 import Best from "@/images/best.jpg";
-import { useRef } from "react";
+import { FC, useRef } from "react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 // import react icon
 
-import { BiSkipNextCircle, BiSkipPreviousCircle } from "react-icons/bi";
+import { VscArrowRight, VscArrowLeft } from "react-icons/vsc";
 import Link from "next/link";
-const Product_section_one = () => {
+import { IProduct } from "@/types/product";
+const Product_section_one : FC<{recentProducts: IProduct[]}> = ({recentProducts}) => {
   const swiperRef = useRef<any>();
   return (
     <>
@@ -27,14 +28,14 @@ const Product_section_one = () => {
             <div className="flex items-center">
               <Image src={Best} alt="no Image" width={50} height={50} />
               <h1 className="ml-2  font-bold capitalize lg:text-2xl ">
-                Best selling product
+                Recent product
               </h1>
             </div>
-            <div className="flex items-center ">
+            {/* <div className="flex items-center ">
               <Link href='/product' className="border-2 border-mainBlueColor px-4 lg:px-6 py-2 text-mainBlueColor rounded-md hover:text-white hover:bg-mainBlueColor transition duration-500">
                 View All
               </Link>
-            </div>
+            </div> */}
           </div>
           <div className="w-full h-[1px] bg-slate-300 my-4"></div>
           <Swiper
@@ -61,39 +62,25 @@ const Product_section_one = () => {
               },
             }}
           >
-            <SwiperSlide>
-              <SingleProduct />
-            </SwiperSlide>
-            <SwiperSlide>
-              <SingleProduct />
-            </SwiperSlide>
-            <SwiperSlide>
-              <SingleProduct />
-            </SwiperSlide>
-            <SwiperSlide>
-              <SingleProduct />
-            </SwiperSlide>
-            <SwiperSlide>
-              <SingleProduct />
-            </SwiperSlide>
-            <SwiperSlide>
-              <SingleProduct />
-            </SwiperSlide>
+            {recentProducts?.map(singleProduct =>   <SwiperSlide key={singleProduct?._id} >
+              <SingleProduct product={singleProduct} />
+            </SwiperSlide> )}
+
 
             <div className="custom-pagination items-center justify-center mt-4 flex gap-2 xl:hidden  "></div>
           </Swiper>
           <div className="hidden xl:block">
             <div
               onClick={() => swiperRef.current?.slidePrev()}
-              className=" group/prev absolute w-[50px] h-[50px] border border-slate-500 flex items-center justify-center rounded-full cursor-pointer left-6 top-[55%] hover:bg-sky-600 transition duration-500 "
+              className=" group/prev absolute w-[50px] h-[50px] border border-slate-500 flex items-center justify-center rounded-full cursor-pointer left-6 top-[55%] hover:bg-mainBlueColor transition duration-500 "
             >
-              <BiSkipPreviousCircle className="text-2xl group-hover/prev:text-white  " />
+              <VscArrowLeft className="text-2xl group-hover/prev:text-white  " />
             </div>
             <div
               onClick={() => swiperRef.current?.slideNext()}
-              className="group/next absolute w-[50px] h-[50px] border border-slate-500 flex items-center justify-center rounded-full cursor-pointer right-6 top-[55%] hover:bg-sky-600  transition duration-500 "
+              className="group/next absolute w-[50px] h-[50px] border border-slate-500 flex items-center justify-center rounded-full cursor-pointer right-6 top-[55%] hover:bg-mainBlueColor  transition duration-500 "
             >
-              <BiSkipNextCircle className="text-2xl group-hover/next:text-white" />
+              <VscArrowRight className="text-2xl group-hover/next:text-white" />
             </div>
           </div>
         </div>

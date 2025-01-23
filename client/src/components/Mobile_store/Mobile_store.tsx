@@ -10,16 +10,19 @@ import 'swiper/css/free-mode';
 // import required modules
 import { Pagination,Navigation,Autoplay} from "swiper/modules";
 import SingleProduct from "@/components/Products/SingleProduct";
-import { useRef } from "react";
+import { FC, useRef } from "react";
 
 // import react icon
 
-import {BiSkipNextCircle} from 'react-icons/bi' 
-import {BiSkipPreviousCircle} from 'react-icons/bi' 
+import { VscArrowRight, VscArrowLeft } from "react-icons/vsc";
+import { IProduct } from "@/types/product";
  
-
-const Mobile_store = () => {
+interface IProps {
+  smartphoneProducts: IProduct[]
+}
+const Mobile_store : FC<IProps> = ({smartphoneProducts}) => {
     const swiperRef = useRef<any>();
+    console.log(smartphoneProducts)
     return (
       <>
          <section className="my-20 relative shadow-md shadow-slate-100 pb-8 " >
@@ -28,9 +31,9 @@ const Mobile_store = () => {
              <div className="flex items-center" >
              <h1 className="ml-2 font-bold capitalize lg:text-2xl " >The Mobile store</h1>
              </div>
-             <div className="flex items-center " >
+             {/* <div className="flex items-center " >
               <button className="border-2 border-sky-600 px-4 lg:px-8 py-2 text-sky-600 rounded-md hover:text-white hover:bg-sky-600 transition duration-500" >View All</button>
-             </div>
+             </div> */}
           </div>
           <div className="w-full h-[1px] bg-slate-300 my-4" ></div>
          <Swiper
@@ -55,35 +58,21 @@ const Mobile_store = () => {
                   spaceBetween: 10,
                 },
               }}
+            loop={true}
             >
-            
-              <SwiperSlide>
-                  <SingleProduct/>
-              </SwiperSlide>
-              <SwiperSlide>
-                  <SingleProduct/>
-              </SwiperSlide>
-              <SwiperSlide>
-                  <SingleProduct/>
-              </SwiperSlide>
-              <SwiperSlide>
-                  <SingleProduct/>
-              </SwiperSlide>
-              <SwiperSlide>
-                  <SingleProduct/>
-              </SwiperSlide>
-              <SwiperSlide>
-                  <SingleProduct/>
-              </SwiperSlide>
+            {smartphoneProducts?.map(singleProduct => <SwiperSlide key={singleProduct?._id} >
+                  <SingleProduct product={singleProduct} />
+              </SwiperSlide> )}
+
            
               <div className="custom-pagination items-center justify-center mt-4 flex gap-2 xl:hidden  "></div>
             </Swiper>
             <div className="hidden xl:block" >
-            <div  onClick={() => swiperRef.current?.slidePrev()} className=" group/prev absolute w-[50px] h-[50px] border border-slate-500 flex items-center justify-center rounded-full cursor-pointer left-6 top-[55%] hover:bg-sky-600 transition duration-500 ">
-              <BiSkipPreviousCircle className="text-2xl group-hover/prev:text-white  " />
+            <div  onClick={() => swiperRef.current?.slidePrev()} className=" group/prev absolute w-[50px] h-[50px] border border-slate-500 flex items-center justify-center rounded-full cursor-pointer left-6 top-[55%] hover:bg-mainBlueColor transition duration-500 ">
+              <VscArrowLeft className="text-2xl group-hover/prev:text-white  " />
             </div>
-            <div onClick={() => swiperRef.current?.slideNext()} className="group/next absolute w-[50px] h-[50px] border border-slate-500 flex items-center justify-center rounded-full cursor-pointer right-6 top-[55%] hover:bg-sky-600  transition duration-500 ">
-              <BiSkipNextCircle className="text-2xl group-hover/next:text-white" />
+            <div onClick={() => swiperRef.current?.slideNext()} className="group/next absolute w-[50px] h-[50px] border border-slate-500 flex items-center justify-center rounded-full cursor-pointer right-6 top-[55%] hover:bg-mainBlueColor  transition duration-500 ">
+              <VscArrowRight className="text-2xl group-hover/next:text-white" />
             </div>
             </div>
          </div>

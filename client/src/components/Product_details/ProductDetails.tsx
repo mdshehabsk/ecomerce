@@ -131,8 +131,7 @@ const ProductDetails: React.FC<{product: IProduct}> = ({product}) => {
                   {product?.more_info?.map((singleInfo) =>  <React.Fragment key={singleInfo.value} >
                     <div  className="flex items-center gap-3   py-2 my-2 text-sm  ">
                     <p
-                      className="font-semibold
-        "
+                      className="font-semibold"
                     >
                       {singleInfo.key} :
                     </p>
@@ -151,7 +150,7 @@ const ProductDetails: React.FC<{product: IProduct}> = ({product}) => {
                     {isExpandInfo ? "READ LESS" : "READ MORE"}{" "}
                   </button>
                 </div>
-                <Review />
+                {/* <Review /> */}
               </div>
             </div>
           </div>

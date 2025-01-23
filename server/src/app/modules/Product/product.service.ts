@@ -128,8 +128,21 @@ const getProductByCategory = async ({
   return data;
 };
 
+
+const getMainProduct = async () => {
+  const smartphones = await Product.find({categories:'smartphones'}).limit(6).select('-description -more_info -meta_info -categories -status ')
+  const recenentProducts = await Product?.find()?.sort({ createdAt: -1 }).limit(6).select('-description -more_info -meta_info -categories -status ')
+  const lifestyleProducts = await Product.find({categories:'lifestyle'}).limit(6).select('-description -more_info -meta_info -categories -status ')
+  const electronicsProducts = await Product.find({categories:'electronics-appliances'}).limit(6).select('-description -more_info -meta_info -categories -status ')
+  const gadgetProducts = await Product.find({categories: 'mobile-accessories'}).limit(6).select('-description -more_info -meta_info -categories -status ')
+  const computersProducts = await Product.find({categories:'computer'}).limit(6).select('-description -more_info -meta_info -categories -status ')
+  const products = {smartphones,recenentProducts,lifestyleProducts,electronicsProducts,gadgetProducts,computersProducts}
+  return products
+}
+
 export const ProductService = {
   createProduct,
   getSingleProduct,
   getProductByCategory,
+  getMainProduct
 };
