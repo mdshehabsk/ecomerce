@@ -3,19 +3,23 @@ import Image from 'next/image';
 import Product from '@/images/product/product-1.jpg'
 import Link from 'next/link';
 import {AiOutlineStar} from 'react-icons/ai' 
+import { FC } from 'react';
+import { IProduct } from '@/types/product';
 
-const SingleProduct = () => {
+const SingleProduct : FC<{product:IProduct}> = ({product}) => {
   return (
-    <Link href='/product-details/4' className="group/product">
+    <Link href={`/product-details/${product?.slug}`} className="group/product">
       <div className="flex  justify-center overflow-hidden ">
         <Image
-          src={Product}
+          src={product?.imageArr?.[0]}
           alt="no Image"
-          className="group-hover/product:scale-105 transition  "
+          className="group-hover/product:scale-105 transition"
+          width={300}
+          height={300}
         />
       </div>
       <h3 className="text-sm md:text-base font-medium group-hover/product:text-mainBlueColor ">
-        Techno camon 20 Cksrns 8/18GB
+        {product?.name}
       </h3>
       <div className="flex items-center ">
         <span className="text-sm md:text-base text-mainBlueColor">৳</span>

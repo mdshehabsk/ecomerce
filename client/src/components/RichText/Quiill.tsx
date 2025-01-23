@@ -43,12 +43,7 @@ const ReactQuill: React.FC<QuillProps> = ({ value, setValue, className  }) => {
 
   return (
    <React.Fragment>
-      <style jsx global>{`
-        .custom-ql .ql-container {
-          font-size: 16px; /* Set the font size */
-          line-height: 1.5; /* Optional: Adjust line height */
-        }
-      `}</style>
+
      <NoSSRReactQuill
       theme="snow"
       value={value}
@@ -65,3 +60,9 @@ const ReactQuill: React.FC<QuillProps> = ({ value, setValue, className  }) => {
 
 export default ReactQuill;
 
+// {/* <style jsx global>{`
+//   .custom-ql .ql-container {
+//     font-size: 16px; /* Set the font size */
+//     line-height: 1.5; /* Optional: Adjust line height */
+//   }
+// `}</style> */}

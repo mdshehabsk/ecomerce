@@ -66,7 +66,7 @@ const productSchema = new Schema<IProduct>({
     status : {
         type: String,
         enum : EProductStatus,
-        default: EProductStatus.DRAFT
+        default: EProductStatus.PUBLISH
     },
 
 },{timestamps: true})

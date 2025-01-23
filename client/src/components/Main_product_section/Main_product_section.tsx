@@ -6,13 +6,16 @@ import "swiper/css";
 import "swiper/css/grid";
 import "swiper/css/pagination";
 import Main_product_item from "./Main_product_item";
-type Iprops = {
+interface Iprops  {
   title: string;
   ImageArr: any[];
+  products: IProduct[]
 };
 import Image from "next/image";
-const Main_product_section = (props: Iprops) => {
-  const { title, ImageArr } = props;
+import { FC } from "react";
+import { IProduct } from "@/types/product";
+const Main_product_section : FC<Iprops> = (props) => {
+  const { title, ImageArr,products } = props;
   return (
     <section className="my-20 relative shadow-md shadow-slate-100 pb-8 ">
       <div className="my_container mx-auto">
@@ -20,11 +23,11 @@ const Main_product_section = (props: Iprops) => {
           <div className="flex items-center">
             <h1 className="ml-2 font-bold capitalize lg:text-2xl ">{title}</h1>
           </div>
-          <div className="flex items-center ">
+          {/* <div className="flex items-center ">
             <button className="border-2 border-mainBlueColor px-4 lg:px-8 py-2 text-mainBlueColor rounded-md hover:text-white hover:bg-mainBlueColor transition duration-500">
               View All
             </button>
-          </div>
+          </div> */}
         </div>
         <div className="w-full h-[1px] bg-slate-300 my-4"></div>
         <div className="flex gap-6">
@@ -73,30 +76,10 @@ const Main_product_section = (props: Iprops) => {
               slidesPerView={2}
               spaceBetween={20}
             >
-              <SwiperSlide>
-                <Main_product_item />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Main_product_item />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Main_product_item />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Main_product_item />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Main_product_item />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Main_product_item />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Main_product_item />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Main_product_item />
-              </SwiperSlide>
+              {products?.map(singleProduct =>  <SwiperSlide key={singleProduct?._id} >
+                <Main_product_item  product={singleProduct}/>
+              </SwiperSlide> )}
+
               <div className="custom-pagination items-center justify-center mt-4 flex gap-2 md:hidden  "></div>
             </Swiper>
           </div>

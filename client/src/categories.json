@@ -109,7 +109,8 @@
       { "id": 605, "label": "Hair Dryers", "value": "hair-dryers" },
       { "id": 606, "label": "Men's Fragrances", "value": "mens-fragrances" },
       { "id": 607, "label": "Women's Fragrances", "value": "womens-fragrances" },
-      { "id": 608, "label": "Scented Candles", "value": "scented-candles" }
+      { "id": 608, "label": "Scented Candles", "value": "scented-candles" },
+      { "id": 609, "label": "Gift Set", "value": "gift-set" }
     ]
   }
 ]

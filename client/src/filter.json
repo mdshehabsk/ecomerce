@@ -1,5 +1,32 @@
 [
     {
+        "id": [100],
+        "filters": [
+            {
+                "label": "Ram(GB)",
+                "value": "ram",
+                "type": "multiple",
+                "options": [
+                    "2",
+                   "3",
+                    "6",
+                   "8",
+                   "12"
+                ]
+            },
+            {
+                "label": "Processor",
+                "value": "processor",
+                "type": "single",
+                "options": [
+                    "Mediatek",
+                    "Snapdragon",
+                    "Unisoc"
+                ]
+            }
+        ]
+    },
+    {
         "id": [101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112],
         "filters": [
             {
@@ -45,7 +72,8 @@
                 "options": [
                     "Samsung",
                     "LG",
-                    "Panasonic"
+                    "Panasonic",
+                    "Gree"
                 ]
             },
             {
@@ -104,6 +132,7 @@
                     "BOSCH",
                     "Haier",
                     "Hitachi",
+                    "Rangs",
                     "Kelvinator",
                     "LG",
                     "Samsung",
@@ -114,7 +143,8 @@
                     "Danaaz",
                     "Minister",
                     "MyONE",
-                    "Hisense"
+                    "Hisense",
+                    "RohimaFrooz"
                 ]
             },
             {
@@ -136,35 +166,24 @@
                 "value": "brand",
                 "type": "single",
                 "options": [
-                    "Amazon",
-                    "Anker",
+                    "Kieslect",
                     "AWEI",
                     "Baseus",
-                    "Digital X",
-                    "Harman Kardon",
+                    "UGREEN",
                     "Hoco",
-                    "Honor",
-                    "HP",
                     "JBL",
                     "Joyroom",
-                    "LDNIO",
                     "Lenovo",
                     "Logitech",
                     "Oraimo",
-                    "QCY",
                     "Realme",
-                    "Recci",
                     "Redmi",
                     "REMAX",
                     "Sony",
                     "Xiaomi",
                     "Yison",
                     "WiWU",
-                    "Vertux",
-                    "Poly",
-                    "Xinji",
-                    "Megastar",
-                    "HiFuture",
+                    "Samsung",
                     "Sanag",
                     "Tribit",
                     "Xpert",
@@ -211,7 +230,9 @@
                 "options": [
                     "10 inches",
                     "11 inches",
-                    "12.9 inches"
+                    "12.9 inches",
+                    "15.9 inches",
+                    "16.9 inches"
                 ]
             },
             {
@@ -221,8 +242,18 @@
                 "options": [
                     "Apple M1",
                     "Intel i5",
-                    "Intel i7"
+                    "Intel i7",
+                    "Intel i9",
+                    "Ryzen 5",
+                    "Ryzen 7",
+                    "Ryzen 9"
                 ]
+            },
+            {
+                "label": "Ram",
+                "value": "ram",
+                "type": "multiple",
+                "options": ["4GB","8GB","12GB","16GB","32GB","64GB"]
             }
         ]
     },
@@ -277,7 +308,7 @@
         ]
     },
     {
-        "id": [600],
+        "id": [600, 601, 602, 603, 604, 605, 606, 607, 608,609],
         "filters": [
             {
                 "label": "Gender",
@@ -286,7 +317,8 @@
                 "options": [
                     "Men",
                     "Women",
-                    "Unisex"
+                    "Unisex",
+                    "Both"
                 ]
             },
             {
@@ -296,7 +328,12 @@
                 "options": [
                     "Rolex",
                     "Casio",
-                    "Omega"
+                    "Omega",
+                    "Philips",
+                    "Fossil",
+                    "Fastrack",
+                    "Enchen",
+                    "Titan"
                 ]
             }
         ]

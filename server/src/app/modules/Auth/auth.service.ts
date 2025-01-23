@@ -84,6 +84,7 @@ const userLoginGoogle = async (token: string) : Promise<{loginSuccess: boolean,m
   }
   else if(!userExist && decodedToken) {
     const user = await User.create({email,googleId: sub, username: name})
+    const myToken = createToken({_id: user?.id}, config.jwt_secret, config.jwt_expire)
     await user.save()
     response.loginSuccess = true,
     response.myToken = myToken

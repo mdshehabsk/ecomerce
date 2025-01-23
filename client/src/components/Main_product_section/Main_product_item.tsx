@@ -2,20 +2,25 @@ import Image from 'next/image'
 
 import Oven from '@/images/slider/oven-102.jpg'
 import {AiOutlineStar} from 'react-icons/ai' 
-const Main_product_item = () => {
+import { FC } from 'react'
+import { IProduct } from '@/types/product'
+interface IProps  {
+  product: IProduct
+}
+const Main_product_item : FC<IProps> = ({product}) => {
   return (
     <>
    <div className='border border-gray-100 p-2  hover:shadow-lg ' >
    <div className="flex justify-center  " >
-        <Image src={Oven} alt="no Image"  />
+        <Image src={product?.imageArr?.[0]} alt="no Image" width={300} height={300}  />
     </div>
-    <h3 className="text-sm font-medium" >Techno camon 20 Cksrns 8/18GB</h3>
+    <h3 className="text-sm font-medium" > {product?.name} </h3>
     <div className="flex items-center " >
     <span className="text-sm text-mainBlueColor" >৳</span>
     <p className="text-sm text-mainBlueColor font-semibold" >20,000</p>
     <del className="ml-3 text-sm" >৳20,000</del>
     </div>
-    <div className=" flex items-center gap-1" >
+    {/* <div className=" flex items-center gap-1" >
       <div className="flex" >
       <AiOutlineStar/>
       <AiOutlineStar/>
@@ -25,7 +30,7 @@ const Main_product_item = () => {
       <div>
         <p className="text-sm" >(4)</p>
       </div>
-    </div>
+    </div> */}
    </div>
     </>
   )
