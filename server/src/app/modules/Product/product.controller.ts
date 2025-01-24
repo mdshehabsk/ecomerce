@@ -76,9 +76,24 @@ const getMainProduct = catchAsync(async (_req,res)=> {
   }
 })
 
+
+const getProductSearch = catchAsync(async(req,res)=> {
+  const {name} = req.query
+  const products = await ProductService.getProductSearch(name as string)
+  if(products){
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      data: products,
+      message: 'products get successfull'
+    })
+  }
+})
+
 export const ProductsController = {
   createProduct,
   getProductByCategory,
   getSingleProduct,
-  getMainProduct
+  getMainProduct,
+  getProductSearch
 };

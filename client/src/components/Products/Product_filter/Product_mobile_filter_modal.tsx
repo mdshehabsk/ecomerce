@@ -9,23 +9,7 @@ import { BsChevronDown, BsFillPlayCircleFill } from "react-icons/bs";
 import filter from '@/filter.json'
 import { useSearchParams } from "next/navigation";
 
-const filterItems = [
-  {
-    title: "RAM(GB)",
-    type: "checkbox",
-    options: ["2GB", "3GB", "4GB", "8GB", "16GB"],
-  },
-  {
-    title: "Processor",
-    type: "checkbox",
-    options: ["Intel i5", "Intel i7", "AMD Ryzen 5", "Mediatek Helio G32"],
-  },
-  {
-    title: "Clock Speed (GHz)",
-    type: "checkbox",
-    options: ["2.0", "2.5", "3.0", "3.5", "4.0"],
-  },
-];
+
 type TProps = {
   initialFilters: (typeof filter)[number]["filters"];
   getCurrentFilters: (
@@ -57,7 +41,6 @@ const Product_mobile_filter_modal : FC<TProps> = ({getCurrentFilters,initialFilt
   });
   const [priceSubmit, setPriceSubmit] = useState(false);
   const toggleSection = (filterItem: (typeof filters)[number]) => {
-    console.log('got click')
     const newArray = filters.map((item) => {
       if (item.value === filterItem.value) {
         return {

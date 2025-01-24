@@ -40,7 +40,6 @@ const Auth = ({
 
   useEffect(() => {
     if (data && isSuccess) {
-      console.log(data?.token)
       dispatch(setToken(data?.token));
       refetch();
       router.push("/");
