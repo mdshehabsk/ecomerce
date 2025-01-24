@@ -91,7 +91,7 @@ const ProductDetails: React.FC<{product: IProduct}> = ({product}) => {
                     </h3>
                   </div>
                   <div>
-                    <del className="md:text-lg font-normal  ">20,000</del>
+                  {product?.discount &&  <del className=" font-normal  "> {product?.base_price} </del>}
                   </div>
                     {product?.discount > 0 ? <div className=" p-2 px-3 bg-slate-100 rounded ">
                     <p className=" text-sm md:text-base"> -{product.discount} %</p> 
