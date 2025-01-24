@@ -23,7 +23,12 @@ const Category_product_item = ({product}: TProps) => {
             height={200}
           />
         </div>
-        <h3 className=" group-hover:text-mainBlueColor font-medium text-ellipsis "> {product?.name} </h3>
+        <h3
+  className="group-hover:text-mainBlueColor font-medium text-ellipsis overflow-hidden whitespace-nowrap"
+>
+  {product?.name}
+</h3>
+
         <div className="flex items-center ">
           <span className="text-sm text-sky-600">৳</span>
           <p className="text-sm text-sky-600 font-semibold">  {(product?.base_price / 100) * (100 - product?.discount)} </p>

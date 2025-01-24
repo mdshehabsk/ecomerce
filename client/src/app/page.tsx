@@ -31,7 +31,7 @@ export default async function Home() {
     <>
       <Banner />
       <LogoHomeSlider />
-      <Offer />
+      {/* <Offer /> */}
       <Recent_product recentProducts={products?.recenentProducts}  />
       <Mobile_store smartphoneProducts={products?.smartphones} />
       <Main_product_section

@@ -137,7 +137,9 @@ function Navbar() {
                   isSearchDropdown && <div onClick={()=> setIsSearchDropdown(false)} className="w-screen h-screen fixed top-0 left-0 bottom-0 right-0 bg-black/45 z-30" >  </div>
                 }
             <div className="flex justify-center items-center space-x-2 text-white order-2 lg:order-3 md:gap-3 lg:basis-3/12 ">
-              <Link href='/checkout/cart' className="flex gap-1 cursor-pointer md:order-3 ">
+           
+              {
+                !isLoading && !isError && data && token &&   <Link href='/checkout/cart' className="flex gap-1 cursor-pointer md:order-3 ">
                 <div className="relative">
                 <IoMdCart className=" text-xl  md:text-3xl " />
                 <p className="absolute -top-[20%] right-0 text-xs " > {totalCartsItem} </p>
@@ -145,6 +147,7 @@ function Navbar() {
                 <p className="hidden md:block">Cart</p>
                
               </Link>
+              }
               <span className="h-[20px] w-[2px] bg-white md:hidden "></span>
 
               {!isLoading && !isError && data && token ? (
