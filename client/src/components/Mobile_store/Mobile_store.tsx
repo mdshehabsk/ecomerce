@@ -22,7 +22,6 @@ interface IProps {
 }
 const Mobile_store : FC<IProps> = ({smartphoneProducts}) => {
     const swiperRef = useRef<any>();
-    console.log(smartphoneProducts)
     return (
       <>
          <section className="my-20 relative shadow-md shadow-slate-100 pb-8 " >

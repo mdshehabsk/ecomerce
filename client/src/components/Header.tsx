@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaAngleDown , FaUser } from "react-icons/fa6";
 import { FiMenu } from "react-icons/fi";
@@ -41,6 +41,10 @@ function Navbar() {
     setShowDropdown(false);
   }
   const totalCartsItem = cartsData?.data?.items?.reduce((total,acc)=> total + acc.quantity,0)
+
+  function handleSearchChange (event: React.ChangeEvent<HTMLInputElement>) {
+    console.log(event.target.value)
+  }
   return (
     <>
       <header className="w-full min-h-max bg-mainBlueColor flex items-center py-2 lg:py-0 sticky top-0 z-50 ">
@@ -71,14 +75,17 @@ function Navbar() {
               <input
                 type="text"
                 placeholder="Search for product, brands and more"
-                className="ml-4 focus:outline-none px-4 py-1 grow text-sm md:text-md  "
+                className="ml-4 focus:outline-none px-4 py-1 grow text-sm md:text-md "
+                onChange={handleSearchChange}
               />
               <div className="absolute w-10 top-0  right-0 flex items-center h-full text-mainBlueColor bg-white border px-2 cursor-pointer hover:bg-orangeColor hover:text-white rounded-md ">
                 <AiOutlineSearch className="text-2xl" />
               </div>
             </div>
             <div className="flex justify-center items-center space-x-2 text-white order-2 lg:order-3 md:gap-3 lg:basis-3/12 ">
-              <Link href='/checkout/cart' className="flex gap-1 cursor-pointer md:order-3 ">
+           
+              {
+                !isLoading && !isError && data && token &&   <Link href='/checkout/cart' className="flex gap-1 cursor-pointer md:order-3 ">
                 <div className="relative">
                 <IoMdCart className=" text-xl  md:text-3xl " />
                 <p className="absolute -top-[20%] right-0 text-xs " > {totalCartsItem} </p>
@@ -86,6 +93,7 @@ function Navbar() {
                 <p className="hidden md:block">Cart</p>
                
               </Link>
+              }
               <span className="h-[20px] w-[2px] bg-white md:hidden "></span>
 
               {!isLoading && !isError && data && token ? (

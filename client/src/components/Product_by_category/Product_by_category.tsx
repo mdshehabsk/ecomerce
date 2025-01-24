@@ -22,11 +22,10 @@ type TProps = {
 }
 const Product_by_category: FC<TProps> = ({data,category}) => {
   const router = useRouter()
-  const searchParams = useSearchParams()
   const pathname = usePathname()
-  const findCategory = categories?.find(item => item.subCategories?.find(item => item.value === category))
-  const findSubCategoryId = findCategory?.subCategories?.find(item => item.value === category)?.id
-  const initialFilter = filter?.find(filterItem => filterItem?.id?.includes(findSubCategoryId as number))?.filters
+  const findCategory = categories?.find(item => item.subCategories?.find(item => item.value === category) ) || categories?.find(item => item.name.value === category)
+  const findSubCategoryId = findCategory?.subCategories?.find(item => item.value === category)?.id 
+  const initialFilter = filter?.find(filterItem => filterItem?.id?.includes(findSubCategoryId as number))?.filters || filter?.find(filterItem => filterItem?.id?.includes(findCategory?.name?.id as number))?.filters
   const [currentFilters, setCurrentFilters] = useState<Record<string, string[] | string | number | (string | number)[]>>({})
   const [currentPage,setCurrentPage] = useState(1)
   const [currentSortItem,setCurrentSortItem] = useState('')

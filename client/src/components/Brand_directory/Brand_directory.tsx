@@ -1,5 +1,5 @@
 import  Link  from 'next/link'
-
+import categories from '@/categories.json'
 const allCategories = [
   {
     name: "Smartphone",
@@ -117,18 +117,18 @@ const Brand_directory = () => {
         </h2>
         <div className="w-full h-[1px] bg-slate-300 my-4"></div>
         <div>
-          {allCategories.map((elem, i) => (
+          {categories.map((elem, i) => (
             <div key={i} className="flex gap-2 my-1 items-center flex-wrap">
               <p className="text-[12px] font-semibold uppercase  ">
-                {elem.name} :{" "}
+                {elem?.name?.label} :{" "}
               </p>
-              {elem.submenu.map((elem, i) => (
+              {elem?.subCategories.map((elem, i) => (
                 <Link
                   key={i}
                   className=" hover:text-mainBlueColor transition duration-500 text-[12px] font-medium text-black opacity-80 capitalize "
-                  href={elem}
+                  href={`/product/${elem?.value}`}
                 >
-                  {elem} {"|"}
+                  {elem?.label} {"|"}
                 </Link>
               ))}
             </div>
