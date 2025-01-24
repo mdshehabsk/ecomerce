@@ -140,9 +140,20 @@ const getMainProduct = async () => {
   return products
 }
 
+
+const getProductSearch = async (name:string) => {
+  const formatedName = name.trim()
+  if (!formatedName) {
+    return [];
+  }
+  const products = await Product.find({name: new RegExp(formatedName,'i')}).select('-categories -more_info -meta_info -description -status')
+  return products
+}
+
 export const ProductService = {
   createProduct,
   getSingleProduct,
   getProductByCategory,
-  getMainProduct
+  getMainProduct,
+  getProductSearch
 };

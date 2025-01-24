@@ -25,5 +25,6 @@ router.get('/get-products-by-category/:category',ProductsController.getProductBy
 
 router.get('/get-main-product', ProductsController.getMainProduct)
 
+router.get('/get-products-by-search',ProductsController.getProductSearch)
 
 export const ProductRoutes = router;
