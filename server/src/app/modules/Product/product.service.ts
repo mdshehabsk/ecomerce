@@ -21,7 +21,7 @@ const createProduct = async (
   } = body;
   const uploadedImages = await cloudinaryImageUpload(files, "pickaboo/product");
   const uploadedImagesURLS = uploadedImages.map(
-    (uploadedImage) => uploadedImage.url
+    (uploadedImage) => uploadedImage.secure_url
   );
 
 
