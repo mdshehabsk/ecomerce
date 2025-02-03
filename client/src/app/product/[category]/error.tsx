@@ -10,7 +10,7 @@ const Error : FC<IProps> = ({error, reset}) => {
     const router = useRouter()
   return (
     <div className="w-full h-screen flex justify-center items-center flex-col gap-4" >
-        <p className="text-2xl text-red-500" >{error?.message} </p>
+        <p className="text-2xl text-red-500" > Error happend </p>
         <button
         onClick={() => reset() }
         className="px-8 py-2 bg-green-500 text-white flex gap-2 items-center"
