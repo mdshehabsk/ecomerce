@@ -101,7 +101,7 @@ function Navbar() {
               </div>
               <div className="text-slate-100 ">
                 <Link href="/" className=" text-lg md:text-2xl font-extrabold ">
-                  Pickaboo
+                  Ecomerce
                 </Link>
               </div>
             </div>
