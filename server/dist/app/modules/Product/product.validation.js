@@ -104,13 +104,13 @@ const CreateProductimagesZodSchema = zod_1.z.object({
             .max(5 * 1024 * 1024, "image size should not exceed 5MB"), // Max size 5MB
         width: zod_1.z
             .union([zod_1.z.number(), zod_1.z.string()])
-            .refine((value) => !isNaN(Number(value)) && Number(value) === 800, {
-            message: "Image resulation must be 800x800",
+            .refine((value) => !isNaN(Number(value)) && Number(value) <= 1100, {
+            message: "Image max resulation must be 1100x1100",
         }),
         height: zod_1.z
             .union([zod_1.z.number(), zod_1.z.string()])
-            .refine((value) => !isNaN(Number(value)) && Number(value) === 800, {
-            message: "Image resulation must be 800x800",
+            .refine((value) => !isNaN(Number(value)) && Number(value) <= 1100, {
+            message: "Image max resulation must be 1100x1100",
         }),
     }))
         .min(1, { message: "At least one image required" })

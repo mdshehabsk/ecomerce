@@ -15,4 +15,6 @@ const upload = (0, multer_1.default)();
 router.post("/create-product", auth_1.isLogin, upload.array("images"), (0, validateRequest_1.validateBodyRequest)(product_validation_1.ProductValidation.CreateProductZodSchema), (0, validateRequest_1.validateImageFilesRequest)(product_validation_1.ProductValidation.CreateProductimagesZodSchema), product_controller_1.ProductsController.createProduct);
 router.get('/get-single-product/:slug', product_controller_1.ProductsController.getSingleProduct);
 router.get('/get-products-by-category/:category', product_controller_1.ProductsController.getProductByCategory);
+router.get('/get-main-product', product_controller_1.ProductsController.getMainProduct);
+router.get('/get-products-by-search', product_controller_1.ProductsController.getProductSearch);
 exports.ProductRoutes = router;

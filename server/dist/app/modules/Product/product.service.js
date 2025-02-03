@@ -15,7 +15,7 @@ const product_model_1 = require("./product.model");
 const createProduct = (body, files) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, slug, description, more_info, base_price, discount, stock, categories, status, meta_info, } = body;
     const uploadedImages = yield (0, cloudinary_image_upload_service_1.cloudinaryImageUpload)(files, "pickaboo/product");
-    const uploadedImagesURLS = uploadedImages.map((uploadedImage) => uploadedImage.url);
+    const uploadedImagesURLS = uploadedImages.map((uploadedImage) => uploadedImage.secure_url);
     const parsedMoreInfo = JSON.parse(more_info);
     const parsedCategories = JSON.parse(categories);
     const parsedMeta = JSON.parse(meta_info);
@@ -103,8 +103,29 @@ const getProductByCategory = (_a) => __awaiter(void 0, [_a], void 0, function* (
     };
     return data;
 });
+const getMainProduct = () => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
+    const smartphones = yield product_model_1.Product.find({ categories: 'smartphones' }).limit(6).select('-description -more_info -meta_info -categories -status ');
+    const recenentProducts = yield ((_a = product_model_1.Product === null || product_model_1.Product === void 0 ? void 0 : product_model_1.Product.find()) === null || _a === void 0 ? void 0 : _a.sort({ createdAt: -1 }).limit(6).select('-description -more_info -meta_info -categories -status '));
+    const lifestyleProducts = yield product_model_1.Product.find({ categories: 'lifestyle' }).limit(6).select('-description -more_info -meta_info -categories -status ');
+    const electronicsProducts = yield product_model_1.Product.find({ categories: 'electronics-appliances' }).limit(6).select('-description -more_info -meta_info -categories -status ');
+    const gadgetProducts = yield product_model_1.Product.find({ categories: 'mobile-accessories' }).limit(6).select('-description -more_info -meta_info -categories -status ');
+    const computersProducts = yield product_model_1.Product.find({ categories: 'computer' }).limit(6).select('-description -more_info -meta_info -categories -status ');
+    const products = { smartphones, recenentProducts, lifestyleProducts, electronicsProducts, gadgetProducts, computersProducts };
+    return products;
+});
+const getProductSearch = (name) => __awaiter(void 0, void 0, void 0, function* () {
+    const formatedName = name.trim();
+    if (!formatedName) {
+        return [];
+    }
+    const products = yield product_model_1.Product.find({ name: new RegExp(formatedName, 'i') }).select('-categories -more_info -meta_info -description -status');
+    return products;
+});
 exports.ProductService = {
     createProduct,
     getSingleProduct,
     getProductByCategory,
+    getMainProduct,
+    getProductSearch
 };

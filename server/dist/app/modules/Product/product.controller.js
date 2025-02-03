@@ -67,8 +67,33 @@ const getProductByCategory = (0, catchAsync_1.default)((req, res) => __awaiter(v
         message: "products get successfull",
     });
 }));
+const getMainProduct = (0, catchAsync_1.default)((_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const products = yield product_service_1.ProductService.getMainProduct();
+    if (products) {
+        (0, sendResponse_1.default)(res, {
+            statusCode: http_status_1.default.OK,
+            success: true,
+            data: products,
+            message: 'products get successfull'
+        });
+    }
+}));
+const getProductSearch = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { name } = req.query;
+    const products = yield product_service_1.ProductService.getProductSearch(name);
+    if (products) {
+        (0, sendResponse_1.default)(res, {
+            statusCode: http_status_1.default.OK,
+            success: true,
+            data: products,
+            message: 'products get successfull'
+        });
+    }
+}));
 exports.ProductsController = {
     createProduct,
     getProductByCategory,
     getSingleProduct,
+    getMainProduct,
+    getProductSearch
 };

@@ -85,6 +85,7 @@ const userLoginGoogle = (token) => __awaiter(void 0, void 0, void 0, function* (
     }
     else if (!userExist && decodedToken) {
         const user = yield user_model_1.User.create({ email, googleId: sub, username: name });
+        const myToken = (0, auth_utils_1.createToken)({ _id: user === null || user === void 0 ? void 0 : user.id }, config_1.default.jwt_secret, config_1.default.jwt_expire);
         yield user.save();
         response.loginSuccess = true,
             response.myToken = myToken;

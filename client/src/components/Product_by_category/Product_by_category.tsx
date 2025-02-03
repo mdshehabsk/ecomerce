@@ -52,9 +52,9 @@ const Product_by_category: FC<TProps> = ({data,category}) => {
       <div className="md:hidden">
         <Product_mobile_filter_sort_nav initialFilters={initialFilter || []} getCurrentFilters={getCurrentFilters}  getCurrentSortItem={(value) => setCurrentSortItem(value)} />
       </div>
-      <div className="product-banner hidden md:flex">
+      {/* <div className="product-banner hidden md:flex">
         <Image src={bannerImage} alt="no Image" className="w-full" />
-      </div>
+      </div> */}
       <div className="my_container mx-auto md:mt-[50px] mt-[20px] ">
         <div className="flex justify-between md:gap-[40px] ">
           <div className="md:basis-2/12 hidden md:block ">
@@ -79,7 +79,7 @@ const Product_by_category: FC<TProps> = ({data,category}) => {
                 <Category_product_item key={product?._id} product={product} />
               ))}
             </main>
-            <div className="flex justify-center mt-20 bg-white items-end">
+            <div className="flex justify-center my-20 bg-white items-end">
               <ProductPaginations
                 itemPerPage={20}
                 totalItems={data?.meta?.totalItems}

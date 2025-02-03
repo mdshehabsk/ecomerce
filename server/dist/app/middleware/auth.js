@@ -25,7 +25,7 @@ const isLogin = (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
     }
     jsonwebtoken_1.default.verify(authToken, config_1.default.jwt_secret, (err, decoded) => {
         if (err) {
-            return next(new AppError_1.AppError(http_status_1.default.UNAUTHORIZED, 'JWT is invalid'));
+            return next(new AppError_1.AppError(http_status_1.default.UNAUTHORIZED, "You're Not Authorized"));
         }
         const payload = decoded;
         req.user = payload;

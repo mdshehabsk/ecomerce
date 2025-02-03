@@ -74,7 +74,7 @@ const Auth = ({
         </div>
         {children}
 
-        <div className="w-full flex justify-center">
+        <div className="w-full flex justify-center mb-12">
           <button
             onClick={() => handleSigninWithGoogle()}
             className="flex items-center justify-center w-full px-4 py-2 space-x-2 border border-gray-300 rounded bg-white"
@@ -86,14 +86,14 @@ const Auth = ({
           </button>
         </div>
 
-        <div className="w-full flex justify-center mt-4 ">
+        {/* <div className="w-full flex justify-center mt-4 ">
           <button className="flex items-center justify-center w-full px-4 py-2 space-x-2 border border-blue-500 rounded bg-blue-500 text-white">
             <FaFacebookF className="text-white" />
             <span className=" font-semibold text-white ">
-              Sign in with Google
+              Sign in with Facebook
             </span>
           </button>
-        </div>
+        </div> */}
       </div>
     </>
   );

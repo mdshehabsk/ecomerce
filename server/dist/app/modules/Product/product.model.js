@@ -64,7 +64,7 @@ const productSchema = new mongoose_1.Schema({
     status: {
         type: String,
         enum: product_interface_1.EProductStatus,
-        default: product_interface_1.EProductStatus.DRAFT
+        default: product_interface_1.EProductStatus.PUBLISH
     },
 }, { timestamps: true });
 exports.Product = (0, mongoose_1.model)('Product', productSchema);

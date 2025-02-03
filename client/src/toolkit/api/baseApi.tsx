@@ -52,7 +52,7 @@ const axiosBaseQuery = ({ baseUrl }: { baseUrl: string } = { baseUrl: "" }): Bas
 
 const baseApi = createApi({
   baseQuery: axiosBaseQuery({
-    baseUrl: "http://localhost:3001/api/v1",
+    baseUrl: process.env.NEXT_PUBLIC_BACKEND_URL as string,
   }),
   endpoints: () => ({}),
   tagTypes : ['Carts']
