@@ -16,7 +16,7 @@ import Main_product_section from "@/components/Main_product_section/Main_product
 
 async function getMainProducts() {
   try {
-    const res = await fetch('http://localhost:3001/api/v1/product/get-main-product',{cache:'no-cache'})
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/product/get-main-product`,{cache:'no-cache'})
     const {data: products} = await res.json()
     return products
   } catch (error) {

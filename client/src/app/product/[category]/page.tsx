@@ -26,7 +26,7 @@ const serializeQuery = (obj: Record<string, string | string[] | undefined>) =>
     .join('&');
 const getProductsByCategory = async (category: string,queryString : string ) : Promise<IGetProductByCategoryApi> => {
   try {
-    const res = await fetch(`http://localhost:3001/api/v1/product/get-products-by-category/${category}?${queryString}`,{cache: 'no-store'})
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/product/get-products-by-category/${category}?${queryString}`,{cache: 'no-store'})
     const data = await res.json()
     if (!res.ok) {
       throw new Error(`Failed to fetch products: ${res.statusText}`);

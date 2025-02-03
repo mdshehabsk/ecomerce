@@ -2,7 +2,7 @@ import ProductDetails from "@/components/Product_details/ProductDetails";
 
 const getProduct = async (slug: string) => {
   try {
-    const res = await fetch(`http://localhost:3001/api/v1/product/get-single-product/${slug}`,{cache:'no-cache'})
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/product/get-single-product/${slug}`,{cache:'no-cache'})
     const {data: product} = await res.json()
     return product
   } catch (error) {
