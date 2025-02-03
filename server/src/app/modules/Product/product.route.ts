@@ -10,7 +10,7 @@ import multer from "multer";
 
 const router = Router();
 
-const upload = multer();
+const upload = multer({});
 router.post(
   "/create-product",
   isLogin,
