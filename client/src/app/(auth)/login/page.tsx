@@ -38,6 +38,11 @@ const Login = () => {
           newFieldErrors[err.path] = err.message;
         });
       }
+      setToast(
+        <div className="w-full py-3 bg-gray-50 flex items-center justify-center">
+          <p className="text-orangeColor">{(error as { error: any }).error} </p>
+        </div>
+      );
       setFieldErrors(newFieldErrors);
     }
   }, [error, isError]);
