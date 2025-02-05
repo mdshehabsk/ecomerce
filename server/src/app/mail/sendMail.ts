@@ -1,6 +1,5 @@
 import nodemailer from "nodemailer";
-import ejs from "ejs";
-import path from "path";
+import { getTemplate } from "./template";
 import config from "../config";
 export const sendMail = async ({
   email,
@@ -20,17 +19,13 @@ export const sendMail = async ({
           pass: config.mail_pass,
       },
   });
-  // eslint-disable-next-line no-undef
-  const filePath = path.join(__dirname, "..", "..", "views");
-  const fileVal = await ejs.renderFile(`${filePath}/email.ejs`, {
-    token,
-    username,
-  });
+
+
   const mailSend = await transporter.sendMail({
     from: `pickaboo <${config.mail_user}>`,
     to: email,
     subject,
-    html: fileVal,
+    html: getTemplate({token:token, username, url: config.base_url}),
   });
   return mailSend;
 };
