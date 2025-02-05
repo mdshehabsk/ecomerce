@@ -8,9 +8,9 @@ import { useAppDispatch } from "@/toolkit/hook";
 import { setToken } from "@/toolkit/slice/authSlice";
 import { useGetUserDataQuery } from "@/toolkit/api/userApi";
 const Login = () => {
-  const {refetch} = useGetUserDataQuery(undefined)
+  const { refetch } = useGetUserDataQuery(undefined);
   const [passShow, setPassShow] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
   const [inputValue, setInputVal] = useState({
     email: "",
     password: "",
@@ -18,7 +18,7 @@ const Login = () => {
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [toast, setToast] = useState<null | React.ReactElement>(null);
   const [mutate, { data, error, isError, isSuccess }] = useLoginUserMutation();
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const passShowToggle = () => {
     setPassShow(!passShow);
   };
@@ -46,31 +46,32 @@ const Login = () => {
       setFieldErrors(newFieldErrors);
     }
   }, [error, isError]);
+
   useEffect(() => {
     if (isSuccess && data) {
       setFieldErrors({});
       setToast(
         <div className="w-full py-3 bg-gray-50 flex items-center justify-center">
           <p className="text-orangeColor">{data?.message}</p>
-        </div>,
+        </div>
       );
-      dispatch(setToken(data?.token))
-      refetch()
+      dispatch(setToken(data?.token));
+      refetch();
       router.push("/");
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess, data]);
   return (
     <>
       <div className="my-5">
-      {isError && (
-        <div className="w-full bg-gray-50 flex items-center justify-center">
-          <p className="text-orangeColor">
-            {isError && "message" in error && error?.message}
-          </p>
-        </div>
-      )}
-      {toast}
+        {isError && (
+          <div className="w-full bg-gray-50 flex items-center justify-center">
+            <p className="text-orangeColor">
+              {isError && "message" in error && error?.message}
+            </p>
+          </div>
+        )}
+        {toast}
         <form onSubmit={loginSubmit}>
           <div className="w-full flex items-center border px-4 py-2 my-8">
             <input
